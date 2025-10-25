@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-50 to-white">
+    <section className="hero-section h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-50 to-white">
       <div className="container mx-auto px-4 lg:px-8 w-full h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full h-full">
           
@@ -90,8 +90,8 @@ export const HeroSection: React.FC = () => {
           {/* Right Section - Instructor Image */}
           <div className="flex justify-center h-full">
             <div className="relative flex items-end justify-center h-full">
-              {/* Main Instructor Image - Starting from bottom */}
-              <div className="w-80 h-96 lg:w-96 lg:h-[500px] relative">
+              {/* Main Instructor Image - Starting from bottom - HIDDEN (animated image used instead) */}
+              <div className="w-80 h-96 lg:w-96 lg:h-[500px] relative opacity-0 pointer-events-none">
                 <Image
                   src="/static-media/Sammer-top.png"
                   alt="Professional Instructor - Sammer"

@@ -1,15 +1,202 @@
 'use client'
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { HeroSection } from './HeroSection'
 import { FeaturesSection } from './FeaturesSection'
 import { WebinarSection } from './WebinarSection'
+import { ControllableSammerImage, SammerImageRef } from './ControllableSammerImage'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollToPlugin)
+}
 
 export const CustomHomePage: React.FC = () => {
+  const sammerRef = useRef<SammerImageRef>(null)
+
+  useEffect(() => {
+    // Wait for component to mount
+    const timer = setTimeout(() => {
+      if (sammerRef.current) {
+        // MANUAL POSITIONING - You can change these values
+        
+        // Calculate exact positions where static Sammer images appear in each section
+        
+        // Hero Section Position (right side, bottom-aligned)
+        const heroPosition = () => {
+          const containerWidth = Math.min(window.innerWidth, 1200)
+          const containerLeft = (window.innerWidth - containerWidth) / 2
+          const rightColumnLeft = containerLeft + (containerWidth * 0.5) + 32 // 50% + gap
+          const imageWidth = window.innerWidth >= 1024 ? 384 : 320 // lg:w-96 or w-80
+          const imageLeft = rightColumnLeft + (containerWidth * 0.5 - imageWidth) / 2
+          const imageTop = window.innerHeight * 0.1 // Bottom-aligned like static image
+          return { x: imageLeft, y: imageTop, scale: 1.2 }
+        }
+
+        // Features Section Position (left side, center-aligned)
+        const featuresPosition = () => {
+          const containerWidth = Math.min(window.innerWidth, 1200)
+          const containerLeft = (window.innerWidth - containerWidth) / 2
+          const leftColumnLeft = containerLeft // padding
+          const imageWidth = window.innerWidth >= 1024 ? 320 : 288 // lg:w-80 or w-72
+          const imageLeft = leftColumnLeft
+          const featuresSectionTop = (document.querySelector('.features-section') as HTMLElement)?.offsetTop || 0
+          const imageTop = featuresSectionTop * 1.1  // Center of features section
+          return { x: imageLeft, y: imageTop, scale: 1 }
+        }
+
+        // Webinar Section Position (right side, center-aligned)
+        const webinarPosition = () => {
+          const containerWidth = Math.min(window.innerWidth, 1200)
+          const containerLeft = (window.innerWidth - containerWidth) / 2
+          const rightColumnLeft = containerLeft + (containerWidth * 0.5) + 32
+          const imageWidth = window.innerWidth >= 1024 ? 320 : 288
+          const imageLeft = rightColumnLeft + (containerWidth * 0.5 - imageWidth) / 2
+          const webinarSectionTop = (document.querySelector('.webinar-section') as HTMLElement)?.offsetTop || 0
+          const imageTop = webinarSectionTop// Center of webinar section
+          return { x: imageLeft, y: imageTop, scale: 0.8 }
+        }
+
+        // Animate to hero position with fade in
+        const heroPos = heroPosition()
+        // Start at top left (already set) and animate to hero position while fading in
+        setTimeout(() => {
+          if (sammerRef.current) {
+            // Use gsap to animate both position and opacity together
+            const imageElement = document.querySelector('.sammer-image-container') as HTMLElement
+            if (imageElement) {
+              gsap.to(imageElement, {
+                x: heroPos.x,
+                y: heroPos.y,
+                scale: heroPos.scale,
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out"
+              })
+            }
+          }
+        }, 100)
+
+        // Add scroll trigger to reset to hero image when scrolling back to top
+        sammerRef.current.addScrollTrigger(
+          '.hero-section', // trigger element
+          'top 50%', // start when hero section is centered
+          'top 50%', // same end point
+          heroPos.x, // exact x position
+          heroPos.y, // exact y position
+          heroPos.scale, // exact scale
+          1, // duration in seconds
+          '/static-media/sameer-fist.png', // change to sameer-fist image
+          '/static-media/Sammer-top.png' // when leaving hero section, go back to features image (which is above on page)
+        )
+
+        // Create scroll-triggered animation for features section
+        // Image moves to features position when features section is centered
+        sammerRef.current.addScrollTrigger(
+          '.features-section', // trigger element
+          'top 50%', // start when features section is centered
+          'top 50%', // end when features section is centered
+          featuresPosition().x, // exact x position from static image
+          featuresPosition().y, // exact y position from static image
+          featuresPosition().scale, // exact scale from static image
+          1, // duration in seconds
+          '/static-media/Sammer-top.png', // change to Sammer-top image
+          '/static-media/sameer-fist.png' // when leaving features, go back to hero image
+        )
+
+        // Add scroll trigger for webinar section
+        // Image moves to webinar position when webinar section is centered
+        sammerRef.current.addScrollTrigger(
+          '.webinar-section', // trigger element
+          'top 50%', // start when webinar section is centered
+          'top 50%', // end when webinar section is centered
+          webinarPosition().x, // exact x position from static image
+          webinarPosition().y, // exact y position from static image
+          webinarPosition().scale, // exact scale from static image
+          1, // duration in seconds
+          '/static-media/sameer-webinar.png', // change to sameer-webinar image
+          '/static-media/Sammer-top.png' // when leaving webinar, go back to features image
+        )
+
+        // You can add more scroll triggers or manual animations here
+        // Example: sammerRef.current.animateToPosition(200, 300, 1.2, 2)
+
+        // Add snap scrolling using GSAP with proper throttling to prevent vibration
+        const sections = document.querySelectorAll('.snap-section')
+        let wheelTimeout: ReturnType<typeof setTimeout> | null = null
+        let isScrolling = false
+        
+        const handleWheel = (e: WheelEvent) => {
+          if (isScrolling) {
+            e.preventDefault()
+            return
+          }
+          
+          // Clear any pending scroll
+          if (wheelTimeout) clearTimeout(wheelTimeout)
+          
+          e.preventDefault()
+          
+          // Throttle wheel events
+          wheelTimeout = setTimeout(() => {
+            const currentScroll = window.scrollY
+            const sectionHeight = window.innerHeight
+            const currentSectionIndex = Math.round(currentScroll / sectionHeight)
+            
+            let targetIndex = currentSectionIndex
+            
+            // Determine scroll direction and target section
+            if (e.deltaY > 0 && currentSectionIndex < sections.length - 1) {
+              targetIndex = currentSectionIndex + 1
+            } else if (e.deltaY < 0 && currentSectionIndex > 0) {
+              targetIndex = currentSectionIndex - 1
+            }
+            
+            if (targetIndex !== currentSectionIndex) {
+              isScrolling = true
+              const targetSection = sections[targetIndex] as HTMLElement
+              const targetScroll = targetSection.offsetTop
+              
+              gsap.to(window, {
+                duration: 0.6,
+                scrollTo: { 
+                  y: targetScroll, 
+                  autoKill: false 
+                },
+                ease: "power2.inOut",
+                onComplete: () => {
+                  isScrolling = false
+                }
+              })
+            }
+          }, 150) // Throttle delay
+        }
+        
+        window.addEventListener('wheel', handleWheel, { passive: false })
+        
+        // Cleanup
+        return () => {
+          if (wheelTimeout) clearTimeout(wheelTimeout)
+          window.removeEventListener('wheel', handleWheel)
+        }
+      }
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-white">
-      <HeroSection />
-      <FeaturesSection />
-      <WebinarSection />
+    <div className="min-h-screen bg-white relative">
+      <ControllableSammerImage ref={sammerRef} />
+      <div className="snap-section min-h-screen">
+        <HeroSection />
+      </div>
+      <div className="snap-section min-h-screen">
+        <FeaturesSection />
+      </div>
+      <div className="snap-section min-h-screen">
+        <WebinarSection />
+      </div>
     </div>
   )
 }

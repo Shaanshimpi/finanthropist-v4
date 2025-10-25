@@ -16,15 +16,15 @@ export const FeaturesSection: React.FC = () => {
   ]
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
+    <section className="features-section py-16 lg:py-24 bg-gray-50">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
-          {/* Left Section - Instructor Image */}
+          {/* Left Section - Instructor Image - HIDDEN (animated image used instead) */}
           <div className="flex justify-center lg:justify-start">
             <div className="relative">
               {/* Main Instructor Image */}
-              <div className="w-72 h-80 lg:w-80 lg:h-96 relative">
+              <div className="w-72 h-80 lg:w-80 lg:h-96 relative opacity-0 pointer-events-none">
                 <Image
                   src="/static-media/Sammer-top.png"
                   alt="Professional Instructor - Sammer"
