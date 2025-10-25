@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="hero-section h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-50 to-white">
+    <section className="hero-section h-[calc(100vh-4rem)] flex items-center bg-white">
       <div className="container mx-auto px-4 lg:px-8 w-full h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full h-full">
           

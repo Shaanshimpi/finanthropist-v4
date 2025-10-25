@@ -16,7 +16,7 @@ export const FeaturesSection: React.FC = () => {
   ]
 
   return (
-    <section className="features-section py-16 lg:py-24 bg-gray-50">
+    <section className="features-section py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           

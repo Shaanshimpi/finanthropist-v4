@@ -59,12 +59,6 @@ export const ControllableSammerImage = forwardRef<SammerImageRef, {}>((props, re
             start,
             end,
             toggleActions: "play none none reverse", // Play forward, reverse on scroll back
-            markers: {
-              startColor: 'green',
-              endColor: 'red',
-              fontSize: '12px',
-              indent: 20,
-            },
             onEnter: () => {
               // Change image with smooth transition when scrolling forward
               if (imageSrc) {
@@ -174,6 +168,8 @@ export const ControllableSammerImage = forwardRef<SammerImageRef, {}>((props, re
           className="w-full h-full object-contain object-bottom"
           priority
         />
+        {/* Gradient fade at the bottom to prevent hard cutoff */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
       </div>
     </div>
   )
