@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const FeaturesSection: React.FC = () => {
   const features = [
@@ -21,6 +22,19 @@ export const FeaturesSection: React.FC = () => {
           
           {/* Left Section - Heading */}
           <div className="text-center lg:text-left">
+            <div className="flex justify-center lg:justify-start mb-6">
+              <div className="relative w-64 h-80 lg:w-80 lg:h-96">
+                <Image
+                  src="/static-media/Sammer-top.png"
+                  alt="Professional Instructor - Sammer"
+                  width={320}
+                  height={400}
+                  className="w-full h-full object-contain object-bottom"
+                />
+                {/* Gradient fade at the bottom to prevent hard cutoff */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+              </div>
+            </div>
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight mb-6">
               <span className="text-gray-900">
                 Maharashtra's Only

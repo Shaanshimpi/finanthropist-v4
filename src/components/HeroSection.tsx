@@ -91,14 +91,16 @@ export const HeroSection: React.FC = () => {
           <div className="flex justify-center h-full">
             <div className="relative flex items-end justify-center h-full">
               {/* Main Instructor Image - Starting from bottom - HIDDEN (animated image used instead) */}
-              <div className="w-80 h-96 lg:w-96 lg:h-[500px] relative opacity-0 pointer-events-none">
+                                                           <div className="w-80 h-96 lg:w-96 lg:h-[500px] relative opacity-100">
                 <Image
-                  src="/static-media/Sammer-top.png"
+                  src="/static-media/sameer-fist.png"
                   alt="Professional Instructor - Sammer"
                   width={400}
                   height={500}
                   className="w-full h-full object-contain object-bottom"
                 />
+                {/* Gradient fade at the bottom to prevent hard cutoff */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
               </div>
               
               {/* Decorative Elements */}

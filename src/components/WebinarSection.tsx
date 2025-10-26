@@ -61,14 +61,16 @@ export const WebinarSection: React.FC = () => {
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
               {/* Main Instructor Image */}
-              <div className="w-72 h-80 lg:w-80 lg:h-96 relative opacity-0 pointer-events-none">
+              <div className="w-72 h-80 lg:w-80 lg:h-96 relative opacity-100">
                 <Image
-                  src="/static-media/Sammer-top.png"
+                  src="/static-media/sameer-webinar.png"
                   alt="Professional Instructor - Sammer"
                   width={320}
                   height={400}
                   className="w-full h-full object-contain object-bottom"
                 />
+                {/* Gradient fade at the bottom to prevent hard cutoff */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
