@@ -3,13 +3,13 @@ import React, { useRef, useEffect } from 'react'
 import { HeroSection } from './HeroSection'
 import { FeaturesSection } from './FeaturesSection'
 import { WebinarSection } from './WebinarSection'
-import { Footer } from './Footer'
 import { ControllableSammerImage, SammerImageRef } from './ControllableSammerImage'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollToPlugin)
+  gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 }
 
 export const CustomHomePage: React.FC = () => {
@@ -126,7 +126,8 @@ export const CustomHomePage: React.FC = () => {
       }
       */
 
-      // Add snap scrolling using GSAP with proper throttling and direction tracking
+      // TEMPORARILY DISABLED - Snap scrolling logic
+      /*
       const sections = document.querySelectorAll('.snap-section')
       let wheelTimeout: ReturnType<typeof setTimeout> | null = null
       let isScrolling = false
@@ -137,6 +138,13 @@ export const CustomHomePage: React.FC = () => {
       const handleWheel = (e: WheelEvent) => {
         if (isScrolling) {
           e.preventDefault()
+          return
+        }
+        
+        // Check if ScrollTrigger is currently pinning the features section
+        const scrollTrigger = ScrollTrigger.getById('features-pin')
+        if (scrollTrigger && scrollTrigger.isActive) {
+          // Features section is pinned, allow normal scrolling without snapping
           return
         }
         
@@ -152,7 +160,8 @@ export const CustomHomePage: React.FC = () => {
           lastDeltaY = accumulatedDeltaY
         }
         
-        e.preventDefault()
+        // Only prevent default when we're going to snap
+        // This allows normal scrolling within sections
         
         // Throttle wheel events for touchpad compatibility
         wheelTimeout = setTimeout(() => {
@@ -163,8 +172,15 @@ export const CustomHomePage: React.FC = () => {
           }
           
           const currentScroll = window.scrollY
-          const sectionHeight = window.innerHeight
-          const currentSectionIndex = Math.round(currentScroll / sectionHeight)
+          
+          // Calculate which section we're currently in based on actual scroll position
+          let currentSectionIndex = 0
+          sections.forEach((section, index) => {
+            const sectionTop = (section as HTMLElement).offsetTop
+            if (currentScroll >= sectionTop - 50) {
+              currentSectionIndex = index
+            }
+          })
           
           let targetIndex = currentSectionIndex
           
@@ -176,11 +192,14 @@ export const CustomHomePage: React.FC = () => {
           }
           
           if (targetIndex !== currentSectionIndex) {
+            e.preventDefault()
             isScrolling = true
             accumulatedDeltaY = 0
             direction = null
             
             const targetSection = sections[targetIndex] as HTMLElement
+            if (!targetSection) return
+            
             const targetScroll = targetSection.offsetTop
             
             gsap.to(window, {
@@ -199,11 +218,120 @@ export const CustomHomePage: React.FC = () => {
       }
       
       window.addEventListener('wheel', handleWheel, { passive: false })
+      */
+
+      // Add card stacking animation for features section
+      setTimeout(() => {
+        const featuresSection = document.querySelector('.features-section')
+        const featureItems = document.querySelectorAll('.feature-item')
+        
+        if (featuresSection && featureItems.length > 0) {
+          const cardHeight = window.innerHeight * 0.5 // 50vh
+          const totalScrollDistance = featureItems.length * cardHeight
+          
+          let currentCardIndex = 0
+          
+          // Pin the features section and create stacking effect
+          ScrollTrigger.create({
+            id: 'features-pin',
+            trigger: '.features-section',
+            start: 'top top',
+            end: `+=${totalScrollDistance}`,
+            pin: true,
+            anticipatePin: 1,
+            onUpdate: (self) => {
+              const progress = self.progress
+              const targetCardIndex = Math.min(
+                Math.floor(progress * featureItems.length),
+                featureItems.length - 1
+              )
+              
+              // Only update if card index changed
+              if (targetCardIndex !== currentCardIndex) {
+                currentCardIndex = targetCardIndex
+                
+                // Animate each card based on position
+                featureItems.forEach((item, index) => {
+                  const htmlItem = item as HTMLElement
+                  
+                  if (index === currentCardIndex) {
+                    // Current card - fully visible on top
+                    gsap.to(htmlItem, {
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      z: featureItems.length * 10, // Highest z-index for current card
+                      duration: 0.4,
+                      ease: "power2.out"
+                    })
+                  } else if (index < currentCardIndex) {
+                    // Past cards - stacked behind but still visible
+                    const stackedIndex = currentCardIndex - index
+                    gsap.to(htmlItem, {
+                      opacity: 1, // Fully opaque so we can see the stack
+                      y: 0,
+                      scale: 1,
+                      z: (featureItems.length - stackedIndex) * 10, // Lower z-index as we go back
+                      duration: 0.4,
+                      ease: "power2.out"
+                    })
+                  } else {
+                    // Future cards - hidden below waiting to slide up
+                    gsap.to(htmlItem, {
+                      opacity: 0,
+                      y: 100,
+                      scale: 0.9,
+                      z: 0,
+                      duration: 0.3,
+                      ease: "power2.in"
+                    })
+                  }
+                })
+              }
+            }
+          })
+          
+          // Set initial state for all cards
+          featureItems.forEach((item, index) => {
+            const htmlItem = item as HTMLElement
+            
+            // Set absolute positioning for stacking
+            gsap.set(htmlItem, {
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              right: '0',
+              transformOrigin: 'center',
+              willChange: 'transform'
+            })
+            
+            if (index === 0) {
+              // First card visible on top
+              gsap.set(htmlItem, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                z: featureItems.length * 10,
+              })
+            } else {
+              // Other cards hidden below
+              gsap.set(htmlItem, {
+                opacity: 0,
+                y: 100,
+                scale: 0.9,
+                z: 0,
+              })
+            }
+          })
+        }
+      }, 200)
       
       // Cleanup
       return () => {
-        if (wheelTimeout) clearTimeout(wheelTimeout)
-        window.removeEventListener('wheel', handleWheel)
+        // Cleanup for snap scroll is disabled
+        // if (wheelTimeout) clearTimeout(wheelTimeout)
+        // window.removeEventListener('wheel', handleWheel)
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
       }
     }, 100)
 
@@ -217,14 +345,11 @@ export const CustomHomePage: React.FC = () => {
       <div className="snap-section min-h-screen">
         <HeroSection />
       </div>
-      <div className="snap-section min-h-screen">
+      <div className="min-h-screen">
         <FeaturesSection />
       </div>
       <div className="snap-section min-h-screen">
         <WebinarSection />
-      </div>
-      <div className="snap-section h-screen">
-        <Footer />
       </div>
     </div>
   )
