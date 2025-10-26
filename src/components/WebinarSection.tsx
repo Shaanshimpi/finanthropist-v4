@@ -13,7 +13,7 @@ export const WebinarSection: React.FC = () => {
   ]
 
   return (
-    <section className="webinar-section py-16 lg:py-24 bg-white">
+    <section className="webinar-section py-16 lg:py-24">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
@@ -22,7 +22,7 @@ export const WebinarSection: React.FC = () => {
             
             {/* Main Heading */}
             <div className="text-center lg:text-left">
-              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-gray-900">
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-white">
                 Free Live Webinar
               </h2>
             </div>
@@ -31,12 +31,12 @@ export const WebinarSection: React.FC = () => {
             <div className="space-y-3">
               {webinarFeatures.map((feature, index) => (
                 <div key={index} className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center mt-1">
+                  <div className="flex-shrink-0 w-5 h-5 bg-[#C71C22] rounded-full flex items-center justify-center mt-1">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <p className="text-gray-700 text-sm lg:text-base leading-relaxed">
+                  <p className="text-slate-300 text-sm lg:text-base leading-relaxed">
                     {feature}
                   </p>
                 </div>
@@ -47,7 +47,7 @@ export const WebinarSection: React.FC = () => {
             <div className="pt-4">
               <Link
                 href="/webinar"
-                className="group inline-flex items-center space-x-2 text-red-600 hover:text-red-700 font-semibold text-base lg:text-lg transition-colors"
+                className="group inline-flex items-center space-x-2 text-[#FCC22F] hover:text-[#FCC22F]/80 font-semibold text-base lg:text-lg transition-colors"
               >
                 <span>Read More</span>
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

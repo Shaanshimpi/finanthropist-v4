@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="hero-section h-[calc(100vh-4rem)] min-h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950 relative overflow-hidden">
+    <section className="hero-section h-[calc(100vh-4rem)] min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Animated gradient orbs - using brand colors */}
@@ -139,9 +139,6 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#FCC22F]/40 to-transparent"></div>
     </section>
   )
 }

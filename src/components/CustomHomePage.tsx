@@ -226,7 +226,9 @@ export const CustomHomePage: React.FC = () => {
         const featureItems = document.querySelectorAll('.feature-item')
         
         if (featuresSection && featureItems.length > 0) {
-          const cardHeight = window.innerHeight * 0.5 // 50vh
+          // Calculate section height accounting for header
+          const sectionHeight = window.innerHeight - 64 // 4rem = 64px
+          const cardHeight = sectionHeight * 0.5 // 50% of visible section
           const totalScrollDistance = featureItems.length * cardHeight
           
           let currentCardIndex = 0
@@ -234,11 +236,13 @@ export const CustomHomePage: React.FC = () => {
           // Pin the features section and create stacking effect
           ScrollTrigger.create({
             id: 'features-pin',
-            trigger: '.features-section',
-            start: 'top top',
+            trigger: featuresSection,
+            start: 'top 10%',
             end: `+=${totalScrollDistance}`,
             pin: true,
+            pinSpacing: true,
             anticipatePin: 1,
+            markers: false,
             onUpdate: (self) => {
               const progress = self.progress
               const targetCardIndex = Math.min(
@@ -255,7 +259,7 @@ export const CustomHomePage: React.FC = () => {
                   const htmlItem = item as HTMLElement
                   
                   if (index === currentCardIndex) {
-                    // Current card - fully visible on top
+                    // Current card - fully visible on top at 100% opacity
                     gsap.to(htmlItem, {
                       opacity: 1,
                       y: 0,
@@ -265,13 +269,13 @@ export const CustomHomePage: React.FC = () => {
                       ease: "power2.out"
                     })
                   } else if (index < currentCardIndex) {
-                    // Past cards - stacked behind but still visible
+                    // Past cards - completely hidden
                     const stackedIndex = currentCardIndex - index
                     gsap.to(htmlItem, {
-                      opacity: 1, // Fully opaque so we can see the stack
+                      opacity: 0,
                       y: 0,
                       scale: 1,
-                      z: (featureItems.length - stackedIndex) * 10, // Lower z-index as we go back
+                      z: (featureItems.length - stackedIndex) * 10,
                       duration: 0.4,
                       ease: "power2.out"
                     })
@@ -339,15 +343,11 @@ export const CustomHomePage: React.FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white relative">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950 relative">
       {/* TEMPORARILY DISABLED - Moving image component */}
       {/* <ControllableSammerImage ref={sammerRef} /> */}
-      <div className="snap-section min-h-screen">
-        <HeroSection />
-      </div>
-      <div className="min-h-screen">
-        <FeaturesSection />
-      </div>
+      <HeroSection />
+      <FeaturesSection />
       <div className="snap-section min-h-screen">
         <WebinarSection />
       </div>
