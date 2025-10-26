@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react'
 import { HeroSection } from './HeroSection'
 import { FeaturesSection } from './FeaturesSection'
 import { WebinarSection } from './WebinarSection'
+import { Footer } from './Footer'
 import { ControllableSammerImage, SammerImageRef } from './ControllableSammerImage'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
@@ -17,6 +18,8 @@ export const CustomHomePage: React.FC = () => {
   useEffect(() => {
     // Wait for component to mount
     const timer = setTimeout(() => {
+      // TEMPORARILY DISABLED - Moving image logic
+      /*
       if (sammerRef.current) {
         // MANUAL POSITIONING - You can change these values
         
@@ -120,86 +123,87 @@ export const CustomHomePage: React.FC = () => {
 
         // You can add more scroll triggers or manual animations here
         // Example: sammerRef.current.animateToPosition(200, 300, 1.2, 2)
+      }
+      */
 
-        // Add snap scrolling using GSAP with proper throttling and direction tracking
-        const sections = document.querySelectorAll('.snap-section')
-        let wheelTimeout: ReturnType<typeof setTimeout> | null = null
-        let isScrolling = false
-        let lastDeltaY = 0
-        let accumulatedDeltaY = 0
-        let direction: 'up' | 'down' | null = null
-        
-        const handleWheel = (e: WheelEvent) => {
-          if (isScrolling) {
-            e.preventDefault()
-            return
-          }
-          
-          // Clear any pending scroll
-          if (wheelTimeout) clearTimeout(wheelTimeout)
-          
-          // Accumulate delta values for smooth touchpad handling
-          accumulatedDeltaY += e.deltaY
-          
-          // Determine direction based on accumulated delta
-          if (Math.abs(accumulatedDeltaY) > 5) {
-            direction = accumulatedDeltaY > 0 ? 'down' : 'up'
-            lastDeltaY = accumulatedDeltaY
-          }
-          
+      // Add snap scrolling using GSAP with proper throttling and direction tracking
+      const sections = document.querySelectorAll('.snap-section')
+      let wheelTimeout: ReturnType<typeof setTimeout> | null = null
+      let isScrolling = false
+      let lastDeltaY = 0
+      let accumulatedDeltaY = 0
+      let direction: 'up' | 'down' | null = null
+      
+      const handleWheel = (e: WheelEvent) => {
+        if (isScrolling) {
           e.preventDefault()
+          return
+        }
+        
+        // Clear any pending scroll
+        if (wheelTimeout) clearTimeout(wheelTimeout)
+        
+        // Accumulate delta values for smooth touchpad handling
+        accumulatedDeltaY += e.deltaY
+        
+        // Determine direction based on accumulated delta
+        if (Math.abs(accumulatedDeltaY) > 5) {
+          direction = accumulatedDeltaY > 0 ? 'down' : 'up'
+          lastDeltaY = accumulatedDeltaY
+        }
+        
+        e.preventDefault()
+        
+        // Throttle wheel events for touchpad compatibility
+        wheelTimeout = setTimeout(() => {
+          // Use the accumulated direction instead of single event delta
+          if (Math.abs(accumulatedDeltaY) < 10) {
+            accumulatedDeltaY = 0
+            return // Ignore small scrolls
+          }
           
-          // Throttle wheel events for touchpad compatibility
-          wheelTimeout = setTimeout(() => {
-            // Use the accumulated direction instead of single event delta
-            if (Math.abs(accumulatedDeltaY) < 10) {
-              accumulatedDeltaY = 0
-              return // Ignore small scrolls
-            }
+          const currentScroll = window.scrollY
+          const sectionHeight = window.innerHeight
+          const currentSectionIndex = Math.round(currentScroll / sectionHeight)
+          
+          let targetIndex = currentSectionIndex
+          
+          // Use direction instead of deltaY for more consistent behavior
+          if (direction === 'down' && currentSectionIndex < sections.length - 1) {
+            targetIndex = currentSectionIndex + 1
+          } else if (direction === 'up' && currentSectionIndex > 0) {
+            targetIndex = currentSectionIndex - 1
+          }
+          
+          if (targetIndex !== currentSectionIndex) {
+            isScrolling = true
+            accumulatedDeltaY = 0
+            direction = null
             
-            const currentScroll = window.scrollY
-            const sectionHeight = window.innerHeight
-            const currentSectionIndex = Math.round(currentScroll / sectionHeight)
+            const targetSection = sections[targetIndex] as HTMLElement
+            const targetScroll = targetSection.offsetTop
             
-            let targetIndex = currentSectionIndex
-            
-            // Use direction instead of deltaY for more consistent behavior
-            if (direction === 'down' && currentSectionIndex < sections.length - 1) {
-              targetIndex = currentSectionIndex + 1
-            } else if (direction === 'up' && currentSectionIndex > 0) {
-              targetIndex = currentSectionIndex - 1
-            }
-            
-            if (targetIndex !== currentSectionIndex) {
-              isScrolling = true
-              accumulatedDeltaY = 0
-              direction = null
-              
-              const targetSection = sections[targetIndex] as HTMLElement
-              const targetScroll = targetSection.offsetTop
-              
-              gsap.to(window, {
-                duration: 0.6,
-                scrollTo: { 
-                  y: targetScroll, 
-                  autoKill: false 
-                },
-                ease: "power2.inOut",
-                onComplete: () => {
-                  isScrolling = false
-                }
-              })
-            }
-          }, 120) // Reduced throttle delay for better touchpad response
-        }
-        
-        window.addEventListener('wheel', handleWheel, { passive: false })
-        
-        // Cleanup
-        return () => {
-          if (wheelTimeout) clearTimeout(wheelTimeout)
-          window.removeEventListener('wheel', handleWheel)
-        }
+            gsap.to(window, {
+              duration: 0.6,
+              scrollTo: { 
+                y: targetScroll, 
+                autoKill: false 
+              },
+              ease: "power2.inOut",
+              onComplete: () => {
+                isScrolling = false
+              }
+            })
+          }
+        }, 120) // Reduced throttle delay for better touchpad response
+      }
+      
+      window.addEventListener('wheel', handleWheel, { passive: false })
+      
+      // Cleanup
+      return () => {
+        if (wheelTimeout) clearTimeout(wheelTimeout)
+        window.removeEventListener('wheel', handleWheel)
       }
     }, 100)
 
@@ -208,7 +212,8 @@ export const CustomHomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white relative">
-      <ControllableSammerImage ref={sammerRef} />
+      {/* TEMPORARILY DISABLED - Moving image component */}
+      {/* <ControllableSammerImage ref={sammerRef} /> */}
       <div className="snap-section min-h-screen">
         <HeroSection />
       </div>
@@ -217,6 +222,9 @@ export const CustomHomePage: React.FC = () => {
       </div>
       <div className="snap-section min-h-screen">
         <WebinarSection />
+      </div>
+      <div className="snap-section h-screen">
+        <Footer />
       </div>
     </div>
   )
