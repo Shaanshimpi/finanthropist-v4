@@ -330,6 +330,319 @@ export const CustomHomePage: React.FC = () => {
         }
       }, 200)
       
+      // Add background color transition to white for webinar section
+      setTimeout(() => {
+        const webinarSection = document.querySelector('.webinar-section')
+        const bgWrapper = document.querySelector('.page-bg-wrapper') as HTMLElement
+        
+        if (webinarSection && bgWrapper) {
+          // Set initial background for GSAP to control
+          bgWrapper.style.background = 'linear-gradient(to bottom right, #0f172a, #111827, #0f172a)'
+          
+          ScrollTrigger.create({
+            trigger: webinarSection,
+            start: 'top 50%',
+            end: 'bottom 50%',
+            onEnter: () => {
+              gsap.to(bgWrapper, {
+                background: 'linear-gradient(to bottom right, #ffffff, #ffffff, #ffffff)',
+                duration: 1,
+                ease: 'power2.inOut'
+              })
+              webinarSection.classList.add('on-white-bg')
+              const featuresSection = document.querySelector('.features-section')
+              if (featuresSection) featuresSection.classList.add('on-white-bg')
+              
+              // Animate image fade overlays to white
+              const fadeOverlays = document.querySelectorAll('.fade-overlay')
+              fadeOverlays.forEach((overlay) => {
+                gsap.to(overlay as HTMLElement, {
+                  background: 'linear-gradient(to top, #ffffff 0%, #ffffff 40%, rgba(255, 255, 255, 0.9) 60%, rgba(255, 255, 255, 0.7) 80%, transparent 100%)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Animate webinar section text colors
+              const webinarContent = document.querySelectorAll('.webinar-content, .webinar-title')
+              webinarContent.forEach((el) => {
+                gsap.to(el as HTMLElement, {
+                  color: '#111827',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Animate webinar badge
+              const webinarBadge = document.querySelector('.webinar-badge')
+              if (webinarBadge) {
+                gsap.to(webinarBadge as HTMLElement, {
+                  background: 'rgba(252, 194, 47, 0.15)',
+                  borderColor: 'rgba(252, 194, 47, 0.3)',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              const webinarBadgeText = webinarBadge?.querySelector('span')
+              if (webinarBadgeText) {
+                gsap.to(webinarBadgeText as HTMLElement, {
+                  color: '#991b1b',
+                  fontWeight: '700',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              // Animate webinar cards
+              const webinarCards = document.querySelectorAll('.webinar-card')
+              webinarCards.forEach((card) => {
+                const el = card as HTMLElement
+                el.style.backgroundColor = '#fefce8'
+                el.style.borderColor = 'rgba(252, 194, 47, 0.4)'
+                gsap.to(el, {
+                  backgroundColor: '#fff7ed',
+                  borderColor: 'rgba(252, 194, 47, 0.5)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              const webinarCardTexts = document.querySelectorAll('.webinar-card-text')
+              webinarCardTexts.forEach((text) => {
+                gsap.to(text as HTMLElement, {
+                  color: '#1f2937',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+            },
+            onLeaveBack: () => {
+              gsap.to(bgWrapper, {
+                background: 'linear-gradient(to bottom right, #0f172a, #111827, #0f172a)',
+                duration: 1,
+                ease: 'power2.inOut'
+              })
+              webinarSection.classList.remove('on-white-bg')
+              const featuresSection = document.querySelector('.features-section')
+              if (featuresSection) featuresSection.classList.remove('on-white-bg')
+              
+              // Animate image fade overlays back to dark
+              const fadeOverlays = document.querySelectorAll('.fade-overlay')
+              fadeOverlays.forEach((overlay) => {
+                gsap.to(overlay as HTMLElement, {
+                  background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Revert webinar section text colors to white
+              const webinarContent = document.querySelectorAll('.webinar-content, .webinar-title')
+              webinarContent.forEach((el) => {
+                gsap.to(el as HTMLElement, {
+                  color: '#ffffff',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Revert webinar badge
+              const webinarBadge = document.querySelector('.webinar-badge')
+              if (webinarBadge) {
+                gsap.to(webinarBadge as HTMLElement, {
+                  background: 'rgba(30, 41, 59, 0.5)',
+                  borderColor: 'rgba(51, 65, 85, 0.5)',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              const webinarBadgeText = webinarBadge?.querySelector('span')
+              if (webinarBadgeText) {
+                gsap.to(webinarBadgeText as HTMLElement, {
+                  color: 'rgb(203, 213, 225)',
+                  fontWeight: '600',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              // Revert webinar cards
+              const webinarCards = document.querySelectorAll('.webinar-card')
+              webinarCards.forEach((card) => {
+                const el = card as HTMLElement
+                el.style.backgroundColor = '#1e293b'
+                el.style.borderColor = 'rgba(71, 85, 105, 0.3)'
+                gsap.to(el, {
+                  backgroundColor: 'rgba(30, 41, 59, 0.6)',
+                  borderColor: 'rgba(51, 65, 85, 0.4)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              const webinarCardTexts = document.querySelectorAll('.webinar-card-text')
+              webinarCardTexts.forEach((text) => {
+                gsap.to(text as HTMLElement, {
+                  color: '#ffffff',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+            },
+            onLeave: () => {
+              gsap.to(bgWrapper, {
+                background: 'linear-gradient(to bottom right, #ffffff, #ffffff, #ffffff)',
+                duration: 1,
+                ease: 'power2.inOut'
+              })
+              webinarSection.classList.add('on-white-bg')
+              const featuresSection = document.querySelector('.features-section')
+              if (featuresSection) featuresSection.classList.add('on-white-bg')
+              
+              // Animate image fade overlays to white
+              const fadeOverlays = document.querySelectorAll('.fade-overlay')
+              fadeOverlays.forEach((overlay) => {
+                gsap.to(overlay as HTMLElement, {
+                  background: 'linear-gradient(to top, #ffffff 0%, #ffffff 40%, rgba(255, 255, 255, 0.9) 60%, rgba(255, 255, 255, 0.7) 80%, transparent 100%)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Animate webinar section text colors to dark
+              const webinarContent = document.querySelectorAll('.webinar-content, .webinar-title')
+              webinarContent.forEach((el) => {
+                gsap.to(el as HTMLElement, {
+                  color: '#111827',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Animate webinar badge
+              const webinarBadge = document.querySelector('.webinar-badge')
+              if (webinarBadge) {
+                gsap.to(webinarBadge as HTMLElement, {
+                  background: 'rgba(252, 194, 47, 0.15)',
+                  borderColor: 'rgba(252, 194, 47, 0.3)',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              const webinarBadgeText = webinarBadge?.querySelector('span')
+              if (webinarBadgeText) {
+                gsap.to(webinarBadgeText as HTMLElement, {
+                  color: '#991b1b',
+                  fontWeight: '700',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              // Animate webinar cards
+              const webinarCards = document.querySelectorAll('.webinar-card')
+              webinarCards.forEach((card) => {
+                const el = card as HTMLElement
+                el.style.backgroundColor = '#fefce8'
+                el.style.borderColor = 'rgba(252, 194, 47, 0.4)'
+                gsap.to(el, {
+                  backgroundColor: '#fff7ed',
+                  borderColor: 'rgba(252, 194, 47, 0.5)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              const webinarCardTexts = document.querySelectorAll('.webinar-card-text')
+              webinarCardTexts.forEach((text) => {
+                gsap.to(text as HTMLElement, {
+                  color: '#1f2937',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+            },
+            onEnterBack: () => {
+              gsap.to(bgWrapper, {
+                background: 'linear-gradient(to bottom right, #0f172a, #111827, #0f172a)',
+                duration: 1,
+                ease: 'power2.inOut'
+              })
+              webinarSection.classList.remove('on-white-bg')
+              const featuresSection = document.querySelector('.features-section')
+              if (featuresSection) featuresSection.classList.remove('on-white-bg')
+              
+              // Animate image fade overlays back to dark
+              const fadeOverlays = document.querySelectorAll('.fade-overlay')
+              fadeOverlays.forEach((overlay) => {
+                gsap.to(overlay as HTMLElement, {
+                  background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Revert webinar section text colors to white
+              const webinarContent = document.querySelectorAll('.webinar-content, .webinar-title')
+              webinarContent.forEach((el) => {
+                gsap.to(el as HTMLElement, {
+                  color: '#ffffff',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              // Revert webinar badge
+              const webinarBadge = document.querySelector('.webinar-badge')
+              if (webinarBadge) {
+                gsap.to(webinarBadge as HTMLElement, {
+                  background: 'rgba(30, 41, 59, 0.5)',
+                  borderColor: 'rgba(51, 65, 85, 0.5)',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              const webinarBadgeText = webinarBadge?.querySelector('span')
+              if (webinarBadgeText) {
+                gsap.to(webinarBadgeText as HTMLElement, {
+                  color: 'rgb(203, 213, 225)',
+                  fontWeight: '600',
+                  duration: 0.8,
+                  ease: 'power2.inOut'
+                })
+              }
+              
+              // Revert webinar cards
+              const webinarCards = document.querySelectorAll('.webinar-card')
+              webinarCards.forEach((card) => {
+                const el = card as HTMLElement
+                el.style.backgroundColor = '#1e293b'
+                el.style.borderColor = 'rgba(71, 85, 105, 0.3)'
+                gsap.to(el, {
+                  backgroundColor: 'rgba(30, 41, 59, 0.6)',
+                  borderColor: 'rgba(51, 65, 85, 0.4)',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+              
+              const webinarCardTexts = document.querySelectorAll('.webinar-card-text')
+              webinarCardTexts.forEach((text) => {
+                gsap.to(text as HTMLElement, {
+                  color: '#ffffff',
+                  duration: 1,
+                  ease: 'power2.inOut'
+                })
+              })
+            }
+          })
+        }
+      }, 250)
+      
       // Cleanup
       return () => {
         // Cleanup for snap scroll is disabled
@@ -343,12 +656,15 @@ export const CustomHomePage: React.FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950 relative">
+    <div className="relative">
+      {/* Square pattern background for home page sections only */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0" style={{ height: '100%' }}></div>
+      
       {/* TEMPORARILY DISABLED - Moving image component */}
       {/* <ControllableSammerImage ref={sammerRef} /> */}
-      <HeroSection />
-      <FeaturesSection />
-      <div className="snap-section min-h-screen">
+      <div className="page-bg-wrapper relative z-10">
+        <HeroSection />
+        <FeaturesSection />
         <WebinarSection />
       </div>
     </div>

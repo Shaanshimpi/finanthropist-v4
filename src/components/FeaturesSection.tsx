@@ -18,12 +18,6 @@ export const FeaturesSection: React.FC = () => {
     <section className="features-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)', height: 'calc(100vh - 4rem)' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Subtle gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-[#C71C22]/5 via-transparent to-transparent rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-transparent via-[#FCC22F]/5 to-transparent rounded-full blur-[120px]" />
-        
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 h-full flex items-center relative z-10">
@@ -32,12 +26,14 @@ export const FeaturesSection: React.FC = () => {
                      {/* Left Section - Image */}
            <div className="flex justify-center lg:justify-start">
              <div className="relative w-80 h-96 lg:w-96 lg:h-[500px]">
+               {/* Fading mask at bottom */}
+               <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
                <Image
                  src="/static-media/Sammer-top.png"
                  alt="Professional Instructor - Sammer"
                  width={400}
                  height={500}
-                 className="w-full h-full object-contain object-bottom drop-shadow-[0_0_60px_rgba(234,179,8,0.3)]"
+                 className="w-full h-full object-contain object-bottom"
                />
              </div>
            </div>
@@ -66,7 +62,7 @@ export const FeaturesSection: React.FC = () => {
               {features.map((feature, index) => (
                                 <div 
                   key={index} 
-                  className="feature-item"
+                  className="feature-item overflow-hidden rounded-[2rem]"
                   style={{ 
                     height: 'calc((100vh - 4rem) * 0.5)',
                     position: 'absolute',
@@ -81,7 +77,7 @@ export const FeaturesSection: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800/95 to-slate-900 rounded-[2rem] backdrop-blur-2xl border border-slate-700/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]"></div>
                       
                       {/* Floating Corner Element */}
-                      <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-[#C71C22]/20 via-[#FCC22F]/10 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                      {/* <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-[#C71C22]/20 via-[#FCC22F]/10 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div> */}
                       
                       {/* Animated Border Gradient */}
                       <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-[#C71C22]/0 via-[#FCC22F]/20 to-[#C71C22]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
@@ -93,27 +89,18 @@ export const FeaturesSection: React.FC = () => {
                       {/* Diagonal Accent Line */}
                       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FCC22F]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       
-                      <div className="h-full flex flex-col p-8 lg:p-10 relative z-10">
+                      <div className="h-full flex flex-col p-8 lg:p-10 relative z-10 bg-opacity-0">
                         {/* Asymmetric Header */}
                         <div className="relative mb-8">
                           {/* Floating Number Badge - Asymmetric Position */}
                           <div className="absolute -left-4 top-0">
                             <div className="relative">
                               {/* Glow effect */}
-                              <div className="absolute inset-0 bg-gradient-to-br from-[#C71C22] to-[#FCC22F] rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                              {/* <div className="absolute inset-0 bg-gradient-to-br from-[#C71C22] to-[#FCC22F] rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div> */}
                               {/* Main badge */}
                               <div className="relative w-20 h-20 bg-gradient-to-br from-[#C71C22] via-[#C71C22]/80 to-[#FCC22F]/40 rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border-2 border-white/10">
                                 <span className="text-white font-black text-3xl">{index + 1}</span>
                               </div>
-                            </div>
-                          </div>
-                          
-                          {/* Counter Badge - Floating Right */}
-                          <div className="absolute -right-4 top-0">
-                            <div className="px-4 py-2 bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-full border border-[#FCC22F]/30 shadow-lg">
-                              <span className="text-xs font-bold text-[#FCC22F] tracking-wider">
-                                {String(index + 1).padStart(2, '0')} / {features.length.toString().padStart(2, '0')}
-                              </span>
                             </div>
                           </div>
                         </div>

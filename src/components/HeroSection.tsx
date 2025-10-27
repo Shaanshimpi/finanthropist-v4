@@ -8,15 +8,6 @@ export const HeroSection: React.FC = () => {
     <section className="hero-section h-[calc(100vh-4rem)] min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated gradient orbs - using brand colors */}
-        <div className="absolute top-1/4 right-1/4 w-[800px] h-[800px] bg-gradient-to-br from-[#C71C22]/8 via-transparent to-transparent rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-tr from-transparent via-[#FCC22F]/8 to-transparent rounded-full blur-[120px] animate-pulse delay-1000" />
-        
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
-        {/* Top gradient fade */}
-        <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-slate-950/80 to-transparent pointer-events-none"></div>
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 w-full h-full relative z-10">
@@ -33,7 +24,7 @@ export const HeroSection: React.FC = () => {
                   alt="No. 1 Customer Satisfaction Badge"
                   width={112}
                   height={112}
-                  className="object-contain w-full h-full filter drop-shadow-[0_0_30px_rgba(234,179,8,0.5)]"
+                  className="object-contain w-full h-full"
                 />
               </div>
             </div>
@@ -118,19 +109,18 @@ export const HeroSection: React.FC = () => {
           {/* Right Section - Instructor Image */}
           <div className="flex justify-center h-full relative">
             <div className="relative w-full h-full flex items-end justify-center">
-              {/* Glowing background effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#C71C22]/20 via-[#FCC22F]/20 to-[#C71C22]/20 rounded-full blur-3xl scale-150"></div>
-              
               {/* Main Instructor Image */}
                              <div className="relative w-full max-w-md lg:max-w-lg">
                  <div className="relative transform transition-transform duration-700 hover:scale-105">
                                        <div className="relative">
+                      {/* Fading mask at bottom */}
+                      <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
                       <Image
                         src="/static-media/sameer-fist.png"
                         alt="Professional Instructor - Sammer"
                         width={500}
                         height={600}
-                        className="w-full h-auto object-contain object-bottom drop-shadow-[0_0_40px_rgba(234,179,8,0.2)]"
+                        className="w-full h-auto object-contain object-bottom"
                       />
                     </div>
                  </div>
