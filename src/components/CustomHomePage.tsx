@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react'
 import { HeroSection } from './HeroSection'
 import { FeaturesSection } from './FeaturesSection'
+import { InstructorBioSection } from './InstructorBioSection'
 import { WebinarSection } from './WebinarSection'
 import { ControllableSammerImage, SammerImageRef } from './ControllableSammerImage'
 import { gsap } from 'gsap'
@@ -342,7 +343,8 @@ export const CustomHomePage: React.FC = () => {
           ScrollTrigger.create({
             trigger: webinarSection,
             start: 'top 50%',
-            end: 'bottom 50%',
+            end: 'top 50%',
+            markers: true,
             onEnter: () => {
               gsap.to(bgWrapper, {
                 background: 'linear-gradient(to bottom right, #ffffff, #ffffff, #ffffff)',
@@ -666,6 +668,9 @@ export const CustomHomePage: React.FC = () => {
         <HeroSection />
         <FeaturesSection />
         <WebinarSection />
+        {/* New Instructor Bio Section below webinar */}
+        {/* Light-theme content; GSAP fade-overlays already handled */}
+        <InstructorBioSection />
       </div>
     </div>
   )
