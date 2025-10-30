@@ -12,7 +12,7 @@ if (typeof window !== 'undefined') {
 export interface SammerImageRef {
   setPosition: (x: number, y: number, scale?: number) => void
   animateToPosition: (x: number, y: number, scale?: number, duration?: number) => void
-  addScrollTrigger: (trigger: string, start: string, end: string, x: number, y: number, scale?: number, duration?: number, imageSrc?: string, previousImageSrc?: string) => void
+  addScrollTrigger: (trigger: string, start: string, end: string, x: number, y: number, scale?: number, duration?: number, imageSrc?: string, previousImageSrc?: string, flipX?: boolean, previousFlipX?: boolean) => void
   killAllScrollTriggers: () => void
   setImage: (imageSrc: string) => void
 }
@@ -50,7 +50,7 @@ export const ControllableSammerImage = forwardRef<SammerImageRef, {}>((props, re
     },
     
     // Add scroll-triggered animation (supports multiple triggers)
-    addScrollTrigger: (trigger: string, start: string, end: string, x: number, y: number, scale = 1, duration = 1, imageSrc?: string, previousImageSrc?: string) => {
+    addScrollTrigger: (trigger: string, start: string, end: string, x: number, y: number, scale = 1, duration = 1, imageSrc?: string, previousImageSrc?: string, flipX = false, previousFlipX = false) => {
       if (imageRef.current) {
         // Create a timeline for smooth animation with reverse
         const tl = gsap.timeline({
@@ -117,6 +117,40 @@ export const ControllableSammerImage = forwardRef<SammerImageRef, {}>((props, re
           ease: "power2.out"
         })
         
+        // Apply flip when entering or on reverse
+        if (tl.scrollTrigger) {
+          const originalOnEnter = tl.scrollTrigger.onEnter
+          const originalOnEnterBack = tl.scrollTrigger.onEnterBack
+          
+          tl.scrollTrigger.onEnter = () => {
+            if (originalOnEnter) originalOnEnter()
+            if (flipX) {
+              gsap.to(imageRef.current, { scaleX: -scale, duration: duration, ease: "power2.out" })
+            } else {
+              gsap.to(imageRef.current, { scaleX: scale, duration: duration, ease: "power2.out" })
+            }
+          }
+          
+          tl.scrollTrigger.onEnterBack = () => {
+            if (originalOnEnterBack) originalOnEnterBack()
+            if (flipX) {
+              gsap.to(imageRef.current, { scaleX: -scale, duration: duration, ease: "power2.out" })
+            } else {
+              gsap.to(imageRef.current, { scaleX: scale, duration: duration, ease: "power2.out" })
+            }
+          }
+          
+          if (previousImageSrc) {
+            tl.scrollTrigger.onLeaveBack = () => {
+              if (previousFlipX) {
+                gsap.to(imageRef.current, { scaleX: -scale, duration: duration, ease: "power2.out" })
+              } else {
+                gsap.to(imageRef.current, { scaleX: scale, duration: duration, ease: "power2.out" })
+              }
+            }
+          }
+        }
+        
         scrollTriggersRef.current.push(tl.scrollTrigger!)
       }
     },
@@ -136,10 +170,8 @@ export const ControllableSammerImage = forwardRef<SammerImageRef, {}>((props, re
   useEffect(() => {
     if (!imageRef.current) return
 
-    // Set initial position - start invisible and at top left
+    // Set initial position - start invisible (position will be set by parent)
     gsap.set(imageRef.current, {
-      x: 0, // Start at left edge
-      y: 0, // Start at top
       scale: 1,
       opacity: 0 // Start invisible
     })

@@ -15,7 +15,7 @@ export const FeaturesSection: React.FC = () => {
   ]
 
   return (
-    <section className="features-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)', height: 'calc(100vh - 4rem)' }}>
+    <section className="features-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)', height: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>
@@ -23,17 +23,15 @@ export const FeaturesSection: React.FC = () => {
       <div className="container mx-auto px-4 lg:px-8 h-full flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
           
-                     {/* Left Section - Image */}
-           <div className="flex justify-center lg:justify-start">
-             <div className="relative w-80 h-96 lg:w-96 lg:h-[500px]">
-               {/* Fading mask at bottom */}
-               <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
+                     {/* Left Section - Static Image (hidden initially, shown when moving image arrives) */}
+           <div className="flex justify-center lg:justify-start features-static-image-container">
+             <div className="relative w-full max-w-md lg:max-w-lg" style={{ opacity: 0 }}>
                <Image
                  src="/static-media/Sammer-top.png"
                  alt="Professional Instructor - Sammer"
-                 width={400}
-                 height={500}
-                 className="w-full h-full object-contain object-bottom"
+                 width={500}
+                 height={600}
+                 className="w-full h-auto object-contain object-bottom"
                />
              </div>
            </div>

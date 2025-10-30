@@ -4,28 +4,25 @@ import Image from 'next/image'
 
 export const InstructorBioSection: React.FC = () => {
   return (
-    <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+    <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)', height: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
       {/* Background pattern stays global via CustomHomePage */}
       <div className="container mx-auto px-4 lg:px-8 h-full flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
           {/* Left: Instructor Image */}
           <div className="flex justify-center lg:justify-start">
-            <div className="relative w-80 h-96 lg:w-96 lg:h-[500px]">
-              {/* Fading mask at bottom */}
-              <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #ffffff 0%, #ffffff 40%, rgba(255, 255, 255, 0.9) 60%, rgba(255, 255, 255, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
+            <div className="relative w-full max-w-md lg:max-w-lg">
               <Image
                 src="/static-media/sameer-fist.png"
-                alt="Instructor — Sameer Sarang"
-                width={400}
-                height={500}
-                className="w-full h-full object-contain object-bottom"
-                priority
+                alt="Professional Instructor - Sameer Sarang"
+                width={500}
+                height={600}
+                className="w-full h-auto object-contain object-bottom"
               />
             </div>
           </div>
 
           {/* Right: Content (Light theme) */}
-          <div className="space-y-6 text-slate-900">
+          <div className="space-y-6 text-slate-900 instructor-content-wrapper">
             <div className="flex justify-center lg:justify-start">
               <div className="inline-block mb-1.5 px-3 py-1 bg-amber-100/70 rounded-full border border-amber-200 instructor-badge">
                 <span className="text-xs font-semibold text-amber-900">Instructor</span>
@@ -33,8 +30,13 @@ export const InstructorBioSection: React.FC = () => {
             </div>
 
             <div className="text-center lg:text-left space-y-1.5">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight instructor-title">
-                Meet Sameer Sarang
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
+                <span className="md:text-4xl block text-slate-900 instructor-title">
+                  Meet Our Expert Educator
+                </span>
+                <span className="block mt-0.5 bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
+                    Sameer Sarang
+                </span>
               </h2>
               <p className="text-base lg:text-lg text-slate-700 leading-relaxed instructor-content">
                 Maharashtra's most trusted stock market educator with 23+ years of finance experience and a proven
@@ -44,15 +46,15 @@ export const InstructorBioSection: React.FC = () => {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 instructor-card">
+              <div className="instructor-stats-card rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100/80 backdrop-blur-sm p-4 instructor-card relative overflow-hidden">
                 <div className="text-2xl font-extrabold text-amber-900 instructor-card-text">23+ yrs</div>
                 <div className="text-xs font-semibold text-amber-800 instructor-card-text">Experience</div>
               </div>
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 instructor-card">
+              <div className="instructor-stats-card rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100/80 backdrop-blur-sm p-4 instructor-card relative overflow-hidden">
                 <div className="text-2xl font-extrabold text-amber-900 instructor-card-text">10,000+</div>
                 <div className="text-xs font-semibold text-amber-800 instructor-card-text">Families</div>
               </div>
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 instructor-card">
+              <div className="instructor-stats-card rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100/80 backdrop-blur-sm p-4 instructor-card relative overflow-hidden">
                 <div className="text-2xl font-extrabold text-amber-900 instructor-card-text">5.0★</div>
                 <div className="text-xs font-semibold text-amber-800 instructor-card-text">Google Rating</div>
               </div>
@@ -78,8 +80,8 @@ export const InstructorBioSection: React.FC = () => {
                   { title: '23+ Years Finance Experience', desc: 'Proven expertise in financial markets' },
                   { title: 'Maharashtra Focus', desc: 'Understanding local investor mindset' }
                 ].map((item, i) => (
-                  <div key={i} className="rounded-2xl border border-slate-200 bg-white p-4 instructor-card">
-                    <div className="text-sm font-extrabold text-slate-900 instructor-card-text">{item.title}</div>
+                  <div key={i} className="instructor-credential-card rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50/50 backdrop-blur-sm p-4 instructor-card relative overflow-hidden">
+                    <div className="text-sm font-extrabold text-slate-900 instructor-card-text instructor-card-title">{item.title}</div>
                     <div className="text-xs text-slate-600 mt-1.5 instructor-card-text">{item.desc}</div>
                   </div>
                 ))}

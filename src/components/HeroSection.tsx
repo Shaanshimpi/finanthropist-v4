@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="hero-section h-[calc(100vh-4rem)] min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden">
+    <section className="hero-section flex items-center relative overflow-hidden" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>
@@ -107,24 +107,20 @@ export const HeroSection: React.FC = () => {
           </div>
           
           {/* Right Section - Instructor Image */}
-          <div className="flex justify-center h-full relative">
+          <div className="flex justify-center h-full relative hero-right-image">
             <div className="relative w-full h-full flex items-end justify-center">
-              {/* Main Instructor Image */}
-                             <div className="relative w-full max-w-md lg:max-w-lg">
-                 <div className="relative transform transition-transform duration-700 hover:scale-105">
-                                       <div className="relative">
-                      {/* Fading mask at bottom */}
-                      <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
-                      <Image
-                        src="/static-media/sameer-fist.png"
-                        alt="Professional Instructor - Sammer"
-                        width={500}
-                        height={600}
-                        className="w-full h-auto object-contain object-bottom"
-                      />
-                    </div>
-                 </div>
-               </div>
+              <div className="relative w-full max-w-md lg:max-w-lg">
+                <div className="relative">
+                  <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
+                  <Image
+                    src="/static-media/sameer-fist.png"
+                    alt="Professional Instructor - Sammer"
+                    width={500}
+                    height={600}
+                    className="w-full h-auto object-contain object-bottom"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

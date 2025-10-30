@@ -14,7 +14,7 @@ export const WebinarSection: React.FC = () => {
   ]
 
   return (
-    <section className="webinar-section h-[calc(100vh-4rem)] min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden">
+    <section className="webinar-section flex items-center relative overflow-hidden" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>
@@ -92,23 +92,18 @@ export const WebinarSection: React.FC = () => {
           </div>
 
           {/* Right Section - Instructor Image */}
-          <div className="flex justify-center lg:justify-start h-full relative">
-            <div className="relative w-full h-full flex items-end justify-center">
-              {/* Main Instructor Image */}
-              <div className="relative w-full max-w-md lg:max-w-lg">
-                <div className="relative">
-                  <div className="relative scale-x-[-1]">
-                    {/* Fading mask at bottom */}
-                    <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
-                    <Image
-                      src="/static-media/Sammer-top.png"
-                      alt="Professional Instructor - Sammer"
-                      width={500}
-                      height={600}
-                      className="w-full h-auto object-contain object-bottom"
-                    />
-                  </div>
-                </div>
+          <div className="flex justify-center lg:justify-start h-full relative" style={{ minHeight: '600px' }}>
+            <div className="relative w-full max-w-md lg:max-w-lg">
+              <div className="relative">
+                <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
+                <Image
+                  src="/static-media/Sammer-top.png"
+                  alt="Professional Instructor - Sammer"
+                  width={500}
+                  height={600}
+                  className="w-full h-auto object-contain object-bottom"
+                  style={{ transform: 'scaleX(-1)' }}
+                />
               </div>
             </div>
           </div>
