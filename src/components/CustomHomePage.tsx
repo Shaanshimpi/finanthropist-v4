@@ -52,7 +52,7 @@ export const CustomHomePage: React.FC = () => {
           duration: 1,
           ease: 'power2.inOut',
           delay: 0,
-          markers: false,
+          markers: true,
         })
       }, 900)
 

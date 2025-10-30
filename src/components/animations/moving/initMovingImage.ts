@@ -79,6 +79,23 @@ export const initMovingImageTransitions = (
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
         if (!featuresStatic) return
         const p = self.progress
+        try {
+          const featuresLeft = document.querySelector('.features-section .grid > div:first-child') as HTMLElement | null
+          const container = movingImage.parentElement as HTMLElement | null
+          const featuresRect = featuresLeft?.getBoundingClientRect()
+          const containerRect = container?.getBoundingClientRect()
+          const currentRect = movingImage.getBoundingClientRect()
+          const centerY = featuresRect && initialHeroPos ? (featuresRect.top + featuresRect.height / 2 - initialHeroPos.height / 2) : undefined
+          // Debug logs for hero->features scrub
+          // eslint-disable-next-line no-console
+          console.log('[hero->features:onUpdate]', {
+            progress: p.toFixed(3),
+            featuresRect,
+            containerRect,
+            movingRect: currentRect,
+            centerY,
+          })
+        } catch {}
         if (p > 0.98) {
           gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
         } else if (p < 0.02) {
@@ -121,17 +138,54 @@ export const initMovingImageTransitions = (
       endTrigger: '.webinar-section',
       end: 'top top',
       scrub: true,
+      invalidateOnRefresh: true,
       markers,
       onEnter: () => {
+        // Prep for scrubbed move to webinar: hide static, show moving
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
         if (featuresStatic) gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
         setCurrentImage('/static-media/Sammer-top.png')
-        gsap.set(movingImage, { opacity: 1, scaleX: -1 })
+        gsap.set(movingImage, { opacity: 1, scaleX: -1, position: 'absolute' })
       },
       onEnterBack: () => {
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
         if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
+        gsap.set(movingImage, { position: 'absolute' })
       },
+      onUpdate: (self) => {
+        try {
+          // Prefer the actual static image box for precise overlap during pin
+          const featuresStaticBox = document.querySelector('.features-static-image-container > div') as HTMLElement | null
+          const featuresLeft = (featuresStaticBox ?? document.querySelector('.features-section .grid > div:first-child')) as HTMLElement | null
+          const container = movingImage.parentElement as HTMLElement | null
+          const featuresRect = featuresLeft?.getBoundingClientRect()
+          const containerRect = container?.getBoundingClientRect()
+          const movingRect = movingImage.getBoundingClientRect()
+          // Directly match the static image box; no hero-size centering math
+          // Debug logs for features pin scroll
+          // eslint-disable-next-line no-console
+          console.log('[features pin:onUpdate]', {
+            progress: self?.progress?.toFixed ? self.progress.toFixed(3) : self?.progress,
+            scrollY: window.scrollY,
+            featuresRect,
+            containerRect,
+            movingRect,
+            relLeft: featuresRect && containerRect ? featuresRect.left - containerRect.left : null,
+            relTop: featuresRect && containerRect ? featuresRect.top - containerRect.top : null,
+          })
+          if (featuresRect && containerRect && Number(self?.progress) < 0.05) {
+            // Keep moving image exactly overlapping the static image relative to container
+            gsap.set(movingImage, {
+              left: featuresRect.left - containerRect.left,
+              top: featuresRect.top - containerRect.top,
+              width: featuresRect.width,
+              height: featuresRect.height,
+            })
+          }
+        } catch {}
+      },
+      // No onLeave: end state achieved by scrub tween below
+      
     },
   })
   featuresToWebinarTl.to(movingImage, {
@@ -180,6 +234,17 @@ export const initMovingImageTransitions = (
         setCurrentImage('/static-media/Sammer-top.png')
         gsap.set(movingImage, { opacity: 1, scaleX: -1 })
       },
+      onUpdate: () => {
+        try {
+          const instructorImg = document.querySelector('.instructor-bio-section img') as HTMLElement | null
+          const container = movingImage.parentElement as HTMLElement | null
+          const targetRect = instructorImg?.getBoundingClientRect()
+          const containerRect = container?.getBoundingClientRect()
+          const movingRect = movingImage.getBoundingClientRect()
+          // eslint-disable-next-line no-console
+          console.log('[webinar->instructor:onUpdate]', { targetRect, containerRect, movingRect })
+        } catch {}
+      },
     },
   })
   webinarToInstructorTl.to(movingImage, {
@@ -209,8 +274,38 @@ export const initMovingImageTransitions = (
     },
   })
 
+  // Persistent overlap during Features pin using ticker (runs every frame while pin is active)
+  const featuresPinTicker = () => {
+    try {
+      const pin =
+        ScrollTrigger.getById('features-pin') ||
+        ScrollTrigger.getAll().find((t) => {
+          const trig = t.trigger as HTMLElement | null
+          return !!t.pin && !!trig && trig.classList?.contains('features-section')
+        })
+      if (!pin || !pin.isActive) return
+
+      const featuresStaticBox = document.querySelector('.features-static-image-container > div') as HTMLElement | null
+      const targetEl = (featuresStaticBox ?? document.querySelector('.features-section .grid > div:first-child')) as HTMLElement | null
+      const container = movingImage.parentElement as HTMLElement | null
+      if (!targetEl || !container) return
+
+      const targetRect = targetEl.getBoundingClientRect()
+      const containerRect = container.getBoundingClientRect()
+
+      gsap.set(movingImage, {
+        left: targetRect.left - containerRect.left,
+        top: targetRect.top - containerRect.top,
+        width: targetRect.width,
+        height: targetRect.height,
+      })
+    } catch {}
+  }
+  gsap.ticker.add(featuresPinTicker)
+
   return () => {
     window.removeEventListener('resize', handleResize)
+    gsap.ticker.remove(featuresPinTicker)
   }
 }
 
