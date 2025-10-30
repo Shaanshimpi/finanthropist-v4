@@ -15,7 +15,7 @@ export const FeaturesSection: React.FC = () => {
   ]
 
   return (
-    <section className="features-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)', height: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
+    <section className="features-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>

@@ -14,7 +14,7 @@ export const WebinarSection: React.FC = () => {
   ]
 
   return (
-    <section className="webinar-section flex items-center relative overflow-hidden" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
+    <section className="webinar-section flex items-center relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>

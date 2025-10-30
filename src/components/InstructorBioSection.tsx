@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export const InstructorBioSection: React.FC = () => {
   return (
-    <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: 'calc(100vh - 4rem)', height: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
+    <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
       {/* Background pattern stays global via CustomHomePage */}
       <div className="container mx-auto px-4 lg:px-8 h-full flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
