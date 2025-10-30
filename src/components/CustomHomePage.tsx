@@ -41,8 +41,7 @@ export const CustomHomePage: React.FC = () => {
             end: `+=${totalScrollDistance}`,
             pin: true,
             pinSpacing: true,
-            anticipatePin: 1,
-            markers: true,
+          anticipatePin: 1,
             onUpdate: (self) => {
               const progress = self.progress
               const targetCardIndex = Math.min(
@@ -143,7 +142,7 @@ export const CustomHomePage: React.FC = () => {
             trigger: webinarSection,
             start: 'top 50%',
             end: 'top 50%',
-            markers: true,
+            
             onEnter: () => {
               gsap.to(bgWrapper, {
                 background: 'linear-gradient(to bottom right, #ffffff, #ffffff, #ffffff)',
@@ -474,7 +473,6 @@ export const CustomHomePage: React.FC = () => {
                 trigger: instructorSection,
                 start: 'top 50%',
                 end: 'top 50%',
-                markers: true,
                 toggleActions: 'play none none none', // Only play on enter, don't reverse
                 once: true // Play animation only once
               }
@@ -855,7 +853,7 @@ export const CustomHomePage: React.FC = () => {
           trigger: '.features-section',
           start: () => `top+=-${Math.round(window.innerHeight * 0.25)} center`,
           end: () => `top+=-${Math.round(window.innerHeight * 0.25)} center`,
-          markers: true,
+          
           onEnter: () => {
             // Move image to left side of features section (where it should be)
             const featuresSection = document.querySelector('.features-section') as HTMLElement
@@ -951,7 +949,7 @@ export const CustomHomePage: React.FC = () => {
           trigger: '.webinar-section',
           start: () => `top+=-${Math.round(window.innerHeight * 0.25)} center`,
           end: () => `top+=-${Math.round(window.innerHeight * 0.25)} center`,
-          markers: true,
+          
           onEnter: () => {
             const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement
             const webinarImg = document.querySelector('.webinar-section img') as HTMLElement
@@ -1010,13 +1008,14 @@ export const CustomHomePage: React.FC = () => {
           }
         })
 
+        // (removed: page-wide snap)
         // Webinar to Instructor transition
         ScrollTrigger.create({
           id: 'webinar-to-instructor',
           trigger: '.instructor-bio-section',
-          start: () => `top+=-${Math.round(window.innerHeight * 0.25)} top`,
-          end: () => `top+=-${Math.round(window.innerHeight * 0.25)} top`,
-          markers: true,
+          start: () => `top+=-${Math.round(window.innerHeight * 0.25)} center`,
+          end: () => `top+=-${Math.round(window.innerHeight * 0.25)} center`,
+          
           onEnter: () => {
             const instructorImg = document.querySelector('.instructor-bio-section img') as HTMLElement
             const container = movingImage.parentElement as HTMLElement
@@ -1063,101 +1062,9 @@ export const CustomHomePage: React.FC = () => {
         // Cleanup resize listener
         return () => {
           window.removeEventListener('resize', updatePositions)
+          // window.removeEventListener('wheel', handleFirstScrollFromHero)
         }
       }, 800) // After all other animations (400ms + buffer)
-       // TEMPORARILY DISABLED - Snap scrolling logic
-      /*
-      const sections = document.querySelectorAll('.snap-section')
-      let wheelTimeout: ReturnType<typeof setTimeout> | null = null
-      let isScrolling = false
-      let lastDeltaY = 0
-      let accumulatedDeltaY = 0
-      let direction: 'up' | 'down' | null = null
-      
-      const handleWheel = (e: WheelEvent) => {
-        if (isScrolling) {
-          e.preventDefault()
-          return
-        }
-        
-        // Check if ScrollTrigger is currently pinning the features section
-        const scrollTrigger = ScrollTrigger.getById('features-pin')
-        if (scrollTrigger && scrollTrigger.isActive) {
-          // Features section is pinned, allow normal scrolling without snapping
-          return
-        }
-        
-        // Clear any pending scroll
-        if (wheelTimeout) clearTimeout(wheelTimeout)
-        
-        // Accumulate delta values for smooth touchpad handling
-        accumulatedDeltaY += e.deltaY
-        
-        // Determine direction based on accumulated delta
-        if (Math.abs(accumulatedDeltaY) > 5) {
-          direction = accumulatedDeltaY > 0 ? 'down' : 'up'
-          lastDeltaY = accumulatedDeltaY
-        }
-        
-        // Only prevent default when we're going to snap
-        // This allows normal scrolling within sections
-        
-        // Throttle wheel events for touchpad compatibility
-        wheelTimeout = setTimeout(() => {
-          // Use the accumulated direction instead of single event delta
-          if (Math.abs(accumulatedDeltaY) < 10) {
-            accumulatedDeltaY = 0
-            return // Ignore small scrolls
-          }
-          
-          const currentScroll = window.scrollY
-          
-          // Calculate which section we're currently in based on actual scroll position
-          let currentSectionIndex = 0
-          sections.forEach((section, index) => {
-            const sectionTop = (section as HTMLElement).offsetTop
-            if (currentScroll >= sectionTop - 50) {
-              currentSectionIndex = index
-            }
-          })
-          
-          let targetIndex = currentSectionIndex
-          
-          // Use direction instead of deltaY for more consistent behavior
-          if (direction === 'down' && currentSectionIndex < sections.length - 1) {
-            targetIndex = currentSectionIndex + 1
-          } else if (direction === 'up' && currentSectionIndex > 0) {
-            targetIndex = currentSectionIndex - 1
-          }
-          
-          if (targetIndex !== currentSectionIndex) {
-            e.preventDefault()
-            isScrolling = true
-            accumulatedDeltaY = 0
-            direction = null
-            
-            const targetSection = sections[targetIndex] as HTMLElement
-            if (!targetSection) return
-            
-            const targetScroll = targetSection.offsetTop
-            
-            gsap.to(window, {
-              duration: 0.6,
-              scrollTo: { 
-                y: targetScroll, 
-                autoKill: false 
-              },
-              ease: "power2.inOut",
-              onComplete: () => {
-                isScrolling = false
-              }
-            })
-          }
-        }, 120) // Reduced throttle delay for better touchpad response
-      }
-      
-      window.addEventListener('wheel', handleWheel, { passive: false })
-      */
 
       
       
