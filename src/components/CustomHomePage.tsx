@@ -42,17 +42,17 @@ export const CustomHomePage: React.FC = () => {
       setTimeout(() => {
         const movingImage = movingImageRef.current
         if (!movingImage) return
-        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: true })
+        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: false })
       }, 800)
 
       // Enable snap scrolling between major sections with markers
       setTimeout(() => {
         snapCleanup = initSnapScroll({
           sections: ['.hero-section', '.features-section', '.webinar-section', '.instructor-bio-section'],
-          duration: 1,
+          duration: 3,
           ease: 'power2.inOut',
           delay: 0,
-          markers: true,
+          markers: false,
         })
       }, 900)
 

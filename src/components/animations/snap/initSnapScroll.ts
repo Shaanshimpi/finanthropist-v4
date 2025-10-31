@@ -39,13 +39,21 @@ export const initSnapScroll = (options: SnapScrollOptions): (() => void) => {
 
   const triggers: ScrollTrigger[] = []
 
+  // Normalize scroll input to reduce overshoot/momentum around snaps
+  ScrollTrigger.normalizeScroll({
+    allowNestedScroll: true,
+    debounce: true,
+    momentum: 0,
+    lockAxis: true,
+  })
+
   const scrollToTarget = (target: Element | string, targetIndex: number) => {
     if (!scrollerEl) return
     const isHero = targetIndex === 0
     gsap.to(scrollerEl, {
       scrollTo: isHero ? { y: target, offsetY: heroOffset } : target,
-      duration,
-      ease,
+      duration: Math.max(0.2, Math.min(duration, 1.2)),
+      ease: ease || 'power2.out',
       delay,
       overwrite: true,
     })

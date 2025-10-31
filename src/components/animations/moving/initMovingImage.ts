@@ -70,9 +70,9 @@ export const initMovingImageTransitions = (
     scrollTrigger: {
       id: 'hero-to-features',
       trigger: '.hero-section',
-      start: 'top top',
+      start: '5% 10%',
       endTrigger: '.features-section',
-      end: 'top top',
+      end: '5% 10%',
       scrub: true,
       markers,
       onUpdate: (self) => {
@@ -98,10 +98,15 @@ export const initMovingImageTransitions = (
         } catch {}
         if (p > 0.98) {
           gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
+          gsap.set(movingImage, { opacity: 0 })
         } else if (p < 0.02) {
           gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
-          gsap.set(movingImage, { scaleX: 1 })
+          gsap.set(movingImage, { scaleX: 1, opacity: 1 })
           setCurrentImage('/static-media/sameer-fist.png')
+        } else {
+          // During the rest of the span, keep moving image visible so reverse scrub is smooth
+          gsap.set(movingImage, { opacity: 1 , duration: 0.2 })
+          gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
         }
       },
     },
@@ -128,6 +133,8 @@ export const initMovingImageTransitions = (
     height: () => initialHeroPos?.height ?? (movingImage.getBoundingClientRect().height || 0),
   })
 
+  // Continue with subsequent moving image animations
+
   // Features -> Webinar (scrub)
   const featuresToWebinarTl = gsap.timeline({
     defaults: { ease: 'none' },
@@ -141,15 +148,19 @@ export const initMovingImageTransitions = (
       invalidateOnRefresh: true,
       markers,
       onEnter: () => {
-        // Prep for scrubbed move to webinar: hide static, show moving
+        // Static becomes invisible → show moving image with webinar asset and scrub to target
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
         if (featuresStatic) gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
-        setCurrentImage('/static-media/Sammer-top.png')
-        gsap.set(movingImage, { opacity: 1, scaleX: -1, position: 'absolute' })
+        setCurrentImage('/static-media/sameer-webinar.png')
+        gsap.to(movingImage, { opacity: 1, duration: 0.2, delay:0.2 })
+        gsap.set(movingImage, { scaleX: -1, position: 'absolute' })
       },
       onEnterBack: () => {
+        // Back into features pin → reveal static, hide moving image and reset to Sammer-top
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
-        if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
+        if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2, delay:0.2 })
+        // setCurrentImage('/static-media/Sammer-top.png')
+        // gsap.to(movingImage, { opacity: 0, duration: 0.2 })
         gsap.set(movingImage, { position: 'absolute' })
       },
       onUpdate: (self) => {
@@ -227,22 +238,25 @@ export const initMovingImageTransitions = (
       scrub: true,
       markers,
       onEnter: () => {
+        // Start with webinar image; swap to instructor at the end of scrub
+        setCurrentImage('/static-media/sameer-webinar.png')
+        gsap.set(movingImage, { opacity: 1, scaleX: -1 })
+      },
+      onEnterBack: () => {
+        // Start with instructor image; swap back to webinar at the beginning of scrub
         setCurrentImage('/static-media/sameer-fist.png')
         gsap.set(movingImage, { opacity: 1, scaleX: 1 })
       },
-      onEnterBack: () => {
-        setCurrentImage('/static-media/Sammer-top.png')
-        gsap.set(movingImage, { opacity: 1, scaleX: -1 })
-      },
-      onUpdate: () => {
+      onUpdate: (self) => {
         try {
-          const instructorImg = document.querySelector('.instructor-bio-section img') as HTMLElement | null
-          const container = movingImage.parentElement as HTMLElement | null
-          const targetRect = instructorImg?.getBoundingClientRect()
-          const containerRect = container?.getBoundingClientRect()
-          const movingRect = movingImage.getBoundingClientRect()
-          // eslint-disable-next-line no-console
-          console.log('[webinar->instructor:onUpdate]', { targetRect, containerRect, movingRect })
+          const p = Number(self?.progress) || 0
+          if (p > 0.98) {
+            setCurrentImage('/static-media/sameer-fist.png')
+            gsap.set(movingImage, { scaleX: 1 })
+          } else if (p < 0.02) {
+            setCurrentImage('/static-media/sameer-webinar.png')
+            gsap.set(movingImage, { scaleX: -1 })
+          }
         } catch {}
       },
     },
@@ -302,6 +316,28 @@ export const initMovingImageTransitions = (
     } catch {}
   }
   gsap.ticker.add(featuresPinTicker)
+
+  // Ensure moving image fades when entering Features (both directions)
+  ScrollTrigger.create({
+    id: 'movingImage-fade-in-features',
+    trigger: '.features-section',
+    start: 'top top',
+    endTrigger: '.webinar-section',
+    end: 'top top',
+    markers,
+    onEnter: () => {
+      gsap.to(movingImage, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+    },
+    onEnterBack: () => {
+      gsap.to(movingImage, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+    },
+    onLeaveBack: () => {
+      // Hide moving image and reveal the features static image
+      gsap.to(movingImage, { opacity: 0, duration: 0.2, ease: 'power2.out' })
+      const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
+      if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+    },
+  })
 
   return () => {
     window.removeEventListener('resize', handleResize)

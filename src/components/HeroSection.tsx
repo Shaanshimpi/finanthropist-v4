@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="hero-section flex items-center relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh', marginBottom: '50vh' }}>
+    <section className="hero-section flex items-center relative overflow-hidden" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>
