@@ -46,6 +46,7 @@ export const initMovingImageTransitions = (
         top: imgRect.top - containerRect.top,
         width: imgRect.width,
         height: imgRect.height,
+        opacity: 1,
       })
     }
   }
@@ -153,7 +154,7 @@ export const initMovingImageTransitions = (
         if (featuresStatic) gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
         setCurrentImage('/static-media/sameer-webinar.png')
         gsap.to(movingImage, { opacity: 1, duration: 0.2, delay:0.2 })
-        gsap.set(movingImage, { scaleX: -1, position: 'absolute' })
+        gsap.set(movingImage, {  position: 'absolute' })
       },
       onEnterBack: () => {
         // Back into features pin → reveal static, hide moving image and reset to Sammer-top
@@ -240,7 +241,7 @@ export const initMovingImageTransitions = (
       onEnter: () => {
         // Start with webinar image; swap to instructor at the end of scrub
         setCurrentImage('/static-media/sameer-webinar.png')
-        gsap.set(movingImage, { opacity: 1, scaleX: -1 })
+        gsap.set(movingImage, { opacity: 1})
       },
       onEnterBack: () => {
         // Start with instructor image; swap back to webinar at the beginning of scrub
@@ -255,7 +256,7 @@ export const initMovingImageTransitions = (
             gsap.set(movingImage, { scaleX: 1 })
           } else if (p < 0.02) {
             setCurrentImage('/static-media/sameer-webinar.png')
-            gsap.set(movingImage, { scaleX: -1 })
+            // gsap.set(movingImage, { scaleX: -1 })
           }
         } catch {}
       },

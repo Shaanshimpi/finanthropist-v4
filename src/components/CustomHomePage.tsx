@@ -8,7 +8,9 @@ import { WebinarSection } from './WebinarSection'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { initFeaturesCardsTimeline, initWebinarBackgroundTimeline, initInstructorIntroTimeline, initMovingImageTransitions, initSnapScroll } from './animations'
+import { initFeaturesCardsTimeline, initWebinarBackgroundTimeline, initInstructorIntroTimeline, initMovingImageTransitions, initSnapScroll, initPostInstructorPinTimeline } from './animations'
+import { PostInstructorSection } from './PostInstructorSection'
+import { WelcomeSection } from './WelcomeSection'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
@@ -22,7 +24,7 @@ export const CustomHomePage: React.FC = () => {
     const timer = setTimeout(() => {
 
       // Add card stacking animation for features section (extracted)
-      setTimeout(() => {
+        setTimeout(() => {
         initFeaturesCardsTimeline()
       }, 200)
       
@@ -45,16 +47,28 @@ export const CustomHomePage: React.FC = () => {
         movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: false })
       }, 800)
 
+      // Pin & scale FINANTHROPIST in post-instructor section
+      setTimeout(() => {
+        initPostInstructorPinTimeline()
+      }, 900)
+      
       // Enable snap scrolling between major sections with markers
       setTimeout(() => {
         snapCleanup = initSnapScroll({
-          sections: ['.hero-section', '.features-section', '.webinar-section', '.instructor-bio-section'],
-          duration: 3,
+          sections: ['.hero-section', 
+            '.features-section', 
+            '.webinar-section', 
+            '.instructor-bio-section', 
+            '.post-instructor-section', 
+            '.welcome-section',
+          ],
+          duration: 2,
           ease: 'power2.inOut',
           delay: 0,
-          markers: false,
+          markers: true,
         })
-      }, 900)
+      }, 950)
+
 
       
       
@@ -81,7 +95,8 @@ export const CustomHomePage: React.FC = () => {
           position: 'absolute',
           zIndex: 40,
           pointerEvents: 'none',
-          willChange: 'transform, width, height'
+          willChange: 'transform, width, height',
+          opacity: 0,
         }}
       >
         <div className="relative w-full h-full">
@@ -100,9 +115,9 @@ export const CustomHomePage: React.FC = () => {
         <HeroSection />
         <FeaturesSection />
         <WebinarSection />
-        {/* New Instructor Bio Section below webinar */}
-        {/* Light-theme content; GSAP fade-overlays already handled */}
         <InstructorBioSection />
+        <PostInstructorSection />
+        <WelcomeSection />
       </div>
     </div>
   )

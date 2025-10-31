@@ -47,6 +47,19 @@ export const initSnapScroll = (options: SnapScrollOptions): (() => void) => {
     lockAxis: true,
   })
 
+  // Apply CSS safeguards to reduce native overscroll/momentum effects
+  const htmlEl = document.documentElement
+  const bodyEl = document.body
+  const targetEl = scrollerEl instanceof Window ? bodyEl : (scrollerEl as HTMLElement)
+  const prevHtmlOverscroll = htmlEl.style.overscrollBehavior
+  const prevBodyOverscroll = bodyEl.style.overscrollBehavior
+  const prevTargetOverscroll = targetEl.style.overscrollBehavior
+  const prevTargetTouchAction = targetEl.style.touchAction
+  htmlEl.style.overscrollBehavior = htmlEl.style.overscrollBehavior || 'contain'
+  bodyEl.style.overscrollBehavior = bodyEl.style.overscrollBehavior || 'contain'
+  targetEl.style.overscrollBehavior = targetEl.style.overscrollBehavior || 'contain'
+  targetEl.style.touchAction = targetEl.style.touchAction || 'pan-y'
+
   const scrollToTarget = (target: Element | string, targetIndex: number) => {
     if (!scrollerEl) return
     const isHero = targetIndex === 0
@@ -66,10 +79,11 @@ export const initSnapScroll = (options: SnapScrollOptions): (() => void) => {
     const trigger = ScrollTrigger.create({
       id: `snap-${selector}`,
       trigger: selector,
+      scrub: true,
       scroller: scrollerEl instanceof Window ? undefined : scrollerEl,
-      start: start ? start() : (index === 0 ? '5% 10%' : '15% 10%'),
+      start: start ? start() : (index === 0 ? '5% 12%' : '15% 12%'),
       endTrigger: nextSelector ?? undefined,
-      end: end ? end() : (nextSelector ? 'top 5%' : `bottom=+${window.innerHeight * 0.5} 5%`),
+      end: end ? end() : (nextSelector ? 'top 3%' : `bottom=+${window.innerHeight * 0.5} 3%`),
       onEnter: () => {
         if (nextSelector) scrollToTarget(nextSelector, index + 1)
       },
@@ -83,6 +97,11 @@ export const initSnapScroll = (options: SnapScrollOptions): (() => void) => {
 
   return () => {
     triggers.forEach(t => t.kill())
+    // restore CSS
+    htmlEl.style.overscrollBehavior = prevHtmlOverscroll
+    bodyEl.style.overscrollBehavior = prevBodyOverscroll
+    targetEl.style.overscrollBehavior = prevTargetOverscroll
+    targetEl.style.touchAction = prevTargetTouchAction
   }
 }
 

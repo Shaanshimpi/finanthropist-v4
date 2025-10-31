@@ -96,7 +96,7 @@ export const FeaturesSection: React.FC = () => {
                               {/* Glow effect */}
                               {/* <div className="absolute inset-0 bg-gradient-to-br from-[#C71C22] to-[#FCC22F] rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div> */}
                               {/* Main badge */}
-                              <div className="relative w-20 h-20 bg-gradient-to-br from-[#C71C22] via-[#C71C22]/80 to-[#FCC22F]/40 rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border-2 border-white/10">
+                              <div className="relative w-20 h-20 bg-gradient-to-br from-[#C71C22] via-[#C71C22] to-[#FCC22F] rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border-2 border-white/10">
                                 <span className="text-white font-black text-3xl">{index + 1}</span>
                               </div>
                             </div>
