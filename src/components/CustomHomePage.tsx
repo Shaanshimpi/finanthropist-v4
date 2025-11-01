@@ -53,21 +53,21 @@ export const CustomHomePage: React.FC = () => {
       }, 900)
       
       // Enable snap scrolling between major sections with markers
-      setTimeout(() => {
-        snapCleanup = initSnapScroll({
-          sections: ['.hero-section', 
-            '.features-section', 
-            '.webinar-section', 
-            '.instructor-bio-section', 
-            '.post-instructor-section', 
-            '.welcome-section',
-          ],
-          duration: 2,
-          ease: 'power2.inOut',
-          delay: 0,
-          markers: true,
-        })
-      }, 950)
+      // setTimeout(() => {
+      //   snapCleanup = initSnapScroll({
+      //     sections: ['.hero-section', 
+      //       '.features-section', 
+      //       '.webinar-section', 
+      //       '.instructor-bio-section', 
+      //       '.post-instructor-section', 
+      //       // 'footer',
+      //     ],
+      //     duration: 2,
+      //     ease: 'power2.inOut',
+      //     delay: 0,
+      //     markers: false,
+      //   })
+      // }, 950)
 
 
       
@@ -117,7 +117,7 @@ export const CustomHomePage: React.FC = () => {
         <WebinarSection />
         <InstructorBioSection />
         <PostInstructorSection />
-        <WelcomeSection />
+        {/* <WelcomeSection /> */}
       </div>
     </div>
   )
