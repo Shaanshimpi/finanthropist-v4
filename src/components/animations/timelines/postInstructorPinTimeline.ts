@@ -62,7 +62,7 @@ export const initPostInstructorPinTimeline = () => {
   })
 
   // 1) Scale title to cover
-  tl.to(title, { scale: () =>200, scrub: true }, 0)
+  tl.to(title, { scale: () =>240, scrub: true }, 0)
     // .to(bodyEl, { backgroundColor: '#C71C22', duration: 0.6, ease: 'none' }, 0)
     // 2) Fade in welcome after scale progresses most of the way
     .to(welcome, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.7)

@@ -8,7 +8,7 @@ import { WebinarSection } from './WebinarSection'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { initFeaturesCardsTimeline, initWebinarBackgroundTimeline, initInstructorIntroTimeline, initMovingImageTransitions, initSnapScroll, initPostInstructorPinTimeline } from './animations'
+import { initFeaturesCardsTimeline, initWebinarBackgroundTimeline, initInstructorIntroTimeline, initMovingImageTransitions, initSnapScroll, initPostInstructorPinTimeline, initMasterSnapScroll } from './animations'
 import { PostInstructorSection } from './PostInstructorSection'
 import { WelcomeSection } from './WelcomeSection'
 
@@ -44,7 +44,7 @@ export const CustomHomePage: React.FC = () => {
       setTimeout(() => {
         const movingImage = movingImageRef.current
         if (!movingImage) return
-        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: false })
+        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: true })
       }, 800)
 
       // Pin & scale FINANTHROPIST in post-instructor section
@@ -52,22 +52,23 @@ export const CustomHomePage: React.FC = () => {
         initPostInstructorPinTimeline()
       }, 900)
       
-      // Enable snap scrolling between major sections with markers
-      // setTimeout(() => {
-      //   snapCleanup = initSnapScroll({
-      //     sections: ['.hero-section', 
-      //       '.features-section', 
-      //       '.webinar-section', 
-      //       '.instructor-bio-section', 
-      //       '.post-instructor-section', 
-      //       // 'footer',
-      //     ],
-      //     duration: 2,
-      //     ease: 'power2.inOut',
-      //     delay: 0,
-      //     markers: false,
-      //   })
-      // }, 950)
+      // Enable master snap scrolling between major sections (single ScrollTrigger with snap)
+      setTimeout(() => {
+        snapCleanup = initMasterSnapScroll({
+          sections: [
+            '.hero-section',
+            '.features-section',
+            '.webinar-section',
+            '.instructor-bio-section',
+            '.post-instructor-section',
+          ],
+          duration: 0.8,
+          ease: 'power2.out',
+          delay: 0,
+          markers: false,
+          heroOffset: 64,
+        })
+      }, 950)
 
 
       

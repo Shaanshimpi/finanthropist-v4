@@ -4,6 +4,7 @@ export { initInstructorIntroTimeline } from './timelines/instructorIntroTimeline
 export { getCenteredTopOffset } from './utils/offsets'
 export { initMovingImageTransitions } from './moving/initMovingImage'
 export { initSnapScroll } from './snap/initSnapScroll'
+export { initMasterSnapScroll } from './snap/initMasterSnapScroll'
 export { initPostInstructorPinTimeline } from './timelines/postInstructorPinTimeline'
 
 

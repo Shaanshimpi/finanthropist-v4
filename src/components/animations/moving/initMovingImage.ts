@@ -80,6 +80,19 @@ export const initMovingImageTransitions = (
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
         if (!featuresStatic) return
         const p = self.progress
+        // Maintain a simple state to avoid repeated swaps within the same region
+        const stateKey = '__heroFeatImgState__'
+        const currentState = (movingImage as any)[stateKey] as 'fist' | 'top' | undefined
+        const setState = (s: 'fist' | 'top') => { (movingImage as any)[stateKey] = s }
+        const direction = (self as any)?.direction || 0 // 1 down, -1 up
+        const reverseHandoffDoneHF = Boolean((movingImage as any)['__featuresReverseHandoff__'])
+
+        // If reverse overlap handoff already completed, keep static visible and moving hidden
+        if (direction < 0 && reverseHandoffDoneHF) {
+          gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
+          gsap.to(movingImage, { opacity: 0, duration: 0.2 })
+          return
+        }
         try {
           const featuresLeft = document.querySelector('.features-section .grid > div:first-child') as HTMLElement | null
           const container = movingImage.parentElement as HTMLElement | null
@@ -102,12 +115,43 @@ export const initMovingImageTransitions = (
           gsap.set(movingImage, { opacity: 0 })
         } else if (p < 0.02) {
           gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
-          gsap.set(movingImage, { scaleX: 1, opacity: 1 })
-          setCurrentImage('/static-media/sameer-fist.png')
+          // At the very start, we want fist image visible
+          if (currentState !== 'fist') {
+            gsap.set(movingImage, { opacity: 0 })
+            setCurrentImage('/static-media/sameer-fist.png')
+            gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+            setState('fist')
+          } else {
+            gsap.set(movingImage, { opacity: 1 })
+          }
         } else {
           // During the rest of the span, keep moving image visible so reverse scrub is smooth
           gsap.set(movingImage, { opacity: 1 , duration: 0.2 })
           gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
+          const midpoint = 0.5
+          if (direction > 0 && p >= midpoint && currentState !== 'top') {
+            // Scrolling down past midpoint: fade to Sammer-top
+            gsap.to(movingImage, {
+              opacity: 0,
+              duration: 0.15,
+              onComplete: () => {
+                setCurrentImage('/static-media/Sammer-top.png')
+                gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+              },
+            })
+            setState('top')
+          } else if (direction < 0 && p <= midpoint && currentState !== 'fist') {
+            // Scrolling up before midpoint: fade back to sameer-fist
+            gsap.to(movingImage, {
+              opacity: 0,
+              duration: 0.15,
+              onComplete: () => {
+                setCurrentImage('/static-media/sameer-fist.png')
+                gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+              },
+            })
+            setState('fist')
+          }
         }
       },
     },
@@ -149,23 +193,32 @@ export const initMovingImageTransitions = (
       invalidateOnRefresh: true,
       markers,
       onEnter: () => {
-        // Static becomes invisible → show moving image with webinar asset and scrub to target
+        // Hide features static and show moving image; swap handled mid-way in onUpdate
         const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
         if (featuresStatic) gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
-        setCurrentImage('/static-media/sameer-webinar.png')
-        gsap.to(movingImage, { opacity: 1, duration: 0.2, delay:0.2 })
-        gsap.set(movingImage, {  position: 'absolute' })
+        gsap.to(movingImage, { opacity: 1, duration: 0.2, delay: 0.1 })
+        gsap.set(movingImage, { position: 'absolute' })
       },
       onEnterBack: () => {
         // Back into features pin → reveal static, hide moving image and reset to Sammer-top
-        const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
-        if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2, delay:0.2 })
+        // Defer revealing the features static until overlap handoff in onUpdate
         // setCurrentImage('/static-media/Sammer-top.png')
         // gsap.to(movingImage, { opacity: 0, duration: 0.2 })
         gsap.set(movingImage, { position: 'absolute' })
       },
       onUpdate: (self) => {
         try {
+          // If we already handed off to features static while reversing, enforce visibility and exit early
+          const revHandoffDone = Boolean((movingImage as any)['__featuresReverseHandoff__'])
+          const pEarly = Number(self?.progress) || 0
+          const dirEarly = (self as any)?.direction || 0
+          if (dirEarly < 0 && revHandoffDone) {
+            const featuresStaticHold = document.querySelector('.features-static-image-container > div') as HTMLElement | null
+            if (featuresStaticHold) gsap.to(featuresStaticHold, { opacity: 1, duration: 0.2 })
+            gsap.to(movingImage, { opacity: 0, duration: 0.2 })
+            return
+          }
+
           // Prefer the actual static image box for precise overlap during pin
           const featuresStaticBox = document.querySelector('.features-static-image-container > div') as HTMLElement | null
           const featuresLeft = (featuresStaticBox ?? document.querySelector('.features-section .grid > div:first-child')) as HTMLElement | null
@@ -195,6 +248,60 @@ export const initMovingImageTransitions = (
             })
           }
         } catch {}
+        // Midway fade swap between Sammer-top and sameer-webinar
+        const p = Number(self?.progress) || 0
+        const direction = (self as any)?.direction || 0
+        const stateKey = '__featuresWebinarImgState__'
+        const currentState = (movingImage as any)[stateKey] as 'top' | 'webinar' | undefined
+        const setState = (s: 'top' | 'webinar') => { (movingImage as any)[stateKey] = s }
+
+        const midpoint = 0.5
+        if (direction > 0 && p >= midpoint && currentState !== 'webinar') {
+          // Scrolling down past midpoint: fade to webinar image
+          gsap.to(movingImage, {
+            opacity: 0,
+            duration: 0.15,
+            onComplete: () => {
+              setCurrentImage('/static-media/sameer-webinar.png')
+              gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+            },
+          })
+          setState('webinar')
+        } else if (direction < 0 && p <= midpoint && currentState !== 'top') {
+          // Scrolling up before midpoint: fade back to Sammer-top
+          gsap.to(movingImage, {
+            opacity: 0,
+            duration: 0.15,
+            onComplete: () => {
+              setCurrentImage('/static-media/Sammer-top.png')
+              gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+            },
+          })
+          setState('top')
+        }
+
+        // Reverse handoff: only reveal features static AFTER moving image overlaps the static box
+        const handoffKey = '__featuresReverseHandoff__'
+        const handoffDone = Boolean((movingImage as any)[handoffKey])
+        const featuresStaticAtEnd = document.querySelector('.features-static-image-container > div') as HTMLElement | null
+        if (direction < 0 && p <= 0.08 && featuresStaticAtEnd && !handoffDone) {
+          const mr = movingImage.getBoundingClientRect()
+          const fr = featuresStaticAtEnd.getBoundingClientRect()
+          const dx = Math.abs((mr.left + mr.width / 2) - (fr.left + fr.width / 2))
+          const dy = Math.abs((mr.top + mr.height / 2) - (fr.top + fr.height / 2))
+          const dw = Math.abs(mr.width - fr.width)
+          const dh = Math.abs(mr.height - fr.height)
+          const overlap = dx < 2 && dy < 2 && dw < 2 && dh < 2
+          if (overlap) {
+            gsap.to(featuresStaticAtEnd, { opacity: 1, duration: 0.2 })
+            gsap.to(movingImage, { opacity: 0, duration: 0.2 })
+            ;(movingImage as any)[handoffKey] = true
+          }
+        }
+        // Reset handoff flag when moving forward again so reverse logic can run next time
+        if (direction > 0 && p >= 0.12) {
+          (movingImage as any)[handoffKey] = false
+        }
       },
       // No onLeave: end state achieved by scrub tween below
       
@@ -239,24 +346,52 @@ export const initMovingImageTransitions = (
       scrub: true,
       markers,
       onEnter: () => {
-        // Start with webinar image; swap to instructor at the end of scrub
-        setCurrentImage('/static-media/sameer-webinar.png')
-        gsap.set(movingImage, { opacity: 1})
+        // Ensure moving image visible; swaps handled in onUpdate
+        gsap.set(movingImage, { opacity: 1 })
       },
       onEnterBack: () => {
-        // Start with instructor image; swap back to webinar at the beginning of scrub
-        setCurrentImage('/static-media/sameer-fist.png')
         gsap.set(movingImage, { opacity: 1, scaleX: 1 })
       },
       onUpdate: (self) => {
         try {
           const p = Number(self?.progress) || 0
-          if (p > 0.98) {
+          const direction = (self as any)?.direction || 0
+          const stateKey = '__webinarInstructorImgState__'
+          const currentState = (movingImage as any)[stateKey] as 'webinar' | 'instructor' | undefined
+          const setState = (s: 'webinar' | 'instructor') => { (movingImage as any)[stateKey] = s }
+
+          const midpoint = 0.5
+          if (direction > 0 && p >= midpoint && currentState !== 'instructor') {
+            // Scrolling down past midpoint: fade to instructor image
+            gsap.to(movingImage, {
+              opacity: 0,
+              duration: 0.15,
+              onComplete: () => {
+                setCurrentImage('/static-media/sameer-fist.png')
+                gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+              },
+            })
+            setState('instructor')
+          } else if (direction < 0 && p <= midpoint && currentState !== 'webinar') {
+            // Scrolling up before midpoint: fade back to webinar image
+            gsap.to(movingImage, {
+              opacity: 0,
+              duration: 0.15,
+              onComplete: () => {
+                setCurrentImage('/static-media/sameer-webinar.png')
+                gsap.to(movingImage, { opacity: 1, duration: 0.2 })
+              },
+            })
+            setState('webinar')
+          }
+
+          // Clamp ends for robustness
+          if (p > 0.98 && currentState !== 'instructor') {
             setCurrentImage('/static-media/sameer-fist.png')
-            gsap.set(movingImage, { scaleX: 1 })
-          } else if (p < 0.02) {
+            setState('instructor')
+          } else if (p < 0.02 && currentState !== 'webinar') {
             setCurrentImage('/static-media/sameer-webinar.png')
-            // gsap.set(movingImage, { scaleX: -1 })
+            setState('webinar')
           }
         } catch {}
       },
@@ -330,13 +465,20 @@ export const initMovingImageTransitions = (
       gsap.to(movingImage, { opacity: 1, duration: 0.2, ease: 'power2.out' })
     },
     onEnterBack: () => {
-      gsap.to(movingImage, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+      const handoffDone = Boolean((movingImage as any)['__featuresReverseHandoff__'])
+      if (handoffDone) {
+        // If we already handed off to static on reverse, keep moving hidden and static visible
+        const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
+        if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+        gsap.to(movingImage, { opacity: 0, duration: 0.2, ease: 'power2.out' })
+      } else {
+        gsap.to(movingImage, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+      }
     },
     onLeaveBack: () => {
-      // Hide moving image and reveal the features static image
-      gsap.to(movingImage, { opacity: 0, duration: 0.2, ease: 'power2.out' })
-      const featuresStatic = document.querySelector('.features-static-image-container > div') as HTMLElement | null
-      if (featuresStatic) gsap.to(featuresStatic, { opacity: 1, duration: 0.2, ease: 'power2.out' })
+      // Do not reveal features static here; overlap handoff in features->webinar onUpdate handles it precisely
+      // Keep moving image visible until overlap is detected
+      gsap.to(movingImage, { opacity: 1, duration: 0.2, ease: 'power2.out' })
     },
   })
 
