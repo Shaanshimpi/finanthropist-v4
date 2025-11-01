@@ -39,7 +39,7 @@ export const InstructorBioSection: React.FC = () => {
                 </span>
               </h2>
               <p className="text-sm lg:text-base text-slate-700 leading-relaxed instructor-content">
-                Maharashtra's most trusted stock market educator with 23+ years of finance experience and a proven
+                Maharashtra&#39;s most trusted stock market educator with 23+ years of finance experience and a proven
                 track record of transforming lives through practical trading education.
               </p>
             </div>
@@ -75,7 +75,7 @@ export const InstructorBioSection: React.FC = () => {
                 {[
                   { title: '16 Years at HDFC Bank', desc: 'Senior finance professional with deep banking experience' },
                   { title: 'HSBC Experience', desc: 'International banking and finance expertise' },
-                  { title: 'Published Author', desc: "Co-author of 'Billionaire Mindset' book" },
+                  { title: 'Published Author', desc: "Co-author of &#39;Billionaire Mindset&#39; book" },
                   { title: '10,000+ families Trained', desc: 'Successful track record since 2017' },
                   { title: '23+ Years Finance Experience', desc: 'Proven expertise in financial markets' },
                   { title: 'Maharashtra Focus', desc: 'Understanding local investor mindset' }

@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Maharashtra's highest rated share market education institute. 
+              Maharashtra&#39;s highest rated share market education institute. 
               Empowering students with professional financial knowledge.
             </p>
           </div>

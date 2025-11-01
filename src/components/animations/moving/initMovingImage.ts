@@ -87,11 +87,17 @@ export const initMovingImageTransitions = (
         const direction = (self as any)?.direction || 0 // 1 down, -1 up
         const reverseHandoffDoneHF = Boolean((movingImage as any)['__featuresReverseHandoff__'])
 
-        // If reverse overlap handoff already completed, keep static visible and moving hidden
+        // If reverse overlap handoff already completed while still in features span,
+        // keep static visible and moving hidden, but allow re-show at the very start boundary
         if (direction < 0 && reverseHandoffDoneHF) {
-          gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
-          gsap.to(movingImage, { opacity: 0, duration: 0.2 })
-          return
+          const pGuard = self.progress
+          if (pGuard > 0.02) {
+            gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
+            gsap.to(movingImage, { opacity: 0, duration: 0.2 })
+            return
+          }
+          // We reached the hero boundary; clear handoff so moving can reappear in hero
+          ;(movingImage as any)['__featuresReverseHandoff__'] = false
         }
         try {
           const featuresLeft = document.querySelector('.features-section .grid > div:first-child') as HTMLElement | null

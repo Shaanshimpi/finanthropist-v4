@@ -32,6 +32,8 @@ export const initMasterSnapScroll = (options: MasterSnapOptions): (() => void) =
       .map((sel) => document.querySelector(sel) as HTMLElement | null)
       .filter((el): el is HTMLElement => !!el)
 
+  let postInstructorEndSnap: number | null = null
+
   const computeSnapPoints = (): number[] => {
     const maxScroll = ScrollTrigger.maxScroll(window)
     if (maxScroll <= 0) return [0]
@@ -92,6 +94,17 @@ export const initMasterSnapScroll = (options: MasterSnapOptions): (() => void) =
     for (const s of snaps) {
       if (!dedup.length || Math.abs(dedup[dedup.length - 1] - s) > eps) dedup.push(s)
     }
+
+    // Capture the post-instructor end snap progress for custom duration
+    const postPin = ScrollTrigger.getById('post-instructor-pin')
+    if (postPin) {
+      const maxScrollLocal = ScrollTrigger.maxScroll(window)
+      const endY = (postPin as any).end as number
+      const endProgress = maxScrollLocal === 0 ? 0 : Math.min(1, Math.max(0, endY / Math.max(1, maxScrollLocal)))
+      postInstructorEndSnap = endProgress
+    } else {
+      postInstructorEndSnap = null
+    }
     return dedup
   }
 
@@ -144,7 +157,8 @@ export const initMasterSnapScroll = (options: MasterSnapOptions): (() => void) =
         }
         return closest
       },
-      duration,
+      // Use distance-based duration so long jumps (like post-instructor end) take ~1s
+      duration: { min: duration, max: 1 },
       delay,
       ease,
       // Disable inertia so we snap deterministically to the nearest point

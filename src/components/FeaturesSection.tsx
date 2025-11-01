@@ -47,7 +47,7 @@ export const FeaturesSection: React.FC = () => {
               </div>
               <h2 className="text-3xl lg:text-4xl xl:text-5xl font-black leading-tight">
                 <span className="block text-white">
-                  Maharashtra's Only
+                  Maharashtra&#39;s Only
                 </span>
                 <span className="block bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
                   Premier Institute

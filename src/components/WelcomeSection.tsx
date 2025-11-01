@@ -18,7 +18,7 @@ export const WelcomeSection: React.FC = () => {
                 We Welcome You to
               </h2>
               <p className="text-white/80 text-base md:text-lg max-w-prose">
-                Learn and grow with Maharashtra's trusted team. Discover how we guide families to long-term success in finance and trading.
+                Learn and grow with Maharashtra&#39;s trusted team. Discover how we guide families to long-term success in finance and trading.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <Link

@@ -33,7 +33,7 @@ export const HeroSection: React.FC = () => {
             <div className="space-y-1.5 text-center lg:text-left">
               <div className="inline-block mb-1.5 px-3 py-1 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50">
                 <span className="text-xs font-semibold text-slate-300">
-                  Maharashtra's #1 Institute
+                  Maharashtra&#39;s #1 Institute
                 </span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight">

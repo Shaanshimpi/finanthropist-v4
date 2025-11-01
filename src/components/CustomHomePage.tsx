@@ -44,7 +44,7 @@ export const CustomHomePage: React.FC = () => {
       setTimeout(() => {
         const movingImage = movingImageRef.current
         if (!movingImage) return
-        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: true })
+        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: false })
       }, 800)
 
       // Pin & scale FINANTHROPIST in post-instructor section
@@ -62,7 +62,7 @@ export const CustomHomePage: React.FC = () => {
             '.instructor-bio-section',
             '.post-instructor-section',
           ],
-          duration: 0.8,
+          duration: 1,
           ease: 'power2.out',
           delay: 0,
           markers: false,
