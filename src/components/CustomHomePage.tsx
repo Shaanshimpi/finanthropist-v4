@@ -44,7 +44,7 @@ export const CustomHomePage: React.FC = () => {
       setTimeout(() => {
         const movingImage = movingImageRef.current
         if (!movingImage) return
-        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: true })
+        movingCleanup = initMovingImageTransitions(movingImage, setCurrentImage, { markers: false })
       }, 800)
 
       // Pin & scale FINANTHROPIST in post-instructor section

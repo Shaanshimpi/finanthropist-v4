@@ -24,7 +24,7 @@ export const initPostInstructorPinTimeline = () => {
       pin: true,
       // Add slight catch-up for smoother scrubbing
       scrub: 1.2,
-      markers: true,
+      markers: false,
       anticipatePin: 1,
     },
   })
