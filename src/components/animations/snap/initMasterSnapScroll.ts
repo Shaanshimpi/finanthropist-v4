@@ -61,7 +61,7 @@ export const initMasterSnapScroll = (options: MasterSnapOptions): (() => void) =
         }
       }
       if (isPostInstructor) {
-        const topY = el.getBoundingClientRect().top + window.pageYOffset
+        const topY = el.getBoundingClientRect().top + window.pageYOffset-20
         const adjustedTop = Math.min(maxScroll, Math.max(0, topY))
         yTargets.push(adjustedTop)
 
