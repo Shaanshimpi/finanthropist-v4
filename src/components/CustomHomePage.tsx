@@ -24,7 +24,7 @@ export const CustomHomePage: React.FC = () => {
     const timer = setTimeout(() => {
 
       // Add card stacking animation for features section (extracted)
-        setTimeout(() => {
+      setTimeout(() => {
         initFeaturesCardsTimeline()
       }, 200)
       
@@ -75,8 +75,8 @@ export const CustomHomePage: React.FC = () => {
       
       // Cleanup
       return () => {
-        if (typeof movingCleanup === 'function') movingCleanup()
-        if (typeof snapCleanup === 'function') snapCleanup()
+        // if (typeof movingCleanup === 'function') movingCleanup()
+        // if (typeof snapCleanup === 'function') snapCleanup()
         ScrollTrigger.getAll().forEach(trigger => trigger.kill())
       }
     }, 100)

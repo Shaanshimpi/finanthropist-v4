@@ -71,9 +71,9 @@ export const initMovingImageTransitions = (
     scrollTrigger: {
       id: 'hero-to-features',
       trigger: '.hero-section',
-      start: '5% 10%',
+      start: `-64px top`,
       endTrigger: '.features-section',
-      end: '5% 10%',
+      end: `-64px top`,
       scrub: true,
       markers,
       onUpdate: (self) => {
