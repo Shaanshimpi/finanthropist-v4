@@ -102,7 +102,7 @@ export const WebinarSection: React.FC = () => {
                   width={500}
                   height={600}
                   className="w-full h-auto object-contain object-bottom"
-                  style={{ transform: 'scaleX(-1)' }}
+                  style={{ opacity: 0 }}
                 />
               </div>
             </div>

@@ -117,7 +117,7 @@ export const HeroSection: React.FC = () => {
                     alt="Professional Instructor - Sammer"
                     width={500}
                     height={600}
-                    className="w-full h-auto object-contain object-bottom"
+                    className="w-full h-auto object-contain object-bottom opacity-0"
                   />
                 </div>
               </div>

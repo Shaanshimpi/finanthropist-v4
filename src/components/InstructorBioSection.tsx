@@ -7,16 +7,16 @@ export const InstructorBioSection: React.FC = () => {
     <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
       {/* Background pattern stays global via CustomHomePage */}
       <div className="container mx-auto px-4 lg:px-8 h-full flex items-center relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center w-full h-full">
           {/* Left: Instructor Image */}
-          <div className="flex justify-center lg:justify-start">
+          <div className="flex justify-center lg:justify-start items-end h-full">
             <div className="relative w-full max-w-md lg:max-w-lg">
               <Image
                 src="/static-media/sameer-fist.png"
                 alt="Professional Instructor - Sameer Sarang"
                 width={500}
                 height={600}
-                className="w-full h-auto object-contain object-bottom"
+                className="w-full h-auto object-contain object-bottom opacity-0"
               />
             </div>
           </div>
@@ -61,26 +61,30 @@ export const InstructorBioSection: React.FC = () => {
             </div>
 
             {/* Meta */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-700 instructor-content">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-700 instructor-content">
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">Sameer Sarang — Stock Market Expert & Educator</div>
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">87% Success Rate</div>
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">Nashik, Maharashtra</div>
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">Serving all of Maharashtra</div>
-            </div>
+            </div> */}
 
             {/* Credentials */}
             <div>
               <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-3">Professional Credentials</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {[
-                  { title: '16 Years at HDFC Bank', desc: 'Senior finance professional with deep banking experience' },
-                  { title: 'HSBC Experience', desc: 'International banking and finance expertise' },
-                  { title: 'Published Author', desc: "Co-author of &#39;Billionaire Mindset&#39; book" },
+                  { title: '16 years of finance Experience', desc: 'In banks like HDFC and HSBC', colSpan: 2 },
+                  { title: 'Published Author', desc: "Co-author of ' Billionaire Mindset'  book" },
                   { title: '10,000+ families Trained', desc: 'Successful track record since 2017' },
                   { title: '23+ Years Finance Experience', desc: 'Proven expertise in financial markets' },
                   { title: 'Maharashtra Focus', desc: 'Understanding local investor mindset' }
-                ].map((item, i) => (
-                  <div key={i} className="instructor-credential-card rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50/50 backdrop-blur-sm p-3 instructor-card relative overflow-hidden">
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className={`instructor-credential-card rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50/50 backdrop-blur-sm p-3 instructor-card relative overflow-hidden ${
+                      item.colSpan === 2 ? 'sm:col-span-2' : ''
+                    }`}
+                  >
                     <div className="text-sm font-extrabold text-slate-900 instructor-card-text instructor-card-title">{item.title}</div>
                     <div className="text-xs text-slate-600 mt-1 instructor-card-text">{item.desc}</div>
                   </div>
