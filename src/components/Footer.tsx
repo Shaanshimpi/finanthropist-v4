@@ -5,107 +5,142 @@ import Link from 'next/link'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
-      <div className="container mx-auto px-6 lg:px-10 xl:px-14 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Company Info */}
-          <div className="md:col-span-4 lg:col-span-5 xl:col-span-6 space-y-6">
-            <div className="flex items-center space-x-4">
-              <div className="relative w-12 h-12">
-                <Image
-                  src="/static-media/logo.png"
-                  alt="Finanthropist Logo"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold tracking-wide">FINANTHROPIST</h3>
-                <p className="text-sm font-semibold text-red-400 uppercase tracking-[0.2em]">Educare</p>
-              </div>
+    <footer className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white/90 pt-16 pb-10 border-t border-white/10">
+      <div className="relative">
+        {/* Glow accent */}
+        <div className="pointer-events-none absolute inset-x-0 -top-24 flex justify-center">
+          <div className="h-32 w-[60%] max-w-3xl bg-gradient-to-r from-[#C71C22]/20 via-[#FCC22F]/25 to-[#C71C22]/20 blur-3xl opacity-60"></div>
+        </div>
+      </div>
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-start lg:justify-between lg:px-8">
+        {/* Brand block */}
+        <div className="max-w-sm space-y-5">
+          <div className="flex items-center gap-3">
+            <div className="relative h-12 w-12 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#C71C22] via-[#FCC22F] to-[#C71C22] shadow-lg">
+              <div className="absolute inset-1 rounded-2xl bg-slate-950/90 backdrop-blur-sm"></div>
+              <span className="relative z-10 flex h-full items-center justify-center text-xl font-extrabold text-white">
+                F
+              </span>
             </div>
-            <p className="text-gray-300 text-sm md:text-base leading-relaxed max-w-xl">
-              Maharashtra&#39;s highest-rated share market education institute. Empowering students and professionals with
-              expert-led financial knowledge, practical trading skills, and community-focused mentorship.
-            </p>
-            <div className="flex items-center space-x-4 pt-2">
-              <div className="flex -space-x-3">
-                {[1, 2, 3].map((index) => (
-                  <div
-                    key={index}
-                    className="w-12 h-12 rounded-full border-2 border-gray-800 bg-gray-700/60 flex items-center justify-center text-sm font-semibold text-gray-200"
-                  >
-                    {index}K+
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">10,000+ Learners Trained</p>
-                <p className="text-xs text-gray-400">Across Maharashtra and beyond since 2017</p>
-              </div>
+            <div>
+              <p className="text-lg font-semibold text-white">Finanthropist</p>
+              <p className="text-sm text-white/60">Empowering Maharashtra&apos;s investors with world-class financial education.</p>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div className="md:col-span-4 lg:col-span-3">
-            <h4 className="text-lg font-semibold mb-5 uppercase tracking-wide text-gray-200">Quick Links</h4>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="/courses" className="text-gray-300 hover:text-white transition-colors">Courses</Link></li>
-              <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/reviews" className="text-gray-300 hover:text-white transition-colors">Reviews</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="md:col-span-4 lg:col-span-3">
-            <h4 className="text-lg font-semibold mb-5 uppercase tracking-wide text-gray-200">Services</h4>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="/trading" className="text-gray-300 hover:text-white transition-colors">Trading Courses</Link></li>
-              <li><Link href="/investment" className="text-gray-300 hover:text-white transition-colors">Investment Planning</Link></li>
-              <li><Link href="/analysis" className="text-gray-300 hover:text-white transition-colors">Market Analysis</Link></li>
-              <li><Link href="/certification" className="text-gray-300 hover:text-white transition-colors">Certification</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="md:col-span-4 lg:col-span-3 xl:col-span-2">
-            <h4 className="text-lg font-semibold mb-5 uppercase tracking-wide text-gray-200">Contact</h4>
-            <div className="space-y-4 text-sm">
-              <div className="flex items-center space-x-2">
-                <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <span className="text-gray-300 text-sm">info@finanthropist.com</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <span className="text-gray-300 text-sm">+91 98765 43210</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-gray-300 text-sm">Mumbai, Maharashtra</span>
-              </div>
-            </div>
+          <p className="text-sm leading-relaxed text-white/60">
+            From foundational market literacy to advanced trading psychology, we help families build resilient, profitable financial journeys with expert guidance and lifetime support.
+          </p>
+          <div className="flex items-center gap-4 text-sm text-white/50">
+            <span className="flex items-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-[#FCC22F]"></span>
+              SEBI Registered Mentors
+            </span>
+            <span className="hidden items-center gap-2 md:flex">
+              <span className="inline-block h-2 w-2 rounded-full bg-[#C71C22]"></span>
+              15K+ Learners
+            </span>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-14 pt-8">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <p className="text-gray-400 text-sm">
-              © 2024 Finanthropist Educare. All rights reserved.
-            </p>
-            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link>
-              <Link href="/refund" className="text-gray-400 hover:text-white transition-colors">Refund Policy</Link>
-            </div>
+        {/* Quick links */}
+        <div className="grid flex-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">Explore</h4>
+            <ul className="mt-4 space-y-3 text-sm text-white/60">
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#features">
+                  Features
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#curriculum">
+                  Curriculum
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#webinar">
+                  Live Webinars
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#testimonials">
+                  Success Stories
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">Resources</h4>
+            <ul className="mt-4 space-y-3 text-sm text-white/60">
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#about">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#faq">
+                  FAQs
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#pricing">
+                  Investment Plans
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="#blog">
+                  Insights &amp; Articles
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">Connect</h4>
+            <ul className="mt-4 space-y-3 text-sm text-white/60">
+              <li>
+                <Link className="transition hover:text-[#FCC22F]" href="mailto:hello@finanthropist.in">
+                  hello@finanthropist.in
+                </Link>
+              </li>
+              <li className="text-white/60">+91 98765 43210</li>
+              <li className="text-white/60">Pune, Maharashtra</li>
+              <li className="flex gap-3 pt-1">
+                {[
+                  { name: 'Instagram', href: 'https://www.instagram.com/', label: 'IG' },
+                  { name: 'YouTube', href: 'https://www.youtube.com/', label: 'YT' },
+                  { name: 'Telegram', href: 'https://www.telegram.org/', label: 'TG' }
+                ].map((social) => (
+                  <Link
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-xs font-semibold text-white transition hover:border-[#FCC22F] hover:text-[#FCC22F]"
+                  >
+                    {social.label}
+                  </Link>
+                ))}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="mt-14 border-t border-white/10">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <p>© {new Date().getFullYear()} Finanthropist. All rights reserved.</p>
+          <div className="flex flex-wrap gap-4">
+            <Link className="transition hover:text-[#FCC22F]" href="#privacy">
+              Privacy Policy
+            </Link>
+            <Link className="transition hover:text-[#FCC22F]" href="#terms">
+              Terms &amp; Conditions
+            </Link>
+            <Link className="transition hover:text-[#FCC22F]" href="#refund">
+              Refund Policy
+            </Link>
           </div>
         </div>
       </div>

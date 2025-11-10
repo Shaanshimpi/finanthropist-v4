@@ -26,7 +26,7 @@ export const MovingImageOverlay: React.FC = () => {
     if (!wrapper || !moving) return
 
     const cleanup = initMovingImageOverlay(wrapper, moving, {
-      markers: true,
+      markers: false,
     })
 
     gsap.to(moving, { opacity: 1, duration: 0, ease: 'power2.out' })

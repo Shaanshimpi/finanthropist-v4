@@ -103,14 +103,8 @@ export const FeaturesSection: React.FC = () => {
                           </div>
                         </div>
 
-                        {/* Main Content - Diagonal Layout */}
+                        {/* Main Content */}
                         <div className="flex-1 flex flex-col justify-center pt-12">
-                          {/* Decorative Arrow/Line */}
-                          <div className="absolute left-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <div className="w-16 h-0.5 bg-gradient-to-r from-[#C71C22] to-[#FCC22F]"></div>
-                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-8 border-l-[#FCC22F] border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
-                          </div>
-                          
                           {/* Feature Text - Large & Bold */}
                           <div className="pl-6">
                             <p className="text-white text-xl lg:text-3xl font-black leading-snug group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-[#FCC22F] group-hover:to-white transition-all duration-500">

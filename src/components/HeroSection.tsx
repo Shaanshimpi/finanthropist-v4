@@ -48,34 +48,45 @@ export const HeroSection: React.FC = () => {
                 </span>
               </h1>
             </div>
+
+            {/* Mobile Instructor Image */}
+            <div className="flex justify-center lg:hidden">
+              <Image
+                src="/static-media/sameer-fist.png"
+                alt="Professional Instructor - Sammer"
+                width={360}
+                height={420}
+                className="w-64 h-auto object-contain object-bottom"
+              />
+            </div>
             
             {/* Rating Block */}
-            <div className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl text-white p-3 lg:p-4 rounded-2xl max-w-md mx-auto lg:mx-0 shadow-2xl border border-slate-700/50 transform transition-all duration-500 hover:scale-105 hover:border-[#FCC22F]/30">
+            <div className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl text-white p-2.5 lg:p-3 rounded-2xl max-w-sm mx-auto lg:mx-0 shadow-xl border border-slate-700/40">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base font-bold text-white">
+                  <h3 className="text-sm lg:text-base font-bold text-white">
                     Finanthropist
                   </h3>
-                  <div className="flex items-center gap-1 px-2 py-0.5 bg-green-500/20 rounded-full border border-green-500/30">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs font-bold text-green-400">Live</span>
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-green-500/20 rounded-full border border-green-500/30">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-[10px] font-bold text-green-400">Live</span>
                   </div>
                 </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl lg:text-4xl font-black text-white">5.0</span>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-2xl lg:text-3xl font-black text-white">5.0</span>
                   <div className="flex gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 text-[#FCC22F]" fill="currentColor" viewBox="0 0 20 20">
+                      <svg key={i} className="w-4 h-4 lg:w-5 lg:h-5 text-[#FCC22F]" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-1.5 text-slate-400">
+                  <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
-                  <span className="text-sm font-semibold">2,486+ Verified Reviews</span>
+                  <span className="text-xs lg:text-sm font-semibold">2,486+ Verified Reviews</span>
                 </div>
               </div>
             </div>
@@ -107,7 +118,7 @@ export const HeroSection: React.FC = () => {
           </div>
           
           {/* Right Section - Instructor Image */}
-          <div className="flex justify-center h-full relative hero-right-image">
+          <div className="hidden lg:flex justify-center h-full relative hero-right-image">
             <div className="relative w-full h-full flex items-end justify-center">
               <div className="relative w-full max-w-md lg:max-w-lg">
                 <div className="relative">
