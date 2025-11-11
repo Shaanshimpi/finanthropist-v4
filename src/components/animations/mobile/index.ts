@@ -1,2 +1,5 @@
 export { initMobileHeroParallax } from './initMobileHeroParallax'
 export { initMobileHeroReviews } from './initMobileHeroReviews'
+export { initMobileWebinarCards } from './initMobileWebinarCards'
+export { initMobileInstructorTheme } from './initMobileInstructorTheme'
+export { initMobileWelcome } from './initMobileWelcome'

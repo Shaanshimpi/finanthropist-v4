@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { initMobileHeroParallax, initMobileHeroReviews } from '../animations/mobile'
+import type { MobileScheduleAnimation } from './CustomHomePageMobile'
 
 const heroFeatures = {
   badge: "Maharashtra's #1 Institute",
@@ -14,7 +15,11 @@ const heroFeatures = {
   reviews: '2,486+ Verified Reviews'
 }
 
-export const MobileHeroSection: React.FC = () => {
+type MobileHeroSectionProps = {
+  scheduleAnimation?: MobileScheduleAnimation
+}
+
+export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAnimation }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const heroImageRef = useRef<HTMLDivElement>(null)
   const reviewsRef = useRef<HTMLDivElement>(null)
@@ -51,13 +56,18 @@ export const MobileHeroSection: React.FC = () => {
       }
     }
 
-    const timeoutId = window.setTimeout(setupAnimations, 500)
+    let cancelScheduled: (() => void) | undefined
+    if (scheduleAnimation) {
+      cancelScheduled = scheduleAnimation('hero', setupAnimations)
+    } else {
+      setupAnimations()
+    }
 
     return () => {
-      window.clearTimeout(timeoutId)
+      cancelScheduled?.()
       cleanups.forEach((cleanup) => cleanup())
     }
-  }, [])
+  }, [scheduleAnimation])
 
   return (
     <section className="px-6">
