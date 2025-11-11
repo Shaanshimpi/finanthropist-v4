@@ -86,7 +86,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
 
     const applyTheme = () =>
       initMobileInstructorTheme(sectionEl, {
-        markers: true,
+        markers: false,
         start: 'top center',
         lightTheme: lightThemeVars,
         darkTheme: darkThemeVars,

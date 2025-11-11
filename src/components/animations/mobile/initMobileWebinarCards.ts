@@ -18,7 +18,7 @@ export const initMobileWebinarCards = (
 ) => {
   if (typeof window === 'undefined') return () => {}
 
-  const { markers = false, delay = 0, onActivate } = options
+  const { delay = 0, onActivate } = options
 
   if (!container || cards.length === 0) return () => {}
 
@@ -70,7 +70,6 @@ export const initMobileWebinarCards = (
       timeline.play()
     },
     onLeaveBack: () => timeline.reverse(),
-    markers,
   })
 
   ScrollTrigger.refresh()

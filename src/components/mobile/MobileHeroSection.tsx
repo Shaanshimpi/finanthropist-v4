@@ -40,7 +40,7 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
     const setupAnimations = () => {
       cleanups.push(
         initMobileHeroParallax(section, heroImage, {
-          markers,
+          markers: false,
         })
       )
 
@@ -50,7 +50,7 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
       if (reviews && stars) {
         cleanups.push(
           initMobileHeroReviews(reviews, stars, {
-            markers,
+            markers: false,
           })
         )
       }

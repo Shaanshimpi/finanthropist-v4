@@ -39,7 +39,6 @@ export const MobileWebinarSection: React.FC<MobileWebinarSectionProps> = ({
 
     const runAnimation = () => {
       animationCleanup = initMobileWebinarCards(section, cards, {
-        markers: false,
         onActivate: () => onActivated?.(),
       })
     }

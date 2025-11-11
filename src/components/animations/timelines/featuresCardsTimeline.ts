@@ -3,7 +3,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 type FeaturesTimelineParams = {
   delay?: number
-  markers?: boolean
   featuresSection?: HTMLElement | null
   featureItems?: NodeListOf<Element> | null
 }
@@ -13,7 +12,6 @@ export const initFeaturesCardsTimeline = (params: FeaturesTimelineParams = {}) =
 
   const {
     delay = 500,
-    markers = false,
     featuresSection: providedSection,
     featureItems: providedItems,
   } = params
@@ -53,7 +51,6 @@ export const initFeaturesCardsTimeline = (params: FeaturesTimelineParams = {}) =
       id: 'features-pin',
       trigger: sectionEl as Element,
       start: 'top top',
-      markers,
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,

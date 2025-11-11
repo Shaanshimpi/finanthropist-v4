@@ -37,7 +37,6 @@ export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ sc
     const runAnimation = () => {
       animationCleanup = initFeaturesCardsTimeline({
         delay: 0,
-        markers: false,
         featuresSection: sectionEl,
         featureItems: cards,
       })

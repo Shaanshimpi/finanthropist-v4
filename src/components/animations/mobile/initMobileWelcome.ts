@@ -12,7 +12,6 @@ type WelcomeElements = {
 }
 
 type MobileWelcomeOptions = {
-  markers?: boolean
   start?: string
   end?: string
 }
@@ -27,7 +26,7 @@ export const initMobileWelcome = (
   const { heading, ctas, cards } = elements
   if (!container || !heading || !ctas || !cards || cards.length === 0) return () => {}
 
-  const { markers = false, start = 'bottom 85%', end = 'bottom top' } = options
+  const { start = 'bottom 85%', end = 'bottom top' } = options
 
   const cardsArray = Array.from(cards)
 
@@ -60,7 +59,6 @@ export const initMobileWelcome = (
     onEnter: () => timeline.play(),
     onEnterBack: () => timeline.play(),
     onLeaveBack: () => timeline.reverse(),
-    markers,
   })
 
   return () => {
