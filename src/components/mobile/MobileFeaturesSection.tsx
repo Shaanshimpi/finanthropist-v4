@@ -3,17 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import { initFeaturesCardsTimeline } from '../animations'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-
-const featureList = [
-  'Teaches You Share Market Basics to Advance in one course',
-  'Lifetime Live Market Support',
-  'One Fee for Full Family Education',
-  'Daily Market Support & Live Q&A Session',
-  'Live & Recording Versions',
-  'Fee Refund Guarantee',
-  'Trading, Investing, Swing & Life Psychology',
-  'Easy Marathi-English Language',
-]
+import { homeContent } from '../../content/homeContent'
 
 type MobileFeaturesSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
@@ -22,6 +12,7 @@ type MobileFeaturesSectionProps = {
 export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ scheduleAnimation }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const cardsContainerRef = useRef<HTMLDivElement>(null)
+  const { features } = homeContent
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -64,11 +55,11 @@ export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ sc
       <div className="rounded-3xl border border-white/10 bg-white/5 p-6 pb-8 h-full flex flex-col">
         <div className="space-y-3 text-center mb-6">
           <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold text-white/80">
-            Why Choose Us
+            {features.badge}
           </span>
           <h2 className="text-2xl font-black text-white">
-            <span className="block">Maharashtra&apos;s Only</span>
-            <span className="block text-[#FCC22F]">Premier Institute</span>
+            <span className="block">{features.titlePrimary}</span>
+            <span className="block text-[#FCC22F]">{features.titleAccent}</span>
           </h2>
         </div>
 
@@ -77,7 +68,7 @@ export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ sc
           className="relative flex-1"
           style={{ height: 'calc((100vh - 3rem) * 0.55)' }}
         >
-          {featureList.map((feature, index) => (
+          {features.items.map((feature, index) => (
             <div
               key={feature}
               className="feature-item flex flex-col justify-between rounded-3xl border border-white/15 bg-slate-900/80"
@@ -103,7 +94,7 @@ export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ sc
               <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-[#C71C22] via-[#FCC22F] to-[#C71C22] transition-all duration-500"
-                  style={{ width: `${((index + 1) / featureList.length) * 100}%` }}
+                  style={{ width: `${((index + 1) / features.items.length) * 100}%` }}
                 ></div>
               </div>
             </div>

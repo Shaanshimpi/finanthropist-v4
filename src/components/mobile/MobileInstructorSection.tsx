@@ -4,20 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { initMobileInstructorTheme } from '../animations/mobile'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-
-const instructorStats = [
-  { label: 'Experience', value: '23+ yrs' },
-  { label: 'Families', value: '10,000+' },
-  { label: 'Google Rating', value: '5.0★' }
-]
-
-const instructorCredentials = [
-  { title: '16 years of finance Experience', desc: 'In banks like HDFC and HSBC' },
-  { title: "Published Author", desc: "Co-author of ' Billionaire Mindset'  book" },
-  { title: '10,000+ families Trained', desc: 'Successful track record since 2017' },
-  { title: '23+ Years Finance Experience', desc: 'Proven expertise in financial markets' },
-  { title: 'Maharashtra Focus', desc: 'Understanding local investor mindset' }
-]
+import { homeContent } from '../../content/homeContent'
 
 const darkThemeVars: Record<string, string> = {
   '--instructor-bg': 'rgba(15, 23, 42, 0.45)',
@@ -76,6 +63,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
   scheduleAnimation,
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const { instructor } = homeContent
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -86,7 +74,6 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
 
     const applyTheme = () =>
       initMobileInstructorTheme(sectionEl, {
-        markers: false,
         start: 'top center',
         lightTheme: lightThemeVars,
         darkTheme: darkThemeVars,
@@ -133,16 +120,16 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
               borderStyle: 'solid',
             }}
           >
-            Instructor
+            {instructor.badge}
           </span>
           <h2 className="text-2xl font-black leading-tight" style={{ color: 'var(--instructor-heading)' }}>
-            <span className="block">Meet Our Expert Educator</span>
+            <span className="block">{instructor.heading}</span>
             <span className="block bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
-              Sameer Sarang
+              {instructor.name}
             </span>
           </h2>
           <p className="text-sm" style={{ color: 'var(--instructor-subtext)' }}>
-            Maharashtra&apos;s most trusted stock market educator with 23+ years of finance experience and a proven track record of transforming lives through practical trading education.
+            {instructor.description}
           </p>
         </div>
         <div className="flex justify-center">
@@ -155,7 +142,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
           />
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {instructorStats.map((item) => (
+          {instructor.stats.map((item) => (
             <div
               key={item.label}
               className="rounded-2xl p-4 text-center transition-colors duration-500"
@@ -179,10 +166,12 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
             Professional Credentials
           </h3>
           <div className="grid gap-3">
-            {instructorCredentials.map((item) => (
+            {instructor.credentials.map((item) => {
+              const isWide = 'wide' in item && Boolean(item.wide)
+              return (
               <div
                 key={item.title}
-                className="rounded-2xl p-4 transition-colors duration-500"
+                className={`rounded-2xl p-4 transition-colors duration-500 ${isWide ? 'sm:col-span-2' : ''}`}
                 style={{
                   backgroundColor: 'var(--instructor-card-bg)',
                   borderColor: 'var(--instructor-card-border)',
@@ -196,7 +185,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
                   {item.desc}
                 </p>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </div>

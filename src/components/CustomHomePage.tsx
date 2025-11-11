@@ -46,23 +46,23 @@ export const CustomHomePage: React.FC = () => {
     const timer = setTimeout(() => {
       setTimeout(() => {
         initFeaturesCardsTimeline()
-      }, 200)
-
-      setTimeout(() => {
-        initWebinarBackgroundTimeline()
-      }, 250)
-
+      }, 100)
+      
       setTimeout(() => {
         initInstructorIntroTimeline()
       }, 400)
-
+      
       overlayTimeout = setTimeout(() => {
         setShowOverlay(true)
       }, 800)
-
+      
       setTimeout(() => {
         initPostInstructorPinTimeline()
       }, 900)
+
+      setTimeout(() => {
+        initWebinarBackgroundTimeline()
+      }, 1000)
 
       setTimeout(() => {
         snapCleanup = initMasterSnapScroll({

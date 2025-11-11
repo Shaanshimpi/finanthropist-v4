@@ -2,16 +2,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { homeContent } from '../content/homeContent'
 
 export const WebinarSection: React.FC = () => {
-  const webinarFeatures = [
-    "No Education or Experience Required",
-    "We Don't Force to Join Our Course",
-    "Try & Attend with Family (Specially Husband-Wife)",
-    "Attend for 20 mins, then Decide Worth it or Not",
-    "Easy Marathi-English Language",
-    "Get Expert Market Insights & Trading Tips"
-  ]
+  const { webinar } = homeContent
 
   return (
     <section className="webinar-section flex items-center relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
@@ -48,7 +42,7 @@ export const WebinarSection: React.FC = () => {
 
             {/* Features List - Card Style */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
-              {webinarFeatures.map((feature, index) => (
+              {webinar.features.map((feature, index) => (
                 <div 
                   key={index} 
                   className="webinar-card group relative backdrop-blur-sm rounded-2xl p-4 lg:p-5 transition-all duration-300"
@@ -70,24 +64,31 @@ export const WebinarSection: React.FC = () => {
 
             {/* Call to Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
-              <Link
-                href="/webinar"
-                className="group bg-[#C71C22] hover:bg-[#C71C22]/90 text-white px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 shadow-lg hover:shadow-[#C71C22]/50 transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-2"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
-                </svg>
-                <span>Watch Webinar</span>
-              </Link>
-              <Link
-                href="/register"
-                className="group bg-slate-800/50 backdrop-blur-xl border-2 border-slate-600 text-white hover:border-[#FCC22F]/50 px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 hover:bg-slate-700/50 transform hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span>Register Now</span>
-              </Link>
+              {webinar.ctas.map((cta, index) => {
+                const isPrimary = index === 0
+                return (
+                  <Link
+                    key={cta.href}
+                    href={cta.href}
+                    className={`group ${
+                      isPrimary
+                        ? 'bg-[#C71C22] hover:bg-[#C71C22]/90 text-white px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 shadow-lg hover:shadow-[#C71C22]/50 transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-2'
+                        : 'bg-slate-800/50 backdrop-blur-xl border-2 border-slate-600 text-white hover:border-[#FCC22F]/50 px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 hover:bg-slate-700/50 transform hover:-translate-y-1 flex items-center justify-center gap-2'
+                    }`}
+                  >
+                    {isPrimary ? (
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+                      </svg>
+                    ) : (
+                      <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    )}
+                    <span>{cta.label}</span>
+                  </Link>
+                )
+              })}
             </div>
           </div>
 

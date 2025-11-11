@@ -13,6 +13,7 @@ export const initWebinarBackgroundTimeline = () => {
     trigger: webinarSection,
     start: 'top 50%',
     end: 'top 50%',
+    markers:false,
     onEnter: () => {
       gsap.to(bgWrapper, {
         background: 'linear-gradient(to bottom right, #ffffff, #ffffff, #ffffff)',

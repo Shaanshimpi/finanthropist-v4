@@ -166,10 +166,9 @@ export const initMovingImageOverlay = (
     defaults: { ease: 'none' },
     scrollTrigger: {
       id: 'overlay-features-to-webinar',
-      trigger: '.features-section',
-      start: 'top top+=64',
-      endTrigger: '.webinar-section',
-      end: 'top top',
+      trigger: '.webinar-section',
+      start: 'top bottom',
+      end: 'top top+=64',
       scrub: true,
       invalidateOnRefresh: true,
       markers,

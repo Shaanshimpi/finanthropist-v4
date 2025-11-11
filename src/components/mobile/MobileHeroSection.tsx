@@ -5,15 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { initMobileHeroParallax, initMobileHeroReviews } from '../animations/mobile'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-
-const heroFeatures = {
-  badge: "Maharashtra's #1 Institute",
-  headlinePrimary: 'Learn Share Market',
-  headlineAccent: 'From Zero to Hero',
-  headlineSecondary: 'Master Trading',
-  rating: '5.0',
-  reviews: '2,486+ Verified Reviews'
-}
+import { homeContent } from '../../content/homeContent'
 
 type MobileHeroSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
@@ -24,6 +16,7 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
   const heroImageRef = useRef<HTMLDivElement>(null)
   const reviewsRef = useRef<HTMLDivElement>(null)
   const starsRef = useRef<HTMLDivElement>(null)
+  const { hero } = homeContent
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -35,7 +28,6 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
     if (!section || !heroImage) return
 
     const cleanups: Array<() => void> = []
-    const markers = false
 
     const setupAnimations = () => {
       cleanups.push(
@@ -84,12 +76,12 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
 
         <div className="space-y-3 w-full">
           <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold text-white">
-            {heroFeatures.badge}
+            {hero.badge}
           </span>
           <h1 className="space-y-2">
-            <span className="block text-3xl font-black">{heroFeatures.headlinePrimary}</span>
-            <span className="block text-3xl font-black text-[#FCC22F]">{heroFeatures.headlineAccent}</span>
-            <span className="block text-xl font-extrabold text-slate-300">{heroFeatures.headlineSecondary}</span>
+            <span className="block text-3xl font-black">{hero.headlinePrimary}</span>
+            <span className="block text-3xl font-black text-[#FCC22F]">{hero.headlineAccent}</span>
+            <span className="block text-xl font-extrabold text-slate-300">{hero.headlineSecondary}</span>
           </h1>
         </div>
 
@@ -106,10 +98,13 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
 
         <div ref={reviewsRef} className=" overflow-hidden w-full rounded-2xl border border-white/15 bg-white/5 p-4 text-left space-y-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <p className="text-base font-bold text-white">Finanthropist</p>
+            <p className="text-base font-bold text-white">{hero.rating.organization}</p>
+            <span className="rounded-full border border-green-500/40 bg-green-500/20 px-2.5 py-0.5 text-[11px] font-bold text-green-400">
+              {hero.rating.statusLabel}
+            </span>
           </div>
           <div ref={starsRef} className="flex items-baseline gap-2">
-            <span className="text-3xl font-black text-white">{heroFeatures.rating}</span>
+            <span className="text-3xl font-black text-white">{hero.rating.value}</span>
             <div className="flex gap-0.5 text-[#FCC22F]">
               {[...Array(5)].map((_, index) => (
                 <svg key={index} className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
@@ -122,17 +117,20 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
-            <span className="font-semibold">{heroFeatures.reviews}</span>
+            <span className="font-semibold">{hero.rating.reviewsLabel}</span>
           </div>
         </div>
 
         <div className="flex w-full flex-col gap-3">
-          <Link href="/courses" className="rounded-xl bg-[#C71C22] px-5 py-3 text-center text-sm font-bold text-white">
-            Explore Courses
-          </Link>
-          <Link href="/demo" className="rounded-xl border border-white/30 px-5 py-3 text-center text-sm font-bold text-white">
-            Free Demo
-          </Link>
+          {hero.ctas.map((cta, index) => (
+            <Link
+              key={cta.href}
+              href={cta.href}
+              className={`rounded-xl px-5 py-3 text-center text-sm font-bold ${index === 0 ? 'bg-[#C71C22] text-white' : 'border border-white/30 text-white'}`}
+            >
+              {cta.label}
+            </Link>
+          ))}
         </div>
       </div>
     </section>

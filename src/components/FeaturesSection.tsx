@@ -1,18 +1,10 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
+import { homeContent } from '../content/homeContent'
 
 export const FeaturesSection: React.FC = () => {
-  const features = [
-    "Teaches You Share Market Basics to Advance in one course",
-    "Lifetime Live Market Support",
-    "One Fee for Full Family Education",
-    "Daily Market Support & Live Q&A Session",
-    "Live & Recording Versions",
-    "Fee Refund Guarantee",
-    "Trading, Investing, Swing & Life Psychology",
-    "Easy Marathi-English Language"
-  ]
+  const { features } = homeContent
 
   return (
     <section className="features-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
@@ -42,22 +34,22 @@ export const FeaturesSection: React.FC = () => {
             <div className="text-center lg:text-left mb-8">
               <div className="inline-block mb-3 px-3 py-1 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50">
                 <span className="text-xs font-semibold text-slate-300">
-                  Why Choose Us
+                  {features.badge}
                 </span>
               </div>
-              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-black leading-tight">
+              <h2 className="text-xl lg:text-4xl xl:text-5xl font-black leading-tight">
                 <span className="block text-white">
-                  Maharashtra&#39;s Only
+                  {features.titlePrimary}
                 </span>
                 <span className="block bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
-                  Premier Institute
+                  {features.titleAccent}
                 </span>
               </h2>
             </div>
 
             {/* Cards Container */}
             <div className="relative" style={{ height: 'calc((100vh - 4rem) * 0.5)' }}>
-              {features.map((feature, index) => (
+              {features.items.map((feature, index) => (
                                 <div 
                   key={index} 
                   className="feature-item overflow-hidden rounded-[2rem]"
@@ -120,13 +112,13 @@ export const FeaturesSection: React.FC = () => {
                             {/* Progress fill */}
                             <div 
                               className="h-full bg-gradient-to-r from-[#C71C22] via-[#FCC22F] to-[#C71C22] rounded-full transition-all duration-500"
-                              style={{ width: `${((index + 1) / features.length) * 100}%` }}
+                              style={{ width: `${((index + 1) / features.items.length) * 100}%` }}
                             ></div>
                           </div>
                           
                           {/* Progress Text */}
                           <div className="absolute -top-6 left-0 text-xs font-bold text-slate-400">
-                            {index + 1} of {features.length}
+                            {index + 1} of {features.items.length}
                           </div>
                         </div>
                       </div>

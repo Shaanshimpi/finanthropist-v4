@@ -4,15 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { initMobileWebinarCards } from '../animations/mobile'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-
-const webinarFeatures = [
-  'No Education or Experience Required',
-  "We Don't Force to Join Our Course",
-  'Try & Attend with Family (Specially Husband-Wife)',
-  'Attend for 20 mins, then Decide Worth it or Not',
-  'Easy Marathi-English Language',
-  'Get Expert Market Insights & Trading Tips'
-]
+import { homeContent } from '../../content/homeContent'
 
 type MobileWebinarSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
@@ -25,6 +17,7 @@ export const MobileWebinarSection: React.FC<MobileWebinarSectionProps> = ({
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
+  const { webinar } = homeContent
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -61,15 +54,15 @@ export const MobileWebinarSection: React.FC<MobileWebinarSectionProps> = ({
       <div ref={sectionRef} className="space-y-6 rounded-3xl border border-white/10 bg-white/10 p-6 max-h-[200px]">
         <div className="space-y-2 text-center">
           <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold text-white/80">
-            Free Webinar
+            {webinar.badge}
           </span>
           <h2 className="text-2xl font-black text-white">
-            <span className="block">Join Our</span>
-            <span className="block text-[#FCC22F]">Free Live Webinar</span>
+            <span className="block">{webinar.titlePrimary}</span>
+            <span className="block text-[#FCC22F]">{webinar.titleAccent}</span>
           </h2>
         </div>
         <div ref={cardsRef} className="grid gap-3">
-          {webinarFeatures.map((feature) => (
+          {webinar.features.map((feature) => (
             <div key={feature} className="webinar-feature-card flex items-start gap-3 rounded-2xl border border-white/15 bg-slate-900/60 p-4">
               <div className="mt-1 h-3 w-3 rounded-full bg-[#FCC22F]" />
               <p className="text-sm font-medium text-white">{feature}</p>
@@ -77,12 +70,19 @@ export const MobileWebinarSection: React.FC<MobileWebinarSectionProps> = ({
           ))}
         </div>
         <div className="flex flex-col gap-3">
-          <Link href="/webinar" className="rounded-xl bg-[#C71C22] px-5 py-3 text-center text-sm font-bold text-white">
-            Watch Webinar
-          </Link>
-          <Link href="/register" className="rounded-xl border border-white/30 px-5 py-3 text-center text-sm font-bold text-white">
-            Register Now
-          </Link>
+          {webinar.ctas.map((cta, index) => (
+            <Link
+              key={cta.href}
+              href={cta.href}
+              className={`rounded-xl px-5 py-3 text-center text-sm font-bold ${
+                index === 0
+                  ? 'bg-[#C71C22] text-white'
+                  : 'border border-white/30 text-white'
+              }`}
+            >
+              {cta.label}
+            </Link>
+          ))}
         </div>
       </div>
     </section>
