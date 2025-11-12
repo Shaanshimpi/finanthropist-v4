@@ -1,12 +1,14 @@
 'use client'
 
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MobileHeroSection from './MobileHeroSection'
 import MobileFeaturesSection from './MobileFeaturesSection'
 import MobileWebinarSection from './MobileWebinarSection'
 import MobileInstructorSection from './MobileInstructorSection'
 import MobilePostInstructorSection from './MobilePostInstructorSection'
 import MobileWelcomeSection from './MobileWelcomeSection'
+import MobileTestimonialsSection from './MobileTestimonialsSection'
+import MobileCallModal from './MobileCallModal'
 
 export type MobileScheduleAnimation = (key: string, callback: () => void) => () => void
 
@@ -20,6 +22,7 @@ const animationDelays: Record<string, number> = {
 
 export const CustomHomePageMobile: React.FC = () => {
   const timeoutsRef = useRef<Set<number>>(new Set())
+  const [isCallModalOpen, setIsCallModalOpen] = useState(false)
 
   const scheduleAnimation = useCallback<MobileScheduleAnimation>((key, callback) => {
     const delay = animationDelays[key] ?? 0
@@ -66,8 +69,12 @@ export const CustomHomePageMobile: React.FC = () => {
         <MobileFeaturesSection scheduleAnimation={scheduleAnimation} />
         <MobileInstructorSection scheduleAnimation={scheduleAnimation} />
         <MobileWebinarSection scheduleAnimation={scheduleAnimation} />
+        <MobileTestimonialsSection />
         {/* <MobilePostInstructorSection /> */}
-        <MobileWelcomeSection scheduleAnimation={scheduleAnimation} />
+        <MobileWelcomeSection
+          scheduleAnimation={scheduleAnimation}
+          onCall={() => setIsCallModalOpen(true)}
+        />
       </div>
       <style jsx global>{`
         .mobile-theme-wrapper {
@@ -118,6 +125,11 @@ export const CustomHomePageMobile: React.FC = () => {
           color: var(--page-text);
         }
       `}</style>
+      <MobileCallModal
+        open={isCallModalOpen}
+        onClose={() => setIsCallModalOpen(false)}
+        numbers={['+91-7066334499', '+91-7066337676']}
+      />
     </>
   )
 }

@@ -2,8 +2,12 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { footerContent } from '../content/footerContent'
 
 export const Footer: React.FC = () => {
+  const { logo, description, highlights, linkGroups, contact, bottomLinks, copyright } = footerContent
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white/90 pt-16 pb-10 border-t border-white/10">
       <div className="relative">
@@ -12,106 +16,61 @@ export const Footer: React.FC = () => {
           <div className="h-32 w-[60%] max-w-3xl bg-gradient-to-r from-[#C71C22]/20 via-[#FCC22F]/25 to-[#C71C22]/20 blur-3xl opacity-60"></div>
         </div>
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-start lg:justify-between lg:px-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-6 text-center lg:flex-row lg:items-start lg:justify-between lg:text-left lg:px-8">
         {/* Brand block */}
-        <div className="max-w-sm space-y-5">
-          <div className="flex items-center gap-3">
-            <div className="relative h-12 w-12 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#C71C22] via-[#FCC22F] to-[#C71C22] shadow-lg">
-              <div className="absolute inset-1 rounded-2xl bg-slate-950/90 backdrop-blur-sm"></div>
-              <span className="relative z-10 flex h-full items-center justify-center text-xl font-extrabold text-white">
-                F
-              </span>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-white">Finanthropist</p>
-              <p className="text-sm text-white/60">Empowering Maharashtra&apos;s investors with world-class financial education.</p>
-            </div>
-          </div>
-          <p className="text-sm leading-relaxed text-white/60">
-            From foundational market literacy to advanced trading psychology, we help families build resilient, profitable financial journeys with expert guidance and lifetime support.
-          </p>
-          <div className="flex items-center gap-4 text-sm text-white/50">
-            <span className="flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-[#FCC22F]"></span>
-              SEBI Registered Mentors
-            </span>
-            <span className="hidden items-center gap-2 md:flex">
-              <span className="inline-block h-2 w-2 rounded-full bg-[#C71C22]"></span>
-              15K+ Learners
-            </span>
-          </div>
+        <div className="max-w-sm">
+          <Image
+            src={logo.src}
+            alt={logo.alt}
+            width={300}
+            height={300}
+            className="w-full max-w-[220px] object-contain"
+          />
         </div>
 
         {/* Quick links */}
-        <div className="grid flex-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">Explore</h4>
-            <ul className="mt-4 space-y-3 text-sm text-white/60">
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#features">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#curriculum">
-                  Curriculum
-                </Link>
-              </li>
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#webinar">
-                  Live Webinars
-                </Link>
-              </li>
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#testimonials">
-                  Success Stories
-                </Link>
-              </li>
-            </ul>
-          </div>
+        <div className="grid flex-1 gap-10 text-center  sm:text-left sm:grid-cols-2 lg:grid-cols-3">
+          {linkGroups.map((group) => (
+            <div key={group.title}>
+              <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">
+                {group.title}
+              </h4>
+              <ul className="mt-4 space-y-3 text-sm text-white/60">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    {link.href ? (
+                      <Link className="transition hover:text-[#FCC22F]" href={link.href}>
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <span>{link.label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">Resources</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">
+              {contact.title}
+            </h4>
             <ul className="mt-4 space-y-3 text-sm text-white/60">
               <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#about">
-                  About Us
+                <Link className="transition hover:text-[#FCC22F]" href={`mailto:${contact.email}`}>
+                  {contact.email}
                 </Link>
               </li>
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#faq">
-                  FAQs
-                </Link>
-              </li>
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#pricing">
-                  Investment Plans
-                </Link>
-              </li>
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="#blog">
-                  Insights &amp; Articles
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">Connect</h4>
-            <ul className="mt-4 space-y-3 text-sm text-white/60">
-              <li>
-                <Link className="transition hover:text-[#FCC22F]" href="mailto:hello@finanthropist.in">
-                  hello@finanthropist.in
-                </Link>
-              </li>
-              <li className="text-white/60">+91 98765 43210</li>
-              <li className="text-white/60">Pune, Maharashtra</li>
-              <li className="flex gap-3 pt-1">
-                {[
-                  { name: 'Instagram', href: 'https://www.instagram.com/', label: 'IG' },
-                  { name: 'YouTube', href: 'https://www.youtube.com/', label: 'YT' },
-                  { name: 'Telegram', href: 'https://www.telegram.org/', label: 'TG' }
-                ].map((social) => (
+              {contact.phoneNumbers.map((phone) => (
+                <li key={phone}>
+                  <Link className="transition hover:text-[#FCC22F]" href={`tel:${phone.replace(/[^\d+]/g, '')}`}>
+                    {phone}
+                  </Link>
+                </li>
+              ))}
+              <li className="text-white/60">{contact.location}</li>
+              <li className="flex justify-center gap-3 pt-1 sm:justify-start">
+                {contact.socials.map((social) => (
                   <Link
                     key={social.name}
                     href={social.href}
@@ -127,23 +86,36 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
+      <div className="mx-auto mt-12 max-w-6xl px-6 text-center text-sm text-white/60 lg:px-8 lg:text-left">
+        <p className="leading-relaxed">{description}</p>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-white/50 lg:justify-start">
+          {highlights.map((highlight) => (
+            <span key={highlight.label} className="flex items-center gap-2">
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ backgroundColor: highlight.color }}
+              ></span>
+              {highlight.label}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div className="mt-14 border-t border-white/10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <p>© {new Date().getFullYear()} Finanthropist. All rights reserved.</p>
-          <div className="flex flex-wrap gap-4">
-            <Link className="transition hover:text-[#FCC22F]" href="#privacy">
-              Privacy Policy
-            </Link>
-            <Link className="transition hover:text-[#FCC22F]" href="#terms">
-              Terms &amp; Conditions
-            </Link>
-            <Link className="transition hover:text-[#FCC22F]" href="#refund">
-              Refund Policy
-            </Link>
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 text-center text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-8">
+          <p>© {currentYear} {copyright}</p>
+          <div className="flex flex-wrap justify-center gap-4 sm:justify-end">
+            {bottomLinks.map((link) => (
+              <Link key={link.label} className="transition hover:text-[#FCC22F]" href={link.href ?? '#'}>
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
     </footer>
   )
 }
+
+export default Footer

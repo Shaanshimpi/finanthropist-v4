@@ -8,9 +8,10 @@ import { homeContent } from '../../content/homeContent'
 
 type MobileWelcomeSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
+  onCall?: () => void
 }
 
-export const MobileWelcomeSection: React.FC<MobileWelcomeSectionProps> = ({ scheduleAnimation }) => {
+export const MobileWelcomeSection: React.FC<MobileWelcomeSectionProps> = ({ scheduleAnimation, onCall }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
   const ctasRef = useRef<HTMLDivElement>(null)
@@ -66,23 +67,38 @@ export const MobileWelcomeSection: React.FC<MobileWelcomeSectionProps> = ({ sche
           </p>
         </div>
         <div ref={ctasRef} className="flex flex-col gap-3">
-          {welcome.ctas.map((cta, index) => (
-            <Link
-              key={cta.href}
-              href={cta.href}
-              className={`rounded-xl px-5 py-3 text-center text-sm font-bold ${
-                index === 0 ? 'bg-[#FCC22F] text-[#7A0F12]' : 'border border-white/30 text-white'
-              }`}
-            >
-              {cta.label}
-            </Link>
-          ))}
+          {welcome.ctas.map((cta, index) => {
+            const baseClasses = `rounded-xl px-5 py-3 text-center text-sm font-bold ${index === 0 ? 'bg-[#FCC22F] text-[#7A0F12]' : 'border border-white/30 text-white'}`
+            if (cta.type === 'call' && onCall) {
+              return (
+                <button key={cta.label} type="button" className={baseClasses} onClick={onCall}>
+                  {cta.label}
+                </button>
+              )
+            }
+            return (
+              <Link key={cta.href} href={cta.href} className={baseClasses}>
+                {cta.label}
+              </Link>
+            )
+          })}
         </div>
         <div ref={cardsRef} className="grid gap-3">
           {welcome.highlights.map((item) => (
             <div key={item.title} className="welcome-card rounded-2xl border border-white/15 bg-slate-900/70 p-4">
               <p className="text-base font-extrabold text-white">{item.title}</p>
-              <p className="text-sm text-white/70 mt-2">{item.desc}</p>
+              <p className="text-sm text-white/70 mt-2">
+                {item.desc}
+                {'details' in item && Array.isArray(item.details) && (
+                  <span className="mt-2 block space-y-1 text-[13px]">
+                    {item.details.map((phone) => (
+                      <span key={phone} className="block font-semibold text-white/90">
+                        {phone}
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </p>
             </div>
           ))}
         </div>

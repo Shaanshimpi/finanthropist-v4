@@ -51,7 +51,16 @@ export const WelcomeSection: React.FC = () => {
                     <div className="mt-1 h-3 w-3 rounded-full bg-[#FCC22F] shadow-[0_0_0_4px_rgba(252,194,47,0.2)]" />
                     <div>
                       <div className="text-lg md:text-xl font-extrabold text-white">{item.title}</div>
-                      <div className="text-sm text-white/80 pt-1">{item.desc}</div>
+                      <div className="text-sm text-white/80 pt-1">
+                        {item.desc}
+                        {'details' in item && Array.isArray(item.details) && (
+                          <div className="mt-2 space-y-1 text-xs text-white/70">
+                            {item.details.map((phone) => (
+                              <div key={phone}>{phone}</div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

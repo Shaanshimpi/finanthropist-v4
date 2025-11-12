@@ -4,6 +4,7 @@ import { HeroSection } from './HeroSection'
 import { FeaturesSection } from './FeaturesSection'
 import { InstructorBioSection } from './InstructorBioSection'
 import { WebinarSection } from './WebinarSection'
+import { TestimonialsSection } from './TestimonialsSection'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -71,6 +72,7 @@ export const CustomHomePage: React.FC = () => {
             '.features-section',
             '.webinar-section',
             '.instructor-bio-section',
+            '.testimonials-section',
             '.post-instructor-section',
           ],
           duration: 1,
@@ -101,6 +103,7 @@ export const CustomHomePage: React.FC = () => {
             <FeaturesSection />
             <WebinarSection />
             <InstructorBioSection />
+            <TestimonialsSection />
             <PostInstructorSection />
           </div>
         </>
