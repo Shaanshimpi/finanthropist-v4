@@ -12,6 +12,7 @@ export type FooterSocial = {
   name: string
   href: string
   label: string
+  icon?: 'instagram' | 'youtube' | 'telegram'
 }
 
 export type FooterHighlight = {
@@ -75,9 +76,9 @@ export const footerContent: FooterContent = {
     phoneNumbers: ['+91 7066334499', '+91 7066337676'],
     location: 'Pune, Maharashtra',
     socials: [
-      { name: 'Instagram', href: 'https://www.instagram.com/', label: 'IG' },
-      { name: 'YouTube', href: 'https://www.youtube.com/', label: 'YT' },
-      { name: 'Telegram', href: 'https://www.telegram.org/', label: 'TG' },
+      { name: 'Instagram', href: 'https://www.instagram.com/', label: 'Instagram', icon: 'instagram' },
+      { name: 'YouTube', href: 'https://www.youtube.com/', label: 'YouTube', icon: 'youtube' },
+      { name: 'Telegram', href: 'https://www.telegram.org/', label: 'Telegram', icon: 'telegram' },
     ],
   },
   bottomLinks: [

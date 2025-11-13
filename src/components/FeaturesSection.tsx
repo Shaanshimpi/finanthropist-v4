@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import { homeContent } from '../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 export const FeaturesSection: React.FC = () => {
-  const { features } = homeContent
+  const { features } = useHomeContent()
 
   return (
     <section className="features-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>

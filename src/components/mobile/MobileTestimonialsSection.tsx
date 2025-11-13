@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react'
-import { homeContent } from '../../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 export const MobileTestimonialsSection: React.FC = () => {
-  const { testimonials } = homeContent
+  const { testimonials } = useHomeContent()
 
   const truncate = (text: string, length = 220) =>
     text.length > length ? `${text.slice(0, length)}…` : text

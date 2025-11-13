@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { initMobileInstructorTheme } from '../animations/mobile'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-import { homeContent } from '../../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 const darkThemeVars: Record<string, string> = {
   '--instructor-bg': 'rgba(15, 23, 42, 0.45)',
@@ -63,7 +63,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
   scheduleAnimation,
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const { instructor } = homeContent
+  const { instructor } = useHomeContent()
 
   useEffect(() => {
     if (typeof window === 'undefined') return

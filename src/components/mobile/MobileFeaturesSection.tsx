@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import { initFeaturesCardsTimeline } from '../animations'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-import { homeContent } from '../../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 type MobileFeaturesSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
@@ -12,7 +12,9 @@ type MobileFeaturesSectionProps = {
 export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ scheduleAnimation }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const cardsContainerRef = useRef<HTMLDivElement>(null)
-  const { features } = homeContent
+  const { features } = useHomeContent()
+
+  const featureCount = features.items.length
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -44,7 +46,7 @@ export const MobileFeaturesSection: React.FC<MobileFeaturesSectionProps> = ({ sc
       cancelScheduled?.()
       animationCleanup?.()
     }
-  }, [scheduleAnimation])
+  }, [scheduleAnimation, featureCount])
 
   return (
     <section

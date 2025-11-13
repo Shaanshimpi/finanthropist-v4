@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { homeContent } from '../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 export const WelcomeSection: React.FC = () => {
-  const { welcome } = homeContent
+  const { welcome } = useHomeContent()
 
   return (
     <section className="welcome-section absolute overflow-hidden  flex items-center justify-center" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)'}}>

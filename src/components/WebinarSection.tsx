@@ -2,10 +2,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { homeContent } from '../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 export const WebinarSection: React.FC = () => {
-  const { webinar } = homeContent
+  const { webinar } = useHomeContent()
 
   return (
     <section className="webinar-section flex items-center relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
@@ -22,9 +22,7 @@ export const WebinarSection: React.FC = () => {
             {/* Section Badge */}
             <div className="flex justify-center lg:justify-start">
               <div className="webinar-badge inline-block mb-1.5 px-3 py-1 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50">
-                <span className="text-xs font-semibold text-slate-300">
-                  Free Webinar
-                </span>
+                <span className="text-xs font-semibold text-slate-300">{webinar.badge}</span>
               </div>
             </div>
             
@@ -32,10 +30,10 @@ export const WebinarSection: React.FC = () => {
             <div className="text-center lg:text-left space-y-1.5">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight">
                 <span className="block text-white webinar-title">
-                  Join Our
+                  {webinar.titlePrimary}
                 </span>
                 <span className="block mt-0.5 bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
-                  Free Live Webinar
+                  {webinar.titleAccent}
                 </span>
               </h2>
             </div>

@@ -103,10 +103,14 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'home-page-content': HomePageContent;
+    'site-footer-content': SiteFooterContent;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'home-page-content': HomePageContentSelect<false> | HomePageContentSelect<true>;
+    'site-footer-content': SiteFooterContentSelect<false> | SiteFooterContentSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1615,6 +1619,169 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page-content".
+ */
+export interface HomePageContent {
+  id: number;
+  hero: {
+    badge: string;
+    headlinePrimary: string;
+    headlineAccent: string;
+    headlineSecondary?: string | null;
+    rating: {
+      value: string;
+      reviewsLabel: string;
+      organization: string;
+      statusLabel: string;
+    };
+    ctas?:
+      | {
+          label: string;
+          href: string;
+          type?: ('link' | 'call') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  features: {
+    badge: string;
+    titlePrimary: string;
+    titleAccent: string;
+    items?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  webinar: {
+    badge: string;
+    titlePrimary: string;
+    titleAccent: string;
+    features?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctas?:
+      | {
+          label: string;
+          href: string;
+          type?: ('link' | 'call') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  instructor: {
+    badge: string;
+    heading: string;
+    name: string;
+    description: string;
+    stats?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    credentials?:
+      | {
+          title: string;
+          desc: string;
+          wide?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  welcome: {
+    badge: string;
+    title: string;
+    description: string;
+    highlights?:
+      | {
+          title: string;
+          desc: string;
+          details?:
+            | {
+                value?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    ctas?:
+      | {
+          label: string;
+          href: string;
+          type?: ('link' | 'call') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  testimonials?:
+    | {
+        name: string;
+        rating: number;
+        review: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-footer-content".
+ */
+export interface SiteFooterContent {
+  id: number;
+  logo: {
+    src: string;
+    alt: string;
+  };
+  description: string;
+  highlights: {
+    label: string;
+    color: string;
+    id?: string | null;
+  }[];
+  linkGroups: {
+    title: string;
+    links: {
+      label: string;
+      href: string;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  contact: {
+    title: string;
+    email: string;
+    phoneNumbers: {
+      value: string;
+      id?: string | null;
+    }[];
+    location: string;
+    socials: {
+      name: string;
+      href: string;
+      label: string;
+      id?: string | null;
+    }[];
+  };
+  bottomLinks: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1655,6 +1822,197 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page-content_select".
+ */
+export interface HomePageContentSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        badge?: T;
+        headlinePrimary?: T;
+        headlineAccent?: T;
+        headlineSecondary?: T;
+        rating?:
+          | T
+          | {
+              value?: T;
+              reviewsLabel?: T;
+              organization?: T;
+              statusLabel?: T;
+            };
+        ctas?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              type?: T;
+              id?: T;
+            };
+      };
+  features?:
+    | T
+    | {
+        badge?: T;
+        titlePrimary?: T;
+        titleAccent?: T;
+        items?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  webinar?:
+    | T
+    | {
+        badge?: T;
+        titlePrimary?: T;
+        titleAccent?: T;
+        features?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        ctas?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              type?: T;
+              id?: T;
+            };
+      };
+  instructor?:
+    | T
+    | {
+        badge?: T;
+        heading?: T;
+        name?: T;
+        description?: T;
+        stats?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        credentials?:
+          | T
+          | {
+              title?: T;
+              desc?: T;
+              wide?: T;
+              id?: T;
+            };
+      };
+  welcome?:
+    | T
+    | {
+        badge?: T;
+        title?: T;
+        description?: T;
+        highlights?:
+          | T
+          | {
+              title?: T;
+              desc?: T;
+              details?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        ctas?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              type?: T;
+              id?: T;
+            };
+      };
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        rating?: T;
+        review?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-footer-content_select".
+ */
+export interface SiteFooterContentSelect<T extends boolean = true> {
+  logo?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+      };
+  description?: T;
+  highlights?:
+    | T
+    | {
+        label?: T;
+        color?: T;
+        id?: T;
+      };
+  linkGroups?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        email?: T;
+        phoneNumbers?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        location?: T;
+        socials?:
+          | T
+          | {
+              name?: T;
+              href?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  bottomLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  copyright?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

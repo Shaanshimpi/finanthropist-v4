@@ -2,10 +2,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { homeContent } from '../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 export const HeroSection: React.FC = () => {
-  const { hero } = homeContent
+  const { hero } = useHomeContent()
 
   return (
     <section className="hero-section flex items-center relative overflow-hidden" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)', marginBottom: '50vh' }}>

@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import { homeContent } from '../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 export const InstructorBioSection: React.FC = () => {
-  const { instructor } = homeContent
+  const { instructor } = useHomeContent()
 
   return (
     <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>

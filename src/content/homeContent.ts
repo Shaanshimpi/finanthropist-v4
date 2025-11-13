@@ -1,5 +1,3 @@
-'use client'
-
 export type CTA = {
   label: string
   href: string
@@ -12,7 +10,52 @@ export type Testimonial = {
   review: string
 }
 
-export const homeContent = {
+export type HomeContent = {
+  hero: {
+    badge: string
+    headlinePrimary: string
+    headlineAccent: string
+    headlineSecondary?: string
+    rating: {
+      value: string
+      reviewsLabel: string
+      organization: string
+      statusLabel: string
+    }
+    ctas: CTA[]
+  }
+  features: {
+    badge: string
+    titlePrimary: string
+    titleAccent: string
+    items: string[]
+  }
+  webinar: {
+    badge: string
+    titlePrimary: string
+    titleAccent: string
+    features: string[]
+    ctas: CTA[]
+  }
+  instructor: {
+    badge: string
+    heading: string
+    name: string
+    description: string
+    stats: Array<{ label: string; value: string }>
+    credentials: Array<{ title: string; desc: string; wide?: boolean }>
+  }
+  welcome: {
+    badge: string
+    title: string
+    description: string
+    highlights: Array<{ title: string; desc: string; details?: string[] }>
+    ctas: CTA[]
+  }
+  testimonials: Testimonial[]
+}
+
+export const homeContent: HomeContent = {
   hero: {
     badge: "Maharashtra's #1 Institute",
     headlinePrimary: 'Learn Share Market',
@@ -27,7 +70,7 @@ export const homeContent = {
     ctas: [
       { label: 'Attend Free Webinar', href: '/demo' },
       { label: 'Explore Course', href: '/courses' },
-    ] as CTA[],
+    ],
   },
   features: {
     badge: 'Why Choose Us',
@@ -59,7 +102,7 @@ export const homeContent = {
     ctas: [
       { label: 'Register for Live Webinar', href: '/webinar' },
       { label: 'Watch Recorded Webinar', href: '/register' },
-    ] as CTA[],
+    ],
   },
   instructor: {
     badge: 'Instructor',
@@ -98,7 +141,7 @@ export const homeContent = {
     ctas: [
       { label: 'Know More About Us', href: '/about' },
       { label: 'Call Now', href: '/contact', type: 'call' },
-    ] as CTA[],
+    ],
   },
   testimonials: [
     {
@@ -179,10 +222,9 @@ export const homeContent = {
       review:
         'Thanks to Sameer sir for motivating us and creating such a desire in us that share trading is for all. The beginning made by you will definitely lead us to new heights. Thank you so much to the whole team 💐',
     },
-  ] as Testimonial[],
-} as const
+  ],
+}
 
-export type HomeContent = typeof homeContent
 export const googleReviews: Testimonial[] = [
   {
     name: 'Satish Atkari',

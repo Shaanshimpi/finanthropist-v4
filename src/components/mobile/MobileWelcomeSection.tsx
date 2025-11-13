@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { initMobileWelcome } from '../animations/mobile'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-import { homeContent } from '../../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 type MobileWelcomeSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
@@ -16,7 +16,8 @@ export const MobileWelcomeSection: React.FC<MobileWelcomeSectionProps> = ({ sche
   const headingRef = useRef<HTMLDivElement>(null)
   const ctasRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
-  const { welcome } = homeContent
+  const { welcome } = useHomeContent()
+  const highlightCount = welcome.highlights.length
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -52,7 +53,7 @@ export const MobileWelcomeSection: React.FC<MobileWelcomeSectionProps> = ({ sche
       cancelScheduled?.()
       cleanup?.()
     }
-  }, [scheduleAnimation])
+  }, [scheduleAnimation, highlightCount])
 
   return (
     <section className="px-6">

@@ -2,10 +2,12 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { footerContent } from '../content/footerContent'
+import { Instagram, Youtube, Send } from 'lucide-react'
+import { useFooterContent } from '@/hooks/useFooterContent'
 
 export const Footer: React.FC = () => {
-  const { logo, description, highlights, linkGroups, contact, bottomLinks, copyright } = footerContent
+  const { logo, description, highlights, linkGroups, contact, bottomLinks, copyright } =
+    useFooterContent()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -70,16 +72,25 @@ export const Footer: React.FC = () => {
               ))}
               <li className="text-white/60">{contact.location}</li>
               <li className="flex justify-center gap-3 pt-1 sm:justify-start">
-                {contact.socials.map((social) => (
-                  <Link
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-xs font-semibold text-white transition hover:border-[#FCC22F] hover:text-[#FCC22F]"
-                  >
-                    {social.label}
-                  </Link>
-                ))}
+                {contact.socials.map((social) => {
+                  let Icon = Instagram
+                  if (social.icon === 'youtube' || social.name.toLowerCase() === 'youtube') {
+                    Icon = Youtube
+                  } else if (social.icon === 'telegram' || social.name.toLowerCase() === 'telegram') {
+                    Icon = Send
+                  }
+                  return (
+                    <Link
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#FCC22F] hover:bg-[#FCC22F]/10"
+                      aria-label={social.label ?? social.name}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </Link>
+                  )
+                })}
               </li>
             </ul>
           </div>

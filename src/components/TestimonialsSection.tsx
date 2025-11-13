@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { homeContent } from '../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 const renderStars = (count: number) =>
   Array.from({ length: 5 }).map((_, idx) => (
@@ -16,7 +16,7 @@ const renderStars = (count: number) =>
   ))
 
 export const TestimonialsSection: React.FC = () => {
-  const { testimonials } = homeContent
+  const { testimonials } = useHomeContent()
   const sliderRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

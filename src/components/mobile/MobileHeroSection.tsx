@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { initMobileHeroParallax, initMobileHeroReviews } from '../animations/mobile'
 import type { MobileScheduleAnimation } from './CustomHomePageMobile'
-import { homeContent } from '../../content/homeContent'
+import { useHomeContent } from '@/hooks/useHomeContent'
 
 type MobileHeroSectionProps = {
   scheduleAnimation?: MobileScheduleAnimation
@@ -16,7 +16,7 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
   const heroImageRef = useRef<HTMLDivElement>(null)
   const reviewsRef = useRef<HTMLDivElement>(null)
   const starsRef = useRef<HTMLDivElement>(null)
-  const { hero } = homeContent
+  const { hero } = useHomeContent()
 
   useEffect(() => {
     if (typeof window === 'undefined') return
