@@ -10,7 +10,7 @@ export const StaticHeader: React.FC = () => {
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
-          
+
           {/* Logo and Brand */}
           <div className="flex items-center space-x-3">
             <div className=" relative">
@@ -26,14 +26,11 @@ export const StaticHeader: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link href="/courses" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              Courses
+            <Link href="/" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
+              Home
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              About
-            </Link>
-            <Link href="/reviews" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              Reviews
+            <Link href="/course" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
+              Course
             </Link>
             <Link href="/contact" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               Contact
@@ -64,21 +61,17 @@ export const StaticHeader: React.FC = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden transition-all duration-200 ease-out ${
-            isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-3 pointer-events-none'
-          }`}
+          className={`md:hidden transition-all duration-200 ease-out ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-3 pointer-events-none'
+            }`}
         >
           <div className="absolute inset-x-0 top-16">
             <div className="mx-[-1rem] sm:mx-0 rounded-b-3xl border-b border-gray-200 bg-white/95 backdrop-blur px-6 py-5 shadow-lg">
               <nav className="flex flex-col space-y-4 text-base font-medium text-gray-700">
-                <Link href="/courses" className="hover:text-red-600 transition-colors">
-                  Courses
+                <Link href="/" className="hover:text-red-600 transition-colors">
+                  Home
                 </Link>
-                <Link href="/about" className="hover:text-red-600 transition-colors">
-                  About
-                </Link>
-                <Link href="/reviews" className="hover:text-red-600 transition-colors">
-                  Reviews
+                <Link href="/course" className="hover:text-red-600 transition-colors">
+                  Course
                 </Link>
                 <Link href="/contact" className="hover:text-red-600 transition-colors">
                   Contact

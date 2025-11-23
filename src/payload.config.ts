@@ -15,6 +15,8 @@ import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { HomePageContent } from './globals/HomePageContent'
 import { SiteFooterContent } from './globals/SiteFooterContent'
+import { CoursePageContent } from './globals/CoursePageContent'
+import { ContactPageContent } from './globals/ContactPageContent'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -68,7 +70,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, HomePageContent, SiteFooterContent],
+  globals: [Header, Footer, HomePageContent, SiteFooterContent, CoursePageContent, ContactPageContent],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

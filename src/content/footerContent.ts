@@ -74,7 +74,7 @@ export const footerContent: FooterContent = {
     title: 'Connect',
     email: 'hello@finanthropist.in',
     phoneNumbers: ['+91 7066334499', '+91 7066337676'],
-    location: 'Pune, Maharashtra',
+    location: 'Nashik, Maharashtra',
     socials: [
       { name: 'Instagram', href: 'https://www.instagram.com/', label: 'Instagram', icon: 'instagram' },
       { name: 'YouTube', href: 'https://www.youtube.com/', label: 'YouTube', icon: 'youtube' },

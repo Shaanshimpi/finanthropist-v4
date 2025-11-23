@@ -105,12 +105,16 @@ export interface Config {
     footer: Footer;
     'home-page-content': HomePageContent;
     'site-footer-content': SiteFooterContent;
+    'course-page-content': CoursePageContent;
+    'contact-page-content': ContactPageContent;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'home-page-content': HomePageContentSelect<false> | HomePageContentSelect<true>;
     'site-footer-content': SiteFooterContentSelect<false> | SiteFooterContentSelect<true>;
+    'course-page-content': CoursePageContentSelect<false> | CoursePageContentSelect<true>;
+    'contact-page-content': ContactPageContentSelect<false> | ContactPageContentSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1782,6 +1786,114 @@ export interface SiteFooterContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-page-content".
+ */
+export interface CoursePageContent {
+  id: number;
+  hero: {
+    badge: string;
+    headlinePrimary: string;
+    headlineAccent: string;
+    description: string;
+    ctas?:
+      | {
+          label: string;
+          href: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  topicsCovered: {
+    badge: string;
+    title: string;
+    items?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  learningOutcomes: {
+    badge: string;
+    title: string;
+    items?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  earningGuidance: {
+    badge: string;
+    mainMessage: string;
+    points?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  support: {
+    badge: string;
+    subtitle: string;
+    items?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contact: {
+    badge: string;
+    numbers?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    website: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page-content".
+ */
+export interface ContactPageContent {
+  id: number;
+  hero: {
+    title: string;
+    description: string;
+  };
+  info: {
+    title: string;
+    phoneNumbers?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    email: string;
+    location: string;
+    hours: string;
+  };
+  form: {
+    title: string;
+    fields: {
+      name: string;
+      phone: string;
+      email: string;
+      message: string;
+    };
+    button: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2013,6 +2125,134 @@ export interface SiteFooterContentSelect<T extends boolean = true> {
         id?: T;
       };
   copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-page-content_select".
+ */
+export interface CoursePageContentSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        badge?: T;
+        headlinePrimary?: T;
+        headlineAccent?: T;
+        description?: T;
+        ctas?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+      };
+  topicsCovered?:
+    | T
+    | {
+        badge?: T;
+        title?: T;
+        items?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  learningOutcomes?:
+    | T
+    | {
+        badge?: T;
+        title?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  earningGuidance?:
+    | T
+    | {
+        badge?: T;
+        mainMessage?: T;
+        points?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  support?:
+    | T
+    | {
+        badge?: T;
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  contact?:
+    | T
+    | {
+        badge?: T;
+        numbers?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        website?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page-content_select".
+ */
+export interface ContactPageContentSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  info?:
+    | T
+    | {
+        title?: T;
+        phoneNumbers?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        email?: T;
+        location?: T;
+        hours?: T;
+      };
+  form?:
+    | T
+    | {
+        title?: T;
+        fields?:
+          | T
+          | {
+              name?: T;
+              phone?: T;
+              email?: T;
+              message?: T;
+            };
+        button?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
