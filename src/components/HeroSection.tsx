@@ -15,10 +15,10 @@ export const HeroSection: React.FC = () => {
 
       <div className="container mx-auto px-4 lg:px-8 w-full h-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full h-full">
-          
+
           {/* Left Section - Content */}
           <div className="space-y-3 lg:space-y-4 flex flex-col justify-center h-full text-white">
-            
+
             {/* No. 1 Badge - No container box */}
             <div className="flex justify-center lg:justify-start">
               <div className="relative w-20 h-20 lg:w-28 lg:h-28">
@@ -31,7 +31,7 @@ export const HeroSection: React.FC = () => {
                 />
               </div>
             </div>
-            
+
             {/* Main Headline */}
             <div className="space-y-1.5 text-center lg:text-left">
               <div className="inline-block mb-1.5 px-3 py-1 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50">
@@ -53,13 +53,13 @@ export const HeroSection: React.FC = () => {
             <div className="flex justify-center lg:hidden">
               <Image
                 src="/static-media/sameer-fist.png"
-                alt="Professional Instructor - Sammer"
+                alt="Professional Instructor - Sammeer Sarang"
                 width={360}
                 height={420}
                 className="w-64 h-auto object-contain object-bottom"
               />
             </div>
-            
+
             {/* Rating Block */}
             <div className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl text-white p-2.5 lg:p-3 rounded-2xl max-w-sm mx-auto lg:mx-0 shadow-xl border border-slate-700/40">
               <div className="space-y-2">
@@ -90,7 +90,7 @@ export const HeroSection: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
               {hero.ctas.map((cta, index) => (
@@ -121,7 +121,7 @@ export const HeroSection: React.FC = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Right Section - Instructor Image */}
           <div className="hidden lg:flex justify-center h-full relative hero-right-image">
             <div className="relative w-full h-full flex items-end justify-center">
@@ -130,7 +130,7 @@ export const HeroSection: React.FC = () => {
                   <div className="fade-overlay absolute inset-x-0 bottom-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a 0%, #0f172a 40%, rgba(15, 23, 42, 0.9) 60%, rgba(15, 23, 42, 0.7) 80%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}></div>
                   <Image
                     src="/static-media/sameer-fist.png"
-                    alt="Professional Instructor - Sammer"
+                    alt="Professional Instructor - Sammeer Sarang"
                     width={500}
                     height={600}
                     className="w-full h-auto object-contain object-bottom opacity-0"

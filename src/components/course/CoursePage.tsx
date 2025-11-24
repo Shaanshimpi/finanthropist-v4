@@ -4,11 +4,11 @@ import Link from 'next/link'
 import React from 'react'
 import { CheckCircle2, TrendingUp, ShieldCheck, Phone, Globe, ArrowRight, Star, Zap } from 'lucide-react'
 
-import { courseContent } from '@/content/courseContent'
+import { useCourseContent } from '@/hooks/useCourseContent'
 import { Reveal } from '@/components/ui/Reveal'
 
 export const CoursePage: React.FC = () => {
-  const { hero, topicsCovered, learningOutcomes, earningGuidance, support, contact } = courseContent
+  const { hero, topicsCovered, learningOutcomes, earningGuidance, support, contact } = useCourseContent()
 
   return (
     <div className="min-h-screen bg-slate-950 text-white selection:bg-[#FCC22F] selection:text-slate-950 overflow-x-hidden">

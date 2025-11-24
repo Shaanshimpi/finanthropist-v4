@@ -16,7 +16,7 @@ export const InstructorBioSection: React.FC = () => {
             <div className="relative w-full max-w-md lg:max-w-lg">
               <Image
                 src="/static-media/sameer-fist.png"
-                alt="Professional Instructor - Sameer Sarang"
+                alt="Professional Instructor - Sammeer Sarang"
                 width={500}
                 height={600}
                 className="w-full h-auto object-contain object-bottom opacity-0"
@@ -38,7 +38,7 @@ export const InstructorBioSection: React.FC = () => {
                   {instructor.heading}
                 </span>
                 <span className="block mt-0.5 bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
-                    {instructor.name}
+                  {instructor.name}
                 </span>
               </h2>
               <p className="text-sm lg:text-base text-slate-700 leading-relaxed instructor-content">
@@ -61,7 +61,7 @@ export const InstructorBioSection: React.FC = () => {
 
             {/* Meta */}
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-700 instructor-content">
-              <div className="rounded-xl border border-slate-200 bg-white p-2.5">Sameer Sarang — Stock Market Expert & Educator</div>
+              <div className="rounded-xl border border-slate-200 bg-white p-2.5">Sammeer Sarang — Stock Market Expert & Educator</div>
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">87% Success Rate</div>
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">Nashik, Maharashtra</div>
               <div className="rounded-xl border border-slate-200 bg-white p-2.5">Serving all of Maharashtra</div>
@@ -74,16 +74,16 @@ export const InstructorBioSection: React.FC = () => {
                 {instructor.credentials.map((item) => {
                   const isWide = 'wide' in item && Boolean(item.wide)
                   return (
-                  <div
-                    key={item.title}
-                    className={`instructor-credential-card rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50/50 backdrop-blur-sm p-3 instructor-card relative overflow-hidden ${
-                      isWide ? 'sm:col-span-2' : ''
-                    }`}
-                  >
-                    <div className="text-sm font-extrabold text-slate-900 instructor-card-text instructor-card-title">{item.title}</div>
-                    <div className="text-xs text-slate-600 mt-1 instructor-card-text">{item.desc}</div>
-                  </div>
-                )})}
+                    <div
+                      key={item.title}
+                      className={`instructor-credential-card rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50/50 backdrop-blur-sm p-3 instructor-card relative overflow-hidden ${isWide ? 'sm:col-span-2' : ''
+                        }`}
+                    >
+                      <div className="text-sm font-extrabold text-slate-900 instructor-card-text instructor-card-title">{item.title}</div>
+                      <div className="text-xs text-slate-600 mt-1 instructor-card-text">{item.desc}</div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>

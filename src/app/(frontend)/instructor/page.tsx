@@ -18,7 +18,7 @@ export default function InstructorPage() {
                   <span className="text-xs font-semibold text-amber-900">Instructor</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
-                  Meet Sameer Sarang
+                  Meet Sammeer Sarang
                 </h1>
                 <p className="mt-4 text-slate-700 text-base lg:text-lg leading-relaxed">
                   Maharashtra&#39;s most trusted stock market educator with 23+ years of finance experience and a proven track record
@@ -43,7 +43,7 @@ export default function InstructorPage() {
 
                 {/* Meta */}
                 <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
-                  <div className="rounded-xl border border-slate-200 bg-white p-3">Sameer Sarang — Stock Market Expert & Educator</div>
+                  <div className="rounded-xl border border-slate-200 bg-white p-3">Sammeer Sarang — Stock Market Expert & Educator</div>
                   <div className="rounded-xl border border-slate-200 bg-white p-3">87% Success Rate</div>
                   <div className="rounded-xl border border-slate-200 bg-white p-3">Nashik, Maharashtra</div>
                   <div className="rounded-xl border border-slate-200 bg-white p-3">Serving all of Maharashtra</div>
@@ -69,7 +69,7 @@ export default function InstructorPage() {
                   }} />
                   <Image
                     src="/static-media/sameer-fist.png"
-                    alt="Instructor — Sameer Sarang"
+                    alt="Instructor — Sammeer Sarang"
                     width={600}
                     height={700}
                     className="w-full h-full object-contain object-bottom"

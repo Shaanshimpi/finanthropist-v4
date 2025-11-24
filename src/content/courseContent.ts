@@ -119,7 +119,7 @@ export const courseContent: CourseContent = {
   },
   support: {
     badge: 'FREE SUPPORT FOR LIFETIME',
-    subtitle: 'F O R ENTI R E FAMILY FOR LIFETIME',
+    subtitle: 'FOR ENTIRE FAMILY FOR LIFETIME',
     items: [
       'Daily Live Market Analysis Sessions.',
       'Live Q&A sessions after every topic.',

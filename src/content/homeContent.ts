@@ -107,7 +107,7 @@ export const homeContent: HomeContent = {
   instructor: {
     badge: 'Instructor',
     heading: 'Meet Our Expert Educator',
-    name: 'Sameer Sarang',
+    name: 'Sammeer Sarang',
     description:
       "Maharashtra's most trusted stock market educator with 23+ years of finance experience and a proven track record of transforming lives through practical trading education.",
     stats: [
@@ -148,7 +148,7 @@ export const homeContent: HomeContent = {
       name: 'Satish Atkari',
       rating: 5,
       review:
-        "I sincerely thank you for the insightful share market course by Sameer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions in equity/IPO areas. Sir has given recordings for F&O also. I will go through that and will try to understand. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning.\n  Thank you Sameer sir & team.",
+        "I sincerely thank you for the insightful share market course by Sammeer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions in equity/IPO areas. Sir has given recordings for F&O also. I will go through that and will try to understand. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning.\n  Thank you Sammeer sir & team.",
     },
     {
       name: 'Vivek Patankar',
@@ -172,13 +172,13 @@ export const homeContent: HomeContent = {
       name: 'Pallavi Holey',
       rating: 5,
       review:
-        "I sincerely thank you for the insightful share market course by Sameer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning. Thank you Sameer sir, Yash sir, Karan sir and whole team.",
+        "I sincerely thank you for the insightful share market course by Sammeer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning. Thank you Sammeer sir, Yash sir, Karan sir and whole team.",
     },
     {
       name: 'Nita Pandit',
       rating: 5,
       review:
-        'This is one of the best share market courses in Maharashtra. It also provides valuable knowledge about investments. Sameer Sir is a genuine person who is working hard to share his knowledge of the share market with everyone. I feel very fortunate to have attended this course. Thanks to the entire Finanthropist team. I highly recommend joining the course to gain the best knowledge. I also thank the universe for bringing me in contact with the Finanthropist team.',
+        'This is one of the best share market courses in Maharashtra. It also provides valuable knowledge about investments. Sammeer Sir is a genuine person who is working hard to share his knowledge of the share market with everyone. I feel very fortunate to have attended this course. Thanks to the entire Finanthropist team. I highly recommend joining the course to gain the best knowledge. I also thank the universe for bringing me in contact with the Finanthropist team.',
     },
     {
       name: 'Pritesh Satam',
@@ -190,19 +190,19 @@ export const homeContent: HomeContent = {
       name: 'Uday Rajput',
       rating: 5,
       review:
-        'Done all class from here. Excellent work from their team and especially Sameer Sir. Thank you so much. And appreciate their work that they have provided service for lifetime. Thanks again... 😀😊',
+        'Done all class from here. Excellent work from their team and especially Sammeer Sir. Thank you so much. And appreciate their work that they have provided service for lifetime. Thanks again... 😀😊',
     },
     {
       name: 'Pushparaj Shinde',
       rating: 5,
       review:
-        'Myself Pushparaj Shinde and I am a student of Sameer Sarang Sir. I am very happy to learn share market education in a very simple and easiest way. Thank you Sir 🙏 Stay Blessed 💐💐',
+        'Myself Pushparaj Shinde and I am a student of Sammeer Sarang Sir. I am very happy to learn share market education in a very simple and easiest way. Thank you Sir 🙏 Stay Blessed 💐💐',
     },
     {
       name: 'Amit Gade',
       rating: 5,
       review:
-        'Super experience, Finanthropist is the best share market course in Maharashtra. One of the best classes. I got perfect basic knowledge from them. Special thanks to Mr. Sameer sir and class team. They help properly, whatever you want—ask them and they will help you.',
+        'Super experience, Finanthropist is the best share market course in Maharashtra. One of the best classes. I got perfect basic knowledge from them. Special thanks to Mr. Sammeer sir and class team. They help properly, whatever you want—ask them and they will help you.',
     },
     {
       name: 'Akshay Potdar',
@@ -214,13 +214,13 @@ export const homeContent: HomeContent = {
       name: 'Jagdish Skunk',
       rating: 5,
       review:
-        'I have taken F&O from Sameer sir and now I am doing proper trading. I am getting regular profit from trading. Thanks to Sameer sir.',
+        'I have taken F&O from Sammeer sir and now I am doing proper trading. I am getting regular profit from trading. Thanks to Sammeer sir.',
     },
     {
       name: 'Prasad Deshpande',
       rating: 5,
       review:
-        'Thanks to Sameer sir for motivating us and creating such a desire in us that share trading is for all. The beginning made by you will definitely lead us to new heights. Thank you so much to the whole team 💐',
+        'Thanks to Sammeer sir for motivating us and creating such a desire in us that share trading is for all. The beginning made by you will definitely lead us to new heights. Thank you so much to the whole team 💐',
     },
   ],
 }
@@ -229,8 +229,8 @@ export const googleReviews: Testimonial[] = [
   {
     name: 'Satish Atkari',
     rating: 5,
-    review: `I sincerely thank you for the insightful share market course by Sameer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions in equity/IPO areas. Sir has given recordings for F&O also. I will go through that and will try to understand. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning.
-  Thank you Sameer sir & team.`,
+    review: `I sincerely thank you for the insightful share market course by Sammeer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions in equity/IPO areas. Sir has given recordings for F&O also. I will go through that and will try to understand. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning.
+  Thank you Sammeer sir & team.`,
   },
   {
     name: 'Vivek Patankar',
@@ -255,12 +255,12 @@ export const googleReviews: Testimonial[] = [
   {
     name: 'Pallavi Holey',
     rating: 5,
-    review: `I sincerely thank you for the insightful share market course by Sameer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning. Thank you Sameer sir, Yash sir, Karan sir and whole team.`,
+    review: `I sincerely thank you for the insightful share market course by Sammeer sir. The concepts were explained in a simple yet powerful way, and I now feel more confident in making informed investment decisions. Your guidance has truly sparked my interest in market analysis and financial planning. I'm grateful for the value you've added to my learning. Thank you Sammeer sir, Yash sir, Karan sir and whole team.`,
   },
   {
     name: 'Nita Pandit',
     rating: 5,
-    review: `This is one of the best share market courses in Maharashtra. It also provides valuable knowledge about investments. Sameer Sir is a genuine person who is working hard to share his knowledge of the share market with everyone. I feel very fortunate to have attended this course. Thanks to the entire Finanthropist team. I highly recommend joining the course to gain the best knowledge. I also thank the universe for bringing me in contact with the Finanthropist team.`,
+    review: `This is one of the best share market courses in Maharashtra. It also provides valuable knowledge about investments. Sammeer Sir is a genuine person who is working hard to share his knowledge of the share market with everyone. I feel very fortunate to have attended this course. Thanks to the entire Finanthropist team. I highly recommend joining the course to gain the best knowledge. I also thank the universe for bringing me in contact with the Finanthropist team.`,
   },
   {
     name: 'Pritesh Satam',
@@ -270,17 +270,17 @@ export const googleReviews: Testimonial[] = [
   {
     name: 'Uday Rajput',
     rating: 5,
-    review: `Done all class from here. Excellent work from their team and especially Sameer Sir. Thank you so much. And appreciate their work that they have provided service for lifetime. Thanks again... 😀😊`,
+    review: `Done all class from here. Excellent work from their team and especially Sammeer Sir. Thank you so much. And appreciate their work that they have provided service for lifetime. Thanks again... 😀😊`,
   },
   {
     name: 'Pushparaj Shinde',
     rating: 5,
-    review: `Myself Pushparaj Shinde and I am a student of Sameer Sarang Sir. I am very happy to learn share market education in a very simple and easiest way. Thank you Sir 🙏 Stay Blessed 💐💐`,
+    review: `Myself Pushparaj Shinde and I am a student of Sammeer Sarang Sir. I am very happy to learn share market education in a very simple and easiest way. Thank you Sir 🙏 Stay Blessed 💐💐`,
   },
   {
     name: 'Amit Gade',
     rating: 5,
-    review: `Super experience, Finanthropist is the best share market course in Maharashtra. One of the best classes. I got perfect basic knowledge from them. Special thanks to Mr. Sameer sir and class team. They help properly, whatever you want—ask them and they will help you.`,
+    review: `Super experience, Finanthropist is the best share market course in Maharashtra. One of the best classes. I got perfect basic knowledge from them. Special thanks to Mr. Sammeer sir and class team. They help properly, whatever you want—ask them and they will help you.`,
   },
   {
     name: 'Akshay Potdar',
@@ -290,11 +290,11 @@ export const googleReviews: Testimonial[] = [
   {
     name: 'Jagdish Skunk',
     rating: 5,
-    review: `I have taken F&O from Sameer sir and now I am doing proper trading. I am getting regular profit from trading. Thanks to Sameer sir.`,
+    review: `I have taken F&O from Sammeer sir and now I am doing proper trading. I am getting regular profit from trading. Thanks to Sammeer sir.`,
   },
   {
     name: 'Prasad Deshpande',
     rating: 5,
-    review: `Thanks to Sameer sir for motivating us and creating such a desire in us that share trading is for all. The beginning made by you will definitely lead us to new heights. Thank you so much to the whole team 💐`,
+    review: `Thanks to Sammeer sir for motivating us and creating such a desire in us that share trading is for all. The beginning made by you will definitely lead us to new heights. Thank you so much to the whole team 💐`,
   },
 ]

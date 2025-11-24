@@ -135,7 +135,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
         <div className="flex justify-center">
           <Image
             src="/static-media/sameer-fist.png"
-            alt="Professional Instructor - Sameer Sarang"
+            alt="Professional Instructor - Sammeer Sarang"
             width={500}
             height={600}
             className="w-full max-w-xs"
@@ -169,23 +169,24 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
             {instructor.credentials.map((item) => {
               const isWide = 'wide' in item && Boolean(item.wide)
               return (
-              <div
-                key={item.title}
-                className={`rounded-2xl p-4 transition-colors duration-500 ${isWide ? 'sm:col-span-2' : ''}`}
-                style={{
-                  backgroundColor: 'var(--instructor-card-bg)',
-                  borderColor: 'var(--instructor-card-border)',
-                  color: 'var(--instructor-card-text)',
-                  borderWidth: '1px',
-                  borderStyle: 'solid',
-                }}
-              >
-                <p className="text-sm font-extrabold">{item.title}</p>
-                <p className="mt-2 text-xs" style={{ color: 'var(--instructor-card-subtext)' }}>
-                  {item.desc}
-                </p>
-              </div>
-            )})}
+                <div
+                  key={item.title}
+                  className={`rounded-2xl p-4 transition-colors duration-500 ${isWide ? 'sm:col-span-2' : ''}`}
+                  style={{
+                    backgroundColor: 'var(--instructor-card-bg)',
+                    borderColor: 'var(--instructor-card-border)',
+                    color: 'var(--instructor-card-text)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                  }}
+                >
+                  <p className="text-sm font-extrabold">{item.title}</p>
+                  <p className="mt-2 text-xs" style={{ color: 'var(--instructor-card-subtext)' }}>
+                    {item.desc}
+                  </p>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

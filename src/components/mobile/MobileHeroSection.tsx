@@ -88,7 +88,7 @@ export const MobileHeroSection: React.FC<MobileHeroSectionProps> = ({ scheduleAn
         <div ref={heroImageRef} className="w-full flex justify-center">
           <Image
             src="/static-media/sameer-fist.png"
-            alt="Professional Instructor - Sammer"
+            alt="Professional Instructor - Sammeer Sarang"
             width={500}
             height={600}
             className="w-full max-w-xs"

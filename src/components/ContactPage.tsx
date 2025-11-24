@@ -1,10 +1,10 @@
 import React from 'react'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
-import { contactContent } from '@/content/contactContent'
+import { useContactContent } from '@/hooks/useContactContent'
 import { Reveal } from '@/components/ui/Reveal'
 
 export default function ContactPage() {
-    const { hero, info, form } = contactContent
+    const { hero, info, form } = useContactContent()
 
     return (
         <div className="min-h-screen bg-slate-950 text-white pt-24 pb-12">
