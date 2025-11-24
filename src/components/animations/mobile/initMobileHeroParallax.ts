@@ -10,14 +10,11 @@ export const initMobileHeroParallax = (
   imageWrapper: HTMLElement,
   options: { markers?: boolean } = {}
 ) => {
-  if (typeof window === 'undefined') return () => {}
+  if (typeof window === 'undefined') return () => { }
 
   const { markers = false } = options
 
-  const endDistance = () => {
-    const extra = Math.min(window.innerHeight, 400)
-    return container.offsetHeight + extra
-  }
+
 
   const tween = gsap.to(
     imageWrapper,

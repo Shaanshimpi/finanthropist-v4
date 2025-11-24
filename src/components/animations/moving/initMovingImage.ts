@@ -1,6 +1,5 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { getCenteredTopOffset } from '../utils/offsets'
 import { getHeroImageRelativePos } from '../utils/positions'
 
 type SetImageSrc = (src: string) => void
@@ -97,7 +96,7 @@ export const initMovingImageTransitions = (
             return
           }
           // We reached the hero boundary; clear handoff so moving can reappear in hero
-          ;(movingImage as any)['__featuresReverseHandoff__'] = false
+          ; (movingImage as any)['__featuresReverseHandoff__'] = false
         }
         try {
           const featuresLeft = document.querySelector('.features-section .grid > div:first-child') as HTMLElement | null
@@ -115,7 +114,7 @@ export const initMovingImageTransitions = (
             movingRect: currentRect,
             centerY,
           })
-        } catch {}
+        } catch { }
         if (p > 0.98) {
           gsap.to(featuresStatic, { opacity: 1, duration: 0.2 })
           gsap.set(movingImage, { opacity: 0 })
@@ -132,7 +131,7 @@ export const initMovingImageTransitions = (
           }
         } else {
           // During the rest of the span, keep moving image visible so reverse scrub is smooth
-          gsap.set(movingImage, { opacity: 1 , duration: 0.2 })
+          gsap.set(movingImage, { opacity: 1, duration: 0.2 })
           gsap.to(featuresStatic, { opacity: 0, duration: 0.2 })
           const midpoint = 0.5
           if (direction > 0 && p >= midpoint && currentState !== 'top') {
@@ -253,7 +252,7 @@ export const initMovingImageTransitions = (
               height: featuresRect.height,
             })
           }
-        } catch {}
+        } catch { }
         // Midway fade swap between Sammer-top and sameer-webinar
         const p = Number(self?.progress) || 0
         const direction = (self as any)?.direction || 0
@@ -301,7 +300,7 @@ export const initMovingImageTransitions = (
           if (overlap) {
             gsap.to(featuresStaticAtEnd, { opacity: 1, duration: 0.2 })
             gsap.to(movingImage, { opacity: 0, duration: 0.2 })
-            ;(movingImage as any)[handoffKey] = true
+              ; (movingImage as any)[handoffKey] = true
           }
         }
         // Reset handoff flag when moving forward again so reverse logic can run next time
@@ -310,7 +309,7 @@ export const initMovingImageTransitions = (
         }
       },
       // No onLeave: end state achieved by scrub tween below
-      
+
     },
   })
   featuresToWebinarTl.to(movingImage, {
@@ -399,7 +398,7 @@ export const initMovingImageTransitions = (
             setCurrentImage('/static-media/sameer-webinar.png')
             setState('webinar')
           }
-        } catch {}
+        } catch { }
       },
     },
   })
@@ -455,7 +454,7 @@ export const initMovingImageTransitions = (
         width: targetRect.width,
         height: targetRect.height,
       })
-    } catch {}
+    } catch { }
   }
   gsap.ticker.add(featuresPinTicker)
 
