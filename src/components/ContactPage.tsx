@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import { useContactContent } from '@/hooks/useContactContent'

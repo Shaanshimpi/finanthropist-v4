@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
-import { CheckCircle2, TrendingUp, ShieldCheck, Phone, Globe, ArrowRight, Star, Zap } from 'lucide-react'
+import { CheckCircle2, TrendingUp, ShieldCheck, Phone, ArrowRight, Star, Zap } from 'lucide-react'
 
 import { useCourseContent } from '@/hooks/useCourseContent'
 import { Reveal } from '@/components/ui/Reveal'
