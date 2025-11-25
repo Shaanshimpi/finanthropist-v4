@@ -68,8 +68,8 @@ export const homeContent: HomeContent = {
       statusLabel: 'Live',
     },
     ctas: [
-      { label: 'Attend Free Webinar', href: '/demo' },
-      { label: 'Explore Course', href: '/courses' },
+      { label: 'Attend Free Webinar', href: 'https://conference.finanthropist.com/webinar-registration' },
+      { label: 'Explore Course', href: '/course' },
     ],
   },
   features: {
@@ -100,8 +100,8 @@ export const homeContent: HomeContent = {
       'Get Expert Market Insights & Trading Tips',
     ],
     ctas: [
-      { label: 'Register for Live Webinar', href: '/webinar' },
-      { label: 'Watch Recorded Webinar', href: '/register' },
+      { label: 'Register for Live Webinar', href: 'https://conference.finanthropist.com/webinar-registration' },
+      { label: 'Watch Recorded Webinar', href: 'https://youtu.be/nNXCL7Eh7eo?si=6i-mAlFQX98X8XZD' },
     ],
   },
   instructor: {
@@ -139,7 +139,7 @@ export const homeContent: HomeContent = {
       },
     ],
     ctas: [
-      { label: 'Know More About Us', href: '/about' },
+      { label: 'Know More About Us', href: '/course' },
       { label: 'Call Now', href: '/contact', type: 'call' },
     ],
   },

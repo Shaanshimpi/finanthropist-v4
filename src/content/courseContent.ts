@@ -60,7 +60,7 @@ export const courseContent: CourseContent = {
     ctas: [
       {
         label: 'CONTACT US',
-        href: '#contact',
+        href: 'https://conference.finanthropist.com/webinar-registration',
       },
     ],
   },
