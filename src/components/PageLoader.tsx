@@ -35,9 +35,26 @@ export const PageLoader: React.FC = () => {
     body.style.position = 'fixed'
     body.style.width = '100%'
 
+    // Safety function to restore styles - always call this on cleanup
+    const restoreStyles = () => {
+      html.style.overflow = originalHtmlOverflow
+      body.style.overflow = originalBodyOverflow
+      body.style.position = originalBodyPosition
+      body.style.width = originalBodyWidth
+      window.scrollTo(0, 0)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (typeof window !== 'undefined' && (window as any).ScrollTrigger) {
+            (window as any).ScrollTrigger.refresh()
+          }
+        })
+      })
+    }
+
     const animateToHeader = () => {
       if (!logoRef.current || !loaderRef.current) {
         setIsLoading(false)
+        restoreStyles()
         return
       }
 
@@ -46,6 +63,7 @@ export const PageLoader: React.FC = () => {
       if (!headerLink) {
         console.warn('Header logo link not found')
         setIsLoading(false)
+        restoreStyles()
         return
       }
 
@@ -54,6 +72,7 @@ export const PageLoader: React.FC = () => {
       if (!headerLogoContainer) {
         console.warn('Header logo container not found')
         setIsLoading(false)
+        restoreStyles()
         return
       }
 
@@ -191,15 +210,12 @@ export const PageLoader: React.FC = () => {
       })
     }, 1200) // Minimum loading time
 
-    return () => {
-      clearTimeout(timer)
-      // Re-enable scrolling on cleanup
-      html.style.overflow = originalHtmlOverflow
-      body.style.overflow = originalBodyOverflow
-      body.style.position = originalBodyPosition
-      body.style.width = originalBodyWidth
-    }
-  }, [isHomePage])
+           return () => {
+             clearTimeout(timer)
+             // Always restore styles on cleanup (safety net for navigation)
+             restoreStyles()
+           }
+         }, [isHomePage])
 
   if (!isHomePage || !isLoading) return null
 

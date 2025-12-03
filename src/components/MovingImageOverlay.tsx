@@ -3,10 +3,46 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { computeInitialOverlayPlacement, initMovingImageOverlay } from './animations/moving/initMovingImageOverlay'
 import gsap from 'gsap'
+
+// All moving images that need to be preloaded
+const MOVING_IMAGES = [
+  '/static-media/sameer-fist.png',
+  '/static-media/Sammer-top.png',
+  '/static-media/sameer-webinar.png',
+  '/static-media/sameer-instructor.png',
+]
+
+// Preload all moving images
+const preloadMovingImages = (): Promise<void> => {
+  return new Promise((resolve) => {
+    const images = MOVING_IMAGES.map((src) => {
+      const img = new Image()
+      img.src = src
+      return img
+    })
+
+    // Wait for all images to load
+    Promise.all(
+      images.map(
+        (img) =>
+          new Promise<void>((resolveImg) => {
+            if (img.complete) {
+              resolveImg()
+            } else {
+              img.onload = () => resolveImg()
+              img.onerror = () => resolveImg() // Resolve even on error to not block
+            }
+          }),
+      ),
+    ).then(() => resolve())
+  })
+}
+
 export const MovingImageOverlay: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const movingRef = useRef<HTMLDivElement>(null)
   const [initialPlacement, setInitialPlacement] = useState({ top: 0, left: 0 })
+  const [imagesLoaded, setImagesLoaded] = useState(false)
 
   useLayoutEffect(() => {
     const wrapper = wrapperRef.current
@@ -20,7 +56,17 @@ export const MovingImageOverlay: React.FC = () => {
     }
   }, [])
 
+  // Preload images on mount
   useEffect(() => {
+    preloadMovingImages().then(() => {
+      setImagesLoaded(true)
+    })
+  }, [])
+
+  // Initialize animation only after images are loaded
+  useEffect(() => {
+    if (!imagesLoaded) return
+
     const wrapper = wrapperRef.current
     const moving = movingRef.current
     if (!wrapper || !moving) return
@@ -33,7 +79,7 @@ export const MovingImageOverlay: React.FC = () => {
     return () => {
       if (typeof cleanup === 'function') cleanup()
     }
-  }, [])
+  }, [imagesLoaded])
 
   return (
     <div
