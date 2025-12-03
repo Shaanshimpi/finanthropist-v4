@@ -15,6 +15,7 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { StaticHeader } from '@/components/StaticHeader'
 import { Footer } from '@/components/Footer'
+import { PageLoader } from '@/components/PageLoader'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -28,6 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>
+          <PageLoader />
           <AdminBar
             adminBarProps={{
               preview: isEnabled,
