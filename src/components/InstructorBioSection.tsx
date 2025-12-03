@@ -9,13 +9,13 @@ export const InstructorBioSection: React.FC = () => {
   return (
     <section className="instructor-bio-section relative overflow-hidden" style={{ minHeight: '100vh', height: '100vh', paddingTop: '4rem', marginBottom: '50vh' }}>
       {/* Background pattern stays global via CustomHomePage */}
-      <div className="container mx-auto px-4 lg:px-8 h-full flex items-center relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 lg:px-8 h-full flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center w-full h-full">
           {/* Left: Instructor Image */}
           <div className="flex justify-center lg:justify-start items-end h-full">
             <div className="relative w-full max-w-md lg:max-w-lg">
               <Image
-                src="/static-media/sameer-fist.png"
+                src="/static-media/sameer-instructor.png"
                 alt="Professional Instructor - Sammeer Sarang"
                 width={500}
                 height={600}

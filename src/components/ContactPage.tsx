@@ -1,11 +1,57 @@
 'use client'
-import React from 'react'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import React, { useState, FormEvent } from 'react'
+import { Phone, Mail, MapPin, Clock, CheckCircle2, AlertCircle } from 'lucide-react'
 import { useContactContent } from '@/hooks/useContactContent'
 import { Reveal } from '@/components/ui/Reveal'
 
 export default function ContactPage() {
     const { hero, info, form } = useContactContent()
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
+    const [submitMessage, setSubmitMessage] = useState('')
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setIsSubmitting(true)
+        setSubmitStatus(null)
+        setSubmitMessage('')
+
+        const formData = new FormData(e.currentTarget)
+        const data = {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            phone: formData.get('phone') as string,
+            message: formData.get('message') as string,
+        }
+
+        try {
+            const response = await fetch('/api/leads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}))
+                throw new Error(errorData.message || 'Failed to submit form')
+            }
+
+            setSubmitStatus('success')
+            setSubmitMessage('Thank you! Your message has been sent successfully. We will get back to you soon.')
+            ;(e.target as HTMLFormElement).reset()
+        } catch (error) {
+            setSubmitStatus('error')
+            setSubmitMessage(
+                error instanceof Error
+                    ? error.message
+                    : 'Something went wrong. Please try again later or contact us directly.'
+            )
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
 
     return (
         <div className="min-h-screen bg-slate-950 text-white pt-24 pb-12">
@@ -72,17 +118,6 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-lg bg-[#FCC22F]/10 text-[#FCC22F]">
-                                    <Clock className="h-6 w-6" />
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-semibold text-white mb-2">Business Hours</h3>
-                                    <p className="text-slate-300 whitespace-pre-line">
-                                        {info.hours}
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </Reveal>
 
@@ -90,22 +125,47 @@ export default function ContactPage() {
                     <Reveal delay={400} className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm">
                         <h2 className="text-2xl font-bold text-white mb-8">{form.title}</h2>
 
-                        <form className="space-y-6">
+                        {submitStatus && (
+                            <div
+                                className={`mb-6 rounded-lg border p-4 flex items-start gap-3 ${
+                                    submitStatus === 'success'
+                                        ? 'bg-green-500/10 border-green-500/30 text-green-400'
+                                        : 'bg-red-500/10 border-red-500/30 text-red-400'
+                                }`}
+                            >
+                                {submitStatus === 'success' ? (
+                                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                ) : (
+                                    <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                )}
+                                <p className="text-sm">{submitMessage}</p>
+                            </div>
+                        )}
+
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid gap-6 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <label htmlFor="name" className="text-sm font-medium text-slate-300">{form.fields.name}</label>
+                                    <label htmlFor="name" className="text-sm font-medium text-slate-300">
+                                        {form.fields.name}
+                                    </label>
                                     <input
                                         type="text"
                                         id="name"
+                                        name="name"
+                                        required
                                         className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder-slate-500 focus:border-[#FCC22F] focus:outline-none focus:ring-1 focus:ring-[#FCC22F]"
                                         placeholder="John Doe"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label htmlFor="phone" className="text-sm font-medium text-slate-300">{form.fields.phone}</label>
+                                    <label htmlFor="phone" className="text-sm font-medium text-slate-300">
+                                        {form.fields.phone}
+                                    </label>
                                     <input
                                         type="tel"
                                         id="phone"
+                                        name="phone"
+                                        required
                                         className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder-slate-500 focus:border-[#FCC22F] focus:outline-none focus:ring-1 focus:ring-[#FCC22F]"
                                         placeholder="+91 98765 43210"
                                     />
@@ -113,19 +173,26 @@ export default function ContactPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <label htmlFor="email" className="text-sm font-medium text-slate-300">{form.fields.email}</label>
+                                <label htmlFor="email" className="text-sm font-medium text-slate-300">
+                                    {form.fields.email}
+                                </label>
                                 <input
                                     type="email"
                                     id="email"
+                                    name="email"
+                                    required
                                     className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder-slate-500 focus:border-[#FCC22F] focus:outline-none focus:ring-1 focus:ring-[#FCC22F]"
                                     placeholder="john@example.com"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <label htmlFor="message" className="text-sm font-medium text-slate-300">{form.fields.message}</label>
+                                <label htmlFor="message" className="text-sm font-medium text-slate-300">
+                                    {form.fields.message}
+                                </label>
                                 <textarea
                                     id="message"
+                                    name="message"
                                     rows={4}
                                     className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder-slate-500 focus:border-[#FCC22F] focus:outline-none focus:ring-1 focus:ring-[#FCC22F]"
                                     placeholder="How can we help you?"
@@ -134,9 +201,10 @@ export default function ContactPage() {
 
                             <button
                                 type="submit"
-                                className="w-full rounded-xl bg-[#C71C22] px-8 py-4 text-base font-bold text-white transition-all hover:bg-[#a5161b] hover:scale-[1.02]"
+                                disabled={isSubmitting}
+                                className="w-full rounded-xl bg-[#C71C22] px-8 py-4 text-base font-bold text-white transition-all hover:bg-[#a5161b] hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                             >
-                                {form.button}
+                                {isSubmitting ? 'Sending...' : form.button}
                             </button>
                         </form>
                     </Reveal>

@@ -13,7 +13,7 @@ export const HeroSection: React.FC = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 w-full h-full relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 lg:px-8 w-full h-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full h-full">
 
           {/* Left Section - Content */}

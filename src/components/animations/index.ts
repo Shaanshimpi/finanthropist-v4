@@ -6,5 +6,6 @@ export { initMovingImageTransitions } from './moving/initMovingImage'
 export { initSnapScroll } from './snap/initSnapScroll'
 export { initMasterSnapScroll } from './snap/initMasterSnapScroll'
 export { initPostInstructorPinTimeline } from './timelines/postInstructorPinTimeline'
+export { initMobileFeaturesTimeline } from './mobile/mobileFeaturesTimeline'
 
 

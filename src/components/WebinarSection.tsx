@@ -13,7 +13,7 @@ export const WebinarSection: React.FC = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 w-full h-full relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 lg:px-8 w-full h-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full h-full">
           
           {/* Left Section - Content */}
@@ -28,7 +28,7 @@ export const WebinarSection: React.FC = () => {
             
             {/* Main Heading */}
             <div className="text-center lg:text-left space-y-1.5">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight">
+              <h2 className="text-3xl sm:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight">
                 <span className="block text-white webinar-title">
                   {webinar.titlePrimary}
                 </span>
@@ -52,7 +52,7 @@ export const WebinarSection: React.FC = () => {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <p className="webinar-card-text text-white text-sm lg:text-base leading-relaxed font-medium flex-1">
+                    <p className="webinar-card-text text-white text-sm lg:text-md leading-relaxed font-medium flex-1">
                       {feature}
                     </p>
                   </div>
@@ -70,8 +70,8 @@ export const WebinarSection: React.FC = () => {
                     href={cta.href}
                     className={`group ${
                       isPrimary
-                        ? 'bg-[#C71C22] hover:bg-[#C71C22]/90 text-white px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 shadow-lg hover:shadow-[#C71C22]/50 transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-2'
-                        : 'bg-slate-800/50 backdrop-blur-xl border-2 border-slate-600 text-white hover:border-[#FCC22F]/50 px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 hover:bg-slate-700/50 transform hover:-translate-y-1 flex items-center justify-center gap-2'
+                        ? 'bg-[#C71C22] hover:bg-[#C71C22]/90 text-white px-5 py-3 rounded-xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-[#C71C22]/50 transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-2'
+                        : 'bg-slate-800/50 backdrop-blur-xl border-2 border-slate-600 text-white hover:border-[#FCC22F]/50 px-5 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:bg-slate-700/50 transform hover:-translate-y-1 flex items-center justify-center gap-2'
                     }`}
                   >
                     {isPrimary ? (

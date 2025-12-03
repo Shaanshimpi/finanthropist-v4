@@ -101,3 +101,46 @@ html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
 }
+
+/* Hide scrollbar for all browsers */
+html,
+body {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for all scrollable elements */
+* {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Webkit browsers */
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent horizontal scroll on all pages */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for carousel elements */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

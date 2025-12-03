@@ -45,7 +45,48 @@ export const initFeaturesCardsTimeline = (params: FeaturesTimelineParams = {}) =
 
     const nextSection = document.querySelector('.webinar-section')
 
-    let currentCardIndex = 0
+    let currentCardIndex = -1 // Start at -1 to force initial update
+    let allowProgressUpdates = false // Flag to prevent progress updates until we've started from beginning
+    let hasEnteredFromStart = false // Track if we've properly entered from the start
+
+    const updateCardVisibility = (targetIndex: number) => {
+      if (targetIndex === currentCardIndex) return
+      currentCardIndex = targetIndex
+
+      items.forEach((item, index) => {
+        const htmlItem = item as HTMLElement
+
+        if (index === currentCardIndex) {
+          gsap.to(htmlItem, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            z: items.length * 10,
+            duration: 0.4,
+            ease: 'power2.out',
+          })
+        } else if (index < currentCardIndex) {
+          const stackedIndex = currentCardIndex - index
+          gsap.to(htmlItem, {
+            opacity: 0,
+            y: 0,
+            scale: 1,
+            z: (items.length - stackedIndex) * 10,
+            duration: 0.4,
+            ease: 'power2.out',
+          })
+        } else {
+          gsap.to(htmlItem, {
+            opacity: 0,
+            y: 100,
+            scale: 0.9,
+            z: 0,
+            duration: 0.3,
+            ease: 'power2.in',
+          })
+        }
+      })
+    }
 
     const scrollTriggerOptions: ScrollTrigger.Vars = {
       id: 'features-pin',
@@ -54,50 +95,83 @@ export const initFeaturesCardsTimeline = (params: FeaturesTimelineParams = {}) =
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
+      onEnter: () => {
+        // When entering the section from above, always start at the first card
+        hasEnteredFromStart = true
+        currentCardIndex = -1
+        updateCardVisibility(0)
+        // Now we can allow progress-based updates
+        allowProgressUpdates = true
+      },
+      onEnterBack: () => {
+        // When scrolling back up into the section, reset to first card
+        hasEnteredFromStart = true
+        currentCardIndex = -1
+        updateCardVisibility(0)
+        allowProgressUpdates = true
+      },
+      onLeave: () => {
+        // When leaving the section, reset the flag
+        hasEnteredFromStart = false
+        allowProgressUpdates = false
+      },
+      onLeaveBack: () => {
+        // When leaving the section going back, reset the flag
+        hasEnteredFromStart = false
+        allowProgressUpdates = false
+      },
       onUpdate: (self) => {
-        const progress = self.progress
+        const progress = Math.max(0, Math.min(1, self.progress))
+        
+        // CRITICAL: Never allow progress-based card selection until we've properly entered from start
+        // This prevents jumping to a later card when the section is already in view on page load
+        if (!hasEnteredFromStart) {
+          // Force card 0 and keep it there until we properly enter
+          if (currentCardIndex !== 0) {
+            currentCardIndex = -1
+            updateCardVisibility(0)
+          }
+          // Only enable if we're at the absolute start AND the trigger is active
+          // This means we've scrolled to the section from above
+          if (self.isActive && progress < 0.001) {
+            hasEnteredFromStart = true
+            allowProgressUpdates = true
+          }
+          return
+        }
+        
+        // If we haven't allowed progress updates yet, check if we should
+        if (!allowProgressUpdates) {
+          // Only allow if we're at the start
+          if (progress < 0.001) {
+            allowProgressUpdates = true
+            if (currentCardIndex !== 0) {
+              currentCardIndex = -1
+              updateCardVisibility(0)
+            }
+          } else {
+            // Force card 0 until we reach the start
+            if (currentCardIndex !== 0) {
+              currentCardIndex = -1
+              updateCardVisibility(0)
+            }
+          }
+          return
+        }
+
+        // Now we can safely use progress to determine card index
+        // But add a safety check: if progress is very small, ensure we're at card 0
+        if (progress < 0.01 && currentCardIndex !== 0) {
+          currentCardIndex = -1
+          updateCardVisibility(0)
+          return
+        }
+
         const targetCardIndex = Math.min(
           Math.floor(progress * items.length),
           items.length - 1
         )
-
-        if (targetCardIndex !== currentCardIndex) {
-          currentCardIndex = targetCardIndex
-
-          items.forEach((item, index) => {
-            const htmlItem = item as HTMLElement
-
-            if (index === currentCardIndex) {
-              gsap.to(htmlItem, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                z: items.length * 10,
-                duration: 0.4,
-                ease: 'power2.out',
-              })
-            } else if (index < currentCardIndex) {
-              const stackedIndex = currentCardIndex - index
-              gsap.to(htmlItem, {
-                opacity: 0,
-                y: 0,
-                scale: 1,
-                z: (items.length - stackedIndex) * 10,
-                duration: 0.4,
-                ease: 'power2.out',
-              })
-            } else {
-              gsap.to(htmlItem, {
-                opacity: 0,
-                y: 100,
-                scale: 0.9,
-                z: 0,
-                duration: 0.3,
-                ease: 'power2.in',
-              })
-            }
-          })
-        }
+        updateCardVisibility(targetCardIndex)
       },
     }
 
@@ -108,8 +182,7 @@ export const initFeaturesCardsTimeline = (params: FeaturesTimelineParams = {}) =
       scrollTriggerOptions.end = `+=${totalScrollDistance}`
     }
 
-    trigger = ScrollTrigger.create(scrollTriggerOptions)
-
+    // Set initial card states first (before creating trigger)
     items.forEach((item, index) => {
       const htmlItem = item as HTMLElement
       gsap.set(htmlItem, {
@@ -138,7 +211,38 @@ export const initFeaturesCardsTimeline = (params: FeaturesTimelineParams = {}) =
       }
     })
 
+    // Force initial state to card 0
+    currentCardIndex = -1
+    updateCardVisibility(0)
+
+    trigger = ScrollTrigger.create(scrollTriggerOptions)
+
+    // Refresh to recalculate positions
     ScrollTrigger.refresh()
+
+    // After refresh, check trigger state and ensure we're at card 0
+    // Use multiple requestAnimationFrame calls to ensure refresh has fully completed
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (trigger) {
+          const progress = trigger.progress
+          
+          // CRITICAL: Always start with card 0 and block progress updates
+          // Reset flags to ensure we start fresh
+          currentCardIndex = -1
+          updateCardVisibility(0)
+          hasEnteredFromStart = false
+          allowProgressUpdates = false
+          
+          // Only allow if we're at the absolute start AND active
+          // This means we've scrolled to the section from above
+          if (trigger.isActive && progress < 0.001) {
+            hasEnteredFromStart = true
+            allowProgressUpdates = true
+          }
+        }
+      })
+    })
   }
 
   timeoutId = window.setTimeout(init, delay)

@@ -97,20 +97,6 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 max-w-6xl px-6 text-center text-sm text-white/60 lg:px-8 lg:text-left">
-        <p className="leading-relaxed">{description}</p>
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-white/50 lg:justify-start">
-          {highlights.map((highlight) => (
-            <span key={highlight.label} className="flex items-center gap-2">
-              <span
-                className="inline-block h-2 w-2 rounded-full"
-                style={{ backgroundColor: highlight.color }}
-              ></span>
-              {highlight.label}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* Bottom bar */}
       <div className="mt-14 border-t border-white/10">

@@ -54,19 +54,19 @@ export const footerContent: FooterContent = {
     {
       title: 'Explore',
       links: [
-        { label: 'Features', href: '#features' },
-        { label: 'Curriculum', href: '#curriculum' },
-        { label: 'Live Webinars', href: '#webinar' },
-        { label: 'Success Stories', href: '#testimonials' },
+        // Only real pages, no section anchors
+        { label: 'Home', href: '/' },
+        { label: 'Course', href: '/course' },
+        { label: 'Instructor', href: '/instructor' },
+        // Blog & Posts temporarily disabled
+        // { label: 'Blog & Posts', href: '/posts' },
       ],
     },
     {
       title: 'Resources',
       links: [
-        { label: 'About Us', href: '#about' },
-        { label: 'FAQs', href: '#faq' },
-        { label: 'Investment Plans', href: '#pricing' },
-        { label: 'Insights & Articles', href: '#blog' },
+        { label: 'About Us', href: '/about' },
+        { label: 'Contact', href: '/contact' },
       ],
     },
   ],
@@ -76,15 +76,14 @@ export const footerContent: FooterContent = {
     phoneNumbers: ['+91 7066334499', '+91 7066337676'],
     location: 'Nashik, Maharashtra',
     socials: [
-      { name: 'Instagram', href: 'https://www.instagram.com/', label: 'Instagram', icon: 'instagram' },
-      { name: 'YouTube', href: 'https://www.youtube.com/', label: 'YouTube', icon: 'youtube' },
+      { name: 'Instagram', href: 'https://www.instagram.com/finanthropisteducare_/', label: 'Instagram', icon: 'instagram' },
+      { name: 'YouTube', href: 'https://www.youtube.com/@FinanthropistEducare9', label: 'YouTube', icon: 'youtube' },
       { name: 'Telegram', href: 'https://www.telegram.org/', label: 'Telegram', icon: 'telegram' },
     ],
   },
   bottomLinks: [
-    { label: 'Privacy Policy', href: '#privacy' },
-    { label: 'Terms & Conditions', href: '#terms' },
-    { label: 'Refund Policy', href: '#refund' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms & Conditions', href: '/terms' },
   ],
   copyright: 'Finanthropist. All rights reserved.',
 }

@@ -134,7 +134,7 @@ export const MobileInstructorSection: React.FC<MobileInstructorSectionProps> = (
         </div>
         <div className="flex justify-center">
           <Image
-            src="/static-media/sameer-fist.png"
+            src="/static-media/sameer-instructor.png"
             alt="Professional Instructor - Sammeer Sarang"
             width={500}
             height={600}

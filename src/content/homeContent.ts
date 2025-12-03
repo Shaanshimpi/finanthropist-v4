@@ -75,7 +75,7 @@ export const homeContent: HomeContent = {
   features: {
     badge: 'Why Choose Us',
     titlePrimary: "Maharashtra's Only Institute with",
-    titleAccent: 'Satisfactory results',
+    titleAccent: 'highest results',
     items: [
       'Teaches You Share Market Basics to Advance in one course',
       'Lifetime Live Market Support',

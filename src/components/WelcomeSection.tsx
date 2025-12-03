@@ -9,7 +9,7 @@ export const WelcomeSection: React.FC = () => {
   return (
     <section className="welcome-section absolute overflow-hidden  flex items-center justify-center" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)'}}>
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ height: 'calc(100vh - 4rem)', minHeight: 'calc(100vh - 4rem)'}} />
-      <div className="container mx-auto px-4 lg:px-8 h-full flex items-center">
+      <div className="container mx-auto max-w-6xl px-4 lg:px-8 h-full flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 w-full items-center">
           {/* Left column - headline and CTA */}
           <div className="lg:col-span-5">

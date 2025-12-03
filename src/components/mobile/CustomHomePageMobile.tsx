@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MobileHeroSection from './MobileHeroSection'
-import MobileFeaturesSection from './MobileFeaturesSection'
+import { MobileFeaturesSectionNew } from './MobileFeaturesSectionNew'
 import MobileWebinarSection from './MobileWebinarSection'
 import MobileInstructorSection from './MobileInstructorSection'
 import MobilePostInstructorSection from './MobilePostInstructorSection'
@@ -66,7 +66,7 @@ export const CustomHomePageMobile: React.FC = () => {
     <>
       <div className="mobile-theme-wrapper relative space-y-12 pb-16">
         <MobileHeroSection scheduleAnimation={scheduleAnimation} />
-        <MobileFeaturesSection scheduleAnimation={scheduleAnimation} />
+        <MobileFeaturesSectionNew scheduleAnimation={scheduleAnimation} />
         <MobileInstructorSection scheduleAnimation={scheduleAnimation} />
         <MobileWebinarSection scheduleAnimation={scheduleAnimation} />
         <MobileTestimonialsSection />

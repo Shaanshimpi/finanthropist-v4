@@ -245,28 +245,34 @@ export const seed = async ({
     payload.updateGlobal({
       slug: 'footer',
       data: {
+        // Keep footer nav in the CMS aligned with the actual pages we expose
         navItems: [
           {
             link: {
               type: 'custom',
-              label: 'Admin',
-              url: '/admin',
+              label: 'Home',
+              url: '/',
             },
           },
           {
             link: {
               type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
+              label: 'Course',
+              url: '/course',
             },
           },
           {
             link: {
               type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
+              label: 'About Us',
+              url: '/about',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Contact',
+              url: '/contact',
             },
           },
         ],

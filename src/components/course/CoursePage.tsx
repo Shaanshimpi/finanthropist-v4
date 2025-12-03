@@ -46,7 +46,7 @@ export const CoursePage: React.FC = () => {
 
                 <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-4">
                   <Link
-                    href="https://conference.finanthropist.com/webinar-registration"
+                    href="https://rzp.io/l/JtEgnUYW"
                     className="group relative w-full sm:w-auto overflow-hidden rounded-xl bg-[#C71C22] px-8 py-4 text-lg font-bold text-white transition-all hover:bg-[#a5161b] hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(199,28,34,0.6)]"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">

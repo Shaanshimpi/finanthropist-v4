@@ -32,52 +32,78 @@ export const Card: React.FC<{
   return (
     <article
       className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        'group rounded-2xl border border-slate-800 bg-slate-900/70 overflow-hidden hover:cursor-pointer transition-all duration-300 hover:border-[#FCC22F]/30 hover:shadow-lg hover:shadow-[#FCC22F]/10 hover:-translate-y-1',
         className,
       )}
       ref={card.ref}
     >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+      <div className="relative w-full aspect-video overflow-hidden bg-slate-800">
+        {!metaImage && (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+            <div className="text-slate-600 text-sm">No image</div>
+          </div>
+        )}
+        {metaImage && typeof metaImage !== 'string' && (
+          <div className="w-full h-full">
+            <Media
+              resource={metaImage}
+              size="33vw"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        )}
       </div>
-      <div className="p-4">
+      <div className="p-5 sm:p-6 flex flex-col flex-1">
         {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === 'object') {
-                    const { title: titleFromCategory } = category
+          <div className="mb-3 flex flex-wrap gap-2">
+            {categories?.map((category, index) => {
+              if (typeof category === 'object') {
+                const { title: titleFromCategory } = category
+                const categoryTitle = titleFromCategory || 'Untitled category'
 
-                    const categoryTitle = titleFromCategory || 'Untitled category'
+                return (
+                  <span
+                    key={index}
+                    className="inline-flex items-center rounded-full border border-[#FCC22F]/30 bg-[#FCC22F]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#FCC22F]"
+                  >
+                    {categoryTitle}
+                  </span>
+                )
+              }
 
-                    const isLast = index === categories.length - 1
-
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    )
-                  }
-
-                  return null
-                })}
-              </div>
-            )}
+              return null
+            })}
           </div>
         )}
         {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
+          <h3 className="mb-3 text-lg sm:text-xl font-bold text-white group-hover:text-[#FCC22F] transition-colors">
+            <Link className="not-prose" href={href} ref={link.ref}>
+              {titleToUse}
+            </Link>
+          </h3>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        {description && (
+          <p className="text-sm text-slate-300 leading-relaxed line-clamp-3 flex-1">
+            {sanitizedDescription}
+          </p>
+        )}
+        <div className="mt-4 pt-4 border-t border-slate-800">
+          <Link
+            href={href}
+            ref={link.ref}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#FCC22F] hover:text-[#FCC22F]/80 transition-colors"
+          >
+            Read More
+            <svg
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
       </div>
     </article>
   )

@@ -90,9 +90,9 @@ export const initMovingImageOverlay = (
   ;(moving as any)[stateKey] = 'fist'
   ;(moving as any)[transitionKey] = false
 
-  const swapImage = (src: string, nextState: 'fist' | 'top' | 'webinar') => {
+  const swapImage = (src: string, nextState: 'fist' | 'top' | 'webinar' | 'instructor') => {
     if (!imgEl) return
-    const currentState = (moving as any)[stateKey] as 'fist' | 'top' | 'webinar'
+    const currentState = (moving as any)[stateKey] as 'fist' | 'top' | 'webinar' | 'instructor'
     const isTransitioning = Boolean((moving as any)[transitionKey])
     if (currentState === nextState || isTransitioning) return
     ;(moving as any)[transitionKey] = true
@@ -210,7 +210,7 @@ export const initMovingImageOverlay = (
         const direction = (self as any)?.direction || 0
         const midpoint = 0.5
         if (direction > 0 && progress >= midpoint) {
-          swapImage('/static-media/sameer-fist.png', 'fist')
+          swapImage('/static-media/sameer-instructor.png', 'instructor')
         } else if (direction < 0 && progress <= midpoint) {
           swapImage('/static-media/sameer-webinar.png', 'webinar')
         }

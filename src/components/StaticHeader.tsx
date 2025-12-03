@@ -1,13 +1,28 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const StaticHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [headerHeight, setHeaderHeight] = useState(64)
+
+  useEffect(() => {
+    // Set body padding to account for fixed header
+    const header = document.querySelector('header')
+    if (header) {
+      const height = header.offsetHeight
+      setHeaderHeight(height)
+      document.body.style.paddingTop = `${height}px`
+    }
+
+    return () => {
+      document.body.style.paddingTop = '0'
+    }
+  }, [])
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
 
@@ -32,6 +47,9 @@ export const StaticHeader: React.FC = () => {
             <Link href="/course" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               Course
             </Link>
+            <Link href="/about" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
+              About
+            </Link>
             <Link href="/contact" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               Contact
             </Link>
@@ -40,7 +58,7 @@ export const StaticHeader: React.FC = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link
-              href="/enroll"
+              href="/course"
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
             >
               Enroll Now
@@ -73,11 +91,14 @@ export const StaticHeader: React.FC = () => {
                 <Link href="/course" className="hover:text-red-600 transition-colors">
                   Course
                 </Link>
+                <Link href="/about" className="hover:text-red-600 transition-colors">
+                  About
+                </Link>
                 <Link href="/contact" className="hover:text-red-600 transition-colors">
                   Contact
                 </Link>
                 <Link
-                  href="/enroll"
+                  href="/course"
                   className="mt-2 inline-flex justify-center rounded-xl bg-red-600 px-6 py-2.5 font-semibold text-white shadow hover:bg-red-700 transition-colors"
                 >
                   Enroll Now
