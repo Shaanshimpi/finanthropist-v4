@@ -46,10 +46,6 @@ export const PageLoader: React.FC = () => {
       // Get header logo position using getBoundingClientRect (viewport-relative)
       const headerRect = headerLogoContainer.getBoundingClientRect()
       
-      // Get viewport center - where we want the logo to start
-      const viewportCenterX = window.innerWidth / 2
-      const viewportCenterY = window.innerHeight / 2
-      
       // Get current loader logo position (should be centered by flexbox)
       const loaderLogoRect = logoRef.current.getBoundingClientRect()
       const loaderLogoCenterX = loaderLogoRect.left + loaderLogoRect.width / 2
