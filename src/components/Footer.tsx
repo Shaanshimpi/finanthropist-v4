@@ -100,7 +100,10 @@ export const Footer: React.FC = () => {
       {/* Bottom bar */}
       <div className="mt-14 border-t border-white/10">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 text-center text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-8">
-          <p>© {currentYear} {copyright}</p>
+          <div className="flex flex-col gap-2">
+            <p>© {currentYear} {copyright}</p>
+            <p className="text-white/40">Designed and developed by Digital supremacy and Firefist Solutions</p>
+          </div>
           <div className="flex flex-wrap justify-center gap-4 sm:justify-end">
             {bottomLinks.map((link) => (
               <Link key={link.label} className="transition hover:text-[#FCC22F]" href={link.href ?? '#'}>

@@ -52,21 +52,16 @@ export const footerContent: FooterContent = {
   ],
   linkGroups: [
     {
-      title: 'Explore',
+      title: 'Quick Links',
       links: [
         // Only real pages, no section anchors
         { label: 'Home', href: '/' },
         { label: 'Course', href: '/course' },
         { label: 'Instructor', href: '/instructor' },
-        // Blog & Posts temporarily disabled
-        // { label: 'Blog & Posts', href: '/posts' },
-      ],
-    },
-    {
-      title: 'Resources',
-      links: [
         { label: 'About Us', href: '/about' },
         { label: 'Contact', href: '/contact' },
+        // Blog & Posts temporarily disabled
+        // { label: 'Blog & Posts', href: '/posts' },
       ],
     },
   ],

@@ -4,6 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Course', href: '/course' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+] as const
+
 export const StaticHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [_headerHeight, setHeaderHeight] = useState(64)
@@ -50,6 +57,11 @@ export const StaticHeader: React.FC = () => {
     }
   }, [isMenuOpen])
 
+  const isActive = (href: string) =>
+    href === '/'
+      ? pathname === '/'
+      : pathname === href || pathname?.startsWith(`${href}/`)
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 relative">
@@ -70,18 +82,17 @@ export const StaticHeader: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              Home
-            </Link>
-            <Link href="/course" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              Course
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              Contact
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(link.href) ? 'text-red-600' : 'text-gray-700 hover:text-red-600'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           {/* CTA Button */}
@@ -112,24 +123,31 @@ export const StaticHeader: React.FC = () => {
           className={`md:hidden transition-all duration-200 ease-out ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-3 pointer-events-none'
             }`}
         >
-          <div className="absolute inset-x-0 top-16">
-            <div className="mx-[-1rem] sm:mx-0 rounded-b-3xl border-b border-gray-200 bg-white/95 backdrop-blur px-6 py-5 shadow-lg">
-              <nav className="flex flex-col text-base font-medium text-gray-700">
-                <Link href="/" className="hover:text-red-600 transition-colors py-2">
-                  Home
-                </Link>
-                <Link href="/course" className="hover:text-red-600 transition-colors py-2">
-                  Course
-                </Link>
-                <Link href="/about" className="hover:text-red-600 transition-colors py-2">
-                  About
-                </Link>
-                <Link href="/contact" className="hover:text-red-600 transition-colors py-2">
-                  Contact
-                </Link>
+          <div className="absolute inset-x-0 top-full">
+            <div className="mx-[-1rem] sm:mx-0 rounded-b-3xl border-b border-gray-200 bg-white/95 backdrop-blur shadow-lg">
+              
+              <nav className="flex flex-col text-base font-medium text-gray-700 px-6 pb-4 pt-2 space-y-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center justify-between rounded-xl px-3 py-2 transition-colors ${
+                      isActive(link.href)
+                        ? 'bg-red-50 text-red-700'
+                        : 'text-gray-800 hover:bg-gray-50 hover:text-red-600'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    {isActive(link.href) && (
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-red-500">
+                        Active
+                      </span>
+                    )}
+                  </Link>
+                ))}
                 <Link
                   href="/course"
-                  className="inline-flex justify-center rounded-xl bg-red-600 px-6 py-2.5 font-semibold text-white shadow hover:bg-red-700 transition-colors mt-2"
+                  className="mt-3 inline-flex justify-center rounded-xl bg-red-600 px-6 py-2.5 font-semibold text-white shadow hover:bg-red-700 transition-colors"
                 >
                   Enroll Now
                 </Link>

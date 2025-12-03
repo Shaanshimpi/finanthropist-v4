@@ -27,7 +27,7 @@ export const initMobileHeroReviews = (
       ease: 'back.out(1.4)',
     })
     .to(stars, {
-      scale: 2,
+      scale: 1.8,
       x: 150,
       duration: 0.3,
       ease: 'back.out(1.4)',
