@@ -215,7 +215,7 @@ export const initMovingImageTransitions = (
         try {
           // If we already handed off to features static while reversing, enforce visibility and exit early
           const revHandoffDone = Boolean((movingImage as any)['__featuresReverseHandoff__'])
-          const pEarly = Number(self?.progress) || 0
+          const _pEarly = Number(self?.progress) || 0
           const dirEarly = (self as any)?.direction || 0
           if (dirEarly < 0 && revHandoffDone) {
             const featuresStaticHold = document.querySelector('.features-static-image-container > div') as HTMLElement | null

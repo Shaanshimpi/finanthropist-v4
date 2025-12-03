@@ -6,8 +6,7 @@ import { Instagram, Youtube, Send } from 'lucide-react'
 import { useFooterContent } from '@/hooks/useFooterContent'
 
 export const Footer: React.FC = () => {
-  const { logo, description, highlights, linkGroups, contact, bottomLinks, copyright } =
-    useFooterContent()
+  const { logo, linkGroups, contact, bottomLinks, copyright } = useFooterContent()
   const currentYear = new Date().getFullYear()
 
   return (

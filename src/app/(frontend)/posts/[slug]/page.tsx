@@ -45,7 +45,7 @@ type Args = {
   }>
 }
 
-export default async function Post({ params: paramsPromise }: Args) {
+export default async function Post({ params: _paramsPromise }: Args) {
   // Blog temporarily disabled
   notFound()
   
@@ -84,7 +84,7 @@ export default async function Post({ params: paramsPromise }: Args) {
   // )
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
+export async function generateMetadata({ params: _paramsPromise }: Args): Promise<Metadata> {
   // Blog temporarily disabled
   return {
     title: 'Not Found',

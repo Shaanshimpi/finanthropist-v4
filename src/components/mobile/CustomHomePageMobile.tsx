@@ -5,7 +5,7 @@ import MobileHeroSection from './MobileHeroSection'
 import { MobileFeaturesSectionNew } from './MobileFeaturesSectionNew'
 import MobileWebinarSection from './MobileWebinarSection'
 import MobileInstructorSection from './MobileInstructorSection'
-import MobilePostInstructorSection from './MobilePostInstructorSection'
+// import MobilePostInstructorSection from './MobilePostInstructorSection'
 import MobileWelcomeSection from './MobileWelcomeSection'
 import MobileTestimonialsSection from './MobileTestimonialsSection'
 import MobileCallModal from './MobileCallModal'
@@ -47,18 +47,20 @@ export const CustomHomePageMobile: React.FC = () => {
       root.style.setProperty('--page-bg', '#080f1f')
       root.style.setProperty('--page-text', '#ffffff')
       root.style.setProperty('--page-border', 'rgba(255, 255, 255, 0.12)')
+      const timeouts = timeoutsRef.current
       return () => {
         root.classList.remove('mobile-theme-dark', 'mobile-theme-light')
         root.style.removeProperty('--page-bg')
         root.style.removeProperty('--page-text')
         root.style.removeProperty('--page-border')
-        timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId))
-        timeoutsRef.current.clear()
+        timeouts.forEach((timeoutId) => window.clearTimeout(timeoutId))
+        timeouts.clear()
       }
     }
+    const timeouts = timeoutsRef.current
     return () => {
-      timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId))
-      timeoutsRef.current.clear()
+      timeouts.forEach((timeoutId) => window.clearTimeout(timeoutId))
+      timeouts.clear()
     }
   }, [])
 

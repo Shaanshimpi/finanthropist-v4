@@ -3,17 +3,17 @@
 import React, { useEffect, useRef } from 'react'
 import { useHomeContent } from '@/hooks/useHomeContent'
 
-const renderStars = (count: number) =>
-  Array.from({ length: 5 }).map((_, idx) => (
-    <svg
-      key={idx}
-      className={`h-4 w-4 ${idx < count ? 'text-[#FCC22F]' : 'text-white/15'}`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-    </svg>
-  ))
+// const renderStars = (count: number) =>
+//   Array.from({ length: 5 }).map((_, idx) => (
+//     <svg
+//       key={idx}
+//       className={`h-4 w-4 ${idx < count ? 'text-[#FCC22F]' : 'text-white/15'}`}
+//       viewBox="0 0 20 20"
+//       fill="currentColor"
+//     >
+//       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+//     </svg>
+//   ))
 
 export const TestimonialsSection: React.FC = () => {
   const { testimonials } = useHomeContent()
@@ -62,7 +62,7 @@ export const TestimonialsSection: React.FC = () => {
           <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl lg:text-5xl">
             Rated 5.0★ on Google by our{' '}
             <span className="bg-gradient-to-r from-[#FCC22F] via-[#C71C22] to-[#FCC22F] bg-clip-text text-transparent">
-              learners
+              Participants
             </span>
           </h2>
           <p className="mt-3 text-sm text-white/60 sm:text-base">

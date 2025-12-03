@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const StaticHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [headerHeight, setHeaderHeight] = useState(64)
+  const [_headerHeight, setHeaderHeight] = useState(64)
 
   useEffect(() => {
     // Set body padding to account for fixed header

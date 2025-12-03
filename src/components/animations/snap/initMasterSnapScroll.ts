@@ -32,7 +32,7 @@ export const initMasterSnapScroll = (options: MasterSnapOptions): (() => void) =
       .map((sel) => document.querySelector(sel) as HTMLElement | null)
       .filter((el): el is HTMLElement => !!el)
 
-  let postInstructorEndSnap: number | null = null
+  let _postInstructorEndSnap: number | null = null
 
   const computeSnapPoints = (): number[] => {
     const maxScroll = ScrollTrigger.maxScroll(window)
@@ -101,9 +101,9 @@ export const initMasterSnapScroll = (options: MasterSnapOptions): (() => void) =
       const maxScrollLocal = ScrollTrigger.maxScroll(window)
       const endY = (postPin as any).end as number
       const endProgress = maxScrollLocal === 0 ? 0 : Math.min(1, Math.max(0, endY / Math.max(1, maxScrollLocal)))
-      postInstructorEndSnap = endProgress
+      _postInstructorEndSnap = endProgress
     } else {
-      postInstructorEndSnap = null
+      _postInstructorEndSnap = null
     }
     return dedup
   }
