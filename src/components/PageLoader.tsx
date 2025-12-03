@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export const PageLoader: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -100,10 +101,22 @@ export const PageLoader: React.FC = () => {
         onComplete: () => {
           setIsLoading(false)
           // Re-enable scrolling when loader finishes
+          // First, reset scroll position to top
+          window.scrollTo(0, 0)
+          
+          // Restore body styles
           html.style.overflow = originalHtmlOverflow
           body.style.overflow = originalBodyOverflow
           body.style.position = originalBodyPosition
           body.style.width = originalBodyWidth
+          
+          // Refresh ScrollTrigger after restoring styles to recalculate snap points
+          // Use multiple requestAnimationFrame calls to ensure DOM is ready
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              ScrollTrigger.refresh()
+            })
+          })
         },
       })
 
@@ -244,4 +257,3 @@ export const PageLoader: React.FC = () => {
     </div>
   )
 }
-
