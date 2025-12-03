@@ -1,11 +1,14 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export const StaticHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [_headerHeight, setHeaderHeight] = useState(64)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     // Set body padding to account for fixed header
@@ -21,13 +24,39 @@ export const StaticHeader: React.FC = () => {
     }
   }, [])
 
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        // Check if click is not on the menu button
+        const menuButton = document.querySelector('[aria-label="Toggle navigation menu"]')
+        if (menuButton && !menuButton.contains(event.target as Node)) {
+          setIsMenuOpen(false)
+        }
+      }
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isMenuOpen])
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
 
           {/* Logo and Brand */}
-          <div className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <div className=" relative">
               <Image
                 src="/static-media/logo.png"
@@ -37,7 +66,7 @@ export const StaticHeader: React.FC = () => {
                 className="object-contain"
               />
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -79,27 +108,28 @@ export const StaticHeader: React.FC = () => {
 
         {/* Mobile Menu */}
         <div
+          ref={menuRef}
           className={`md:hidden transition-all duration-200 ease-out ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-3 pointer-events-none'
             }`}
         >
           <div className="absolute inset-x-0 top-16">
             <div className="mx-[-1rem] sm:mx-0 rounded-b-3xl border-b border-gray-200 bg-white/95 backdrop-blur px-6 py-5 shadow-lg">
-              <nav className="flex flex-col space-y-4 text-base font-medium text-gray-700">
-                <Link href="/" className="hover:text-red-600 transition-colors">
+              <nav className="flex flex-col text-base font-medium text-gray-700">
+                <Link href="/" className="hover:text-red-600 transition-colors py-2">
                   Home
                 </Link>
-                <Link href="/course" className="hover:text-red-600 transition-colors">
+                <Link href="/course" className="hover:text-red-600 transition-colors py-2">
                   Course
                 </Link>
-                <Link href="/about" className="hover:text-red-600 transition-colors">
+                <Link href="/about" className="hover:text-red-600 transition-colors py-2">
                   About
                 </Link>
-                <Link href="/contact" className="hover:text-red-600 transition-colors">
+                <Link href="/contact" className="hover:text-red-600 transition-colors py-2">
                   Contact
                 </Link>
                 <Link
                   href="/course"
-                  className="mt-2 inline-flex justify-center rounded-xl bg-red-600 px-6 py-2.5 font-semibold text-white shadow hover:bg-red-700 transition-colors"
+                  className="inline-flex justify-center rounded-xl bg-red-600 px-6 py-2.5 font-semibold text-white shadow hover:bg-red-700 transition-colors mt-2"
                 >
                   Enroll Now
                 </Link>

@@ -51,7 +51,7 @@ export default function InstructorPage() {
 
                 {/* CTA */}
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Link href="https://conference.finanthropist.com/webinar-registration" className="bg-[#C71C22] hover:bg-[#C71C22]/90 text-white px-6 py-3 rounded-xl font-bold text-base transition-all shadow-lg">
+                  <Link href="https://rzp.io/l/JtEgnUYW" className="bg-[#C71C22] hover:bg-[#C71C22]/90 text-white px-6 py-3 rounded-xl font-bold text-base transition-all shadow-lg">
                     Enroll Now
                   </Link>
                   <Link href="https://conference.finanthropist.com/webinar-registration" className="bg-slate-900/5 hover:bg-slate-900/10 text-slate-900 px-6 py-3 rounded-xl font-bold text-base transition-all border border-slate-200">

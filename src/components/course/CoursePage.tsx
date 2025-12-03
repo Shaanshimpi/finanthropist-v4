@@ -208,7 +208,7 @@ export const CoursePage: React.FC = () => {
                   Contact Us Now
                 </Link>
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="w-full rounded-xl border-2 border-[#FCC22F] bg-transparent px-10 py-5 text-xl font-bold text-[#FCC22F] transition-all hover:bg-[#FCC22F] hover:text-slate-950 sm:w-auto"
                 >
                   Get More Information
