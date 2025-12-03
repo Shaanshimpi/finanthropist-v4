@@ -30,7 +30,7 @@ export const contactContent: ContactContent = {
     info: {
         title: 'Contact Information',
         phoneNumbers: ['+91 7066334499', '+91 7066337676'],
-        email: 'hello@finanthropist.in',
+        email: 'info@finanthropist.com',
         location: 'Nashik, Maharashtra',
         hours: 'Monday - Saturday: 9:00 AM - 6:00 PM\nSunday: Closed',
     },

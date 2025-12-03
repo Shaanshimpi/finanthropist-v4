@@ -67,7 +67,7 @@ export const footerContent: FooterContent = {
   ],
   contact: {
     title: 'Connect',
-    email: 'hello@finanthropist.in',
+    email: 'info@finanthropist.com',
     phoneNumbers: ['+91 7066334499', '+91 7066337676'],
     location: 'Nashik, Maharashtra',
     socials: [

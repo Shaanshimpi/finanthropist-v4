@@ -114,7 +114,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="space-y-2 text-sm sm:text-base text-slate-300">
                 <p>
-                  <span className="font-semibold text-white">Email:</span> hello@finanthropist.in
+                  <span className="font-semibold text-white">Email:</span> info@finanthropist.com
                 </p>
                 <p>
                   <span className="font-semibold text-white">Phone:</span> +91 7066334499, +91 7066337676

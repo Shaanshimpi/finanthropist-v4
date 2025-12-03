@@ -17,42 +17,45 @@ export const Footer: React.FC = () => {
           <div className="h-32 w-[60%] max-w-3xl bg-gradient-to-r from-[#C71C22]/20 via-[#FCC22F]/25 to-[#C71C22]/20 blur-3xl opacity-60"></div>
         </div>
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-6 text-center lg:flex-row lg:items-start lg:justify-between lg:text-left lg:px-8">
-        {/* Brand block */}
-        <div className="max-w-sm">
-          <Image
-            src={logo.src}
-            alt={logo.alt}
-            width={300}
-            height={300}
-            className="w-full max-w-[220px] object-contain"
-          />
-        </div>
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 lg:px-8">
+        <div className="grid gap-10 text-center md:grid-cols-2 lg:grid-cols-3 items-start">
+          {/* Brand block */}
+          <div className="flex flex-col items-center gap-4">
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={300}
+              height={300}
+              className="w-full max-w-[220px] object-contain"
+            />
+          </div>
 
-        {/* Quick links */}
-        <div className="grid flex-1 gap-10 text-center  sm:text-left sm:grid-cols-2 lg:grid-cols-3">
-          {linkGroups.map((group) => (
-            <div key={group.title}>
-              <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">
-                {group.title}
-              </h4>
-              <ul className="mt-4 space-y-3 text-sm text-white/60">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    {link.href ? (
-                      <Link className="transition hover:text-[#FCC22F]" href={link.href}>
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <span>{link.label}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Quick links */}
+          <div className="flex flex-col items-center gap-2">
+            {linkGroups.map((group) => (
+              <div key={group.title}>
+                <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">
+                  {group.title}
+                </h4>
+                <ul className="mt-4 space-y-3 text-sm text-white/60">
+                  {group.links.map((link) => (
+                    <li key={link.label}>
+                      {link.href ? (
+                        <Link className="transition hover:text-[#FCC22F]" href={link.href}>
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <span>{link.label}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
-          <div>
+          {/* Contact / socials */}
+          <div className="flex flex-col items-center gap-2">
             <h4 className="text-sm font-semibold uppercase tracking-wide text-white/70">
               {contact.title}
             </h4>
@@ -70,7 +73,7 @@ export const Footer: React.FC = () => {
                 </li>
               ))}
               <li className="text-white/60">{contact.location}</li>
-              <li className="flex justify-center gap-3 pt-1 sm:justify-start">
+              <li className="flex justify-center gap-3 pt-1">
                 {contact.socials.map((social) => {
                   let Icon = Instagram
                   if (social.icon === 'youtube' || social.name.toLowerCase() === 'youtube') {
