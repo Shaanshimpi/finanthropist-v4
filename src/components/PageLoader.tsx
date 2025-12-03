@@ -127,8 +127,8 @@ export const PageLoader: React.FC = () => {
         duration: 0.6,
         ease: 'power2.out',
       })
-        // Wait 2 seconds before logo entrance
-        .to({}, { duration: 2 })
+        // Wait 1 second before logo entrance
+        .to({}, { duration: 1 })
         // Then fade in logo with smooth animation
         .to(logoRef.current, {
           opacity: 1,
