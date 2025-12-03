@@ -21,6 +21,19 @@ export const PageLoader: React.FC = () => {
       return
     }
 
+    // Disable scrolling while loader is active - prevent on both html and body
+    const html = document.documentElement
+    const body = document.body
+    const originalHtmlOverflow = html.style.overflow
+    const originalBodyOverflow = body.style.overflow
+    const originalBodyPosition = body.style.position
+    const originalBodyWidth = body.style.width
+    
+    html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+    body.style.position = 'fixed'
+    body.style.width = '100%'
+
     const animateToHeader = () => {
       if (!logoRef.current || !loaderRef.current) {
         setIsLoading(false)
@@ -86,6 +99,11 @@ export const PageLoader: React.FC = () => {
       const tl = gsap.timeline({
         onComplete: () => {
           setIsLoading(false)
+          // Re-enable scrolling when loader finishes
+          html.style.overflow = originalHtmlOverflow
+          body.style.overflow = originalBodyOverflow
+          body.style.position = originalBodyPosition
+          body.style.width = originalBodyWidth
         },
       })
 
@@ -160,7 +178,14 @@ export const PageLoader: React.FC = () => {
       })
     }, 1200) // Minimum loading time
 
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      // Re-enable scrolling on cleanup
+      html.style.overflow = originalHtmlOverflow
+      body.style.overflow = originalBodyOverflow
+      body.style.position = originalBodyPosition
+      body.style.width = originalBodyWidth
+    }
   }, [isHomePage])
 
   if (!isHomePage || !isLoading) return null
