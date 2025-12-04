@@ -129,6 +129,12 @@ export const PageLoader: React.FC = () => {
           body.style.position = originalBodyPosition
           body.style.width = originalBodyWidth
           
+          // Dispatch custom event to notify that loader has finished
+          // This allows other components (like CustomHomePage) to initialize snap scroll
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('pageLoaderComplete'))
+          }
+          
           // Refresh ScrollTrigger after restoring styles to recalculate snap points
           // Use multiple requestAnimationFrame calls to ensure DOM is ready
           requestAnimationFrame(() => {
