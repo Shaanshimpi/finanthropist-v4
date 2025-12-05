@@ -99,8 +99,40 @@ export default function AboutPage() {
           </p>
         </Reveal>
 
-        {/* Sammeer */}
+        {/* Aayesha */}
         <Reveal delay={230} className="mb-8">
+          <section className="grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center rounded-2xl border border-slate-800 bg-slate-900/75 p-5 sm:p-7 shadow-lg shadow-black/40">
+            {/* Content */}
+            <div className="order-2 md:order-1 space-y-3">
+              <p className="text-[11px] font-semibold text-[#FCC22F] uppercase tracking-wide">
+                Chairperson
+              </p>
+              <h3 className="text-xl font-bold text-white">Aayesha Sarang</h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                As Chairperson, Aayesha provides strategic guidance and ensures that Finanthropist stays
+                focused on its mission of genuine financial empowerment. Her clarity of vision and commitment
+                to education help shape programs that create long-term impact for families across Maharashtra.
+              </p>
+            </div>
+
+            {/* Image */}
+            <div className="order-1 md:order-2 flex justify-center md:justify-end">
+              <div className="relative w-full max-w-xs aspect-[4/5] rounded-3xl border border-slate-700 overflow-hidden bg-slate-800">
+                <Image
+                  src="/static-media/Aayesha-about.png"
+                  alt="Aayesha Sarang - Chairperson"
+                  width={400}
+                  height={500}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
+        {/* Sammeer */}
+        <Reveal delay={260} className="mb-8">
           <section className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center rounded-2xl border border-slate-800 bg-slate-900/75 p-5 sm:p-7 shadow-lg shadow-black/40">
             {/* Image */}
             <div className="flex justify-center md:justify-start">
@@ -130,38 +162,6 @@ export default function AboutPage() {
                 career to transforming lives through practical trading education and a deep understanding of
                 the local investor mindset.
               </p>
-            </div>
-          </section>
-        </Reveal>
-
-        {/* Aayesha */}
-        <Reveal delay={260} className="mb-8">
-          <section className="grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center rounded-2xl border border-slate-800 bg-slate-900/75 p-5 sm:p-7 shadow-lg shadow-black/40">
-            {/* Content */}
-            <div className="order-2 md:order-1 space-y-3">
-              <p className="text-[11px] font-semibold text-[#FCC22F] uppercase tracking-wide">
-                Chairperson
-              </p>
-              <h3 className="text-xl font-bold text-white">Aayesha Sarang</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                As Chairperson, Aayesha provides strategic guidance and ensures that Finanthropist stays
-                focused on its mission of genuine financial empowerment. Her clarity of vision and commitment
-                to education help shape programs that create long-term impact for families across Maharashtra.
-              </p>
-            </div>
-
-            {/* Image */}
-            <div className="order-1 md:order-2 flex justify-center md:justify-end">
-              <div className="relative w-full max-w-xs aspect-[4/5] rounded-3xl border border-slate-700 overflow-hidden bg-slate-800">
-                <Image
-                  src="/static-media/Aayesha-about.png"
-                  alt="Aayesha Sarang - Chairperson"
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-contain"
-                  priority
-                />
-              </div>
             </div>
           </section>
         </Reveal>

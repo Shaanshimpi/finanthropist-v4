@@ -79,7 +79,7 @@ const normalizeFooterContent = (input: unknown): FooterContent => {
         typeof item.label === 'string'
       ) {
         const icon =
-          typeof item.icon === 'string' && ['instagram', 'youtube', 'telegram'].includes(item.icon)
+          typeof item.icon === 'string' && ['instagram', 'youtube', 'facebook'].includes(item.icon)
             ? (item.icon as FooterContent['contact']['socials'][number]['icon'])
             : undefined
         socials.push(

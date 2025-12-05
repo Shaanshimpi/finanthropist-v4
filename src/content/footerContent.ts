@@ -12,7 +12,7 @@ export type FooterSocial = {
   name: string
   href: string
   label: string
-  icon?: 'instagram' | 'youtube' | 'telegram'
+  icon?: 'instagram' | 'youtube' | 'facebook'
 }
 
 export type FooterHighlight = {
@@ -73,7 +73,7 @@ export const footerContent: FooterContent = {
     socials: [
       { name: 'Instagram', href: 'https://www.instagram.com/finanthropisteducare_/', label: 'Instagram', icon: 'instagram' },
       { name: 'YouTube', href: 'https://www.youtube.com/@FinanthropistEducare9', label: 'YouTube', icon: 'youtube' },
-      { name: 'Telegram', href: 'https://www.telegram.org/', label: 'Telegram', icon: 'telegram' },
+      { name: 'Facebook', href: 'https://www.facebook.com/Finanthropisteducare/', label: 'Facebook', icon: 'facebook' },
     ],
   },
   bottomLinks: [

@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Instagram, Youtube, Send } from 'lucide-react'
+import { Instagram, Youtube, Facebook } from 'lucide-react'
 import { useFooterContent } from '@/hooks/useFooterContent'
 
 export const Footer: React.FC = () => {
@@ -78,8 +78,8 @@ export const Footer: React.FC = () => {
                   let Icon = Instagram
                   if (social.icon === 'youtube' || social.name.toLowerCase() === 'youtube') {
                     Icon = Youtube
-                  } else if (social.icon === 'telegram' || social.name.toLowerCase() === 'telegram') {
-                    Icon = Send
+                  } else if (social.icon === 'facebook' || social.name.toLowerCase() === 'facebook') {
+                    Icon = Facebook
                   }
                   return (
                     <Link
