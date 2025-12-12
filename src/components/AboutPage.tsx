@@ -205,35 +205,8 @@ export default function AboutPage() {
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#FCC22F] mb-6">
             Our Dedicated Team
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {/* Siddhesh */}
-            <div className="flex flex-col items-center">
-              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
-                <Image
-                  src="/static-media/Siddhesh Deshmukh.png"
-                  alt="Siddhesh Deshmukh"
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <h3 className="text-sm font-semibold text-white text-center">Siddhesh Deshmukh</h3>
-            </div>
-
-            {/* Yash */}
-            <div className="flex flex-col items-center">
-              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
-                <Image
-                  src="/static-media/Yash Darade.png"
-                  alt="Yash Darade"
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <h3 className="text-sm font-semibold text-white text-center">Yash Darade</h3>
-            </div>
-
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+            
             {/* Pratik */}
             <div className="flex flex-col items-center">
               <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
@@ -248,6 +221,21 @@ export default function AboutPage() {
               <h3 className="text-sm font-semibold text-white text-center">Pratik Darade</h3>
             </div>
 
+            {/* Siddhesh */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Siddhesh Deshmukh.png"
+                  alt="Siddhesh Deshmukh"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Siddhesh Deshmukh</h3>
+            </div>
+
+
             {/* Karan */}
             <div className="flex flex-col items-center">
               <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
@@ -260,6 +248,36 @@ export default function AboutPage() {
                 />
               </div>
               <h3 className="text-sm font-semibold text-white text-center">Karan Pachkavade</h3>
+            </div>
+            
+            {/* Yash */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Yash Darade.png"
+                  alt="Yash Darade"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Yash Darade</h3>
+            </div>
+
+
+
+            {/* Rohit */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Rohit Gharte.png"
+                  alt="Rohit Gharte"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Rohit Gharte</h3>
             </div>
           </div>
         </Reveal>
