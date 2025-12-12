@@ -152,3 +152,4 @@
 3. **Course Page**: The "Enroll Now" button links directly to payment - this is fine, but consider if it should go to `/course` first
 4. **Welcome Section**: The "Call Now" button behavior is correct (links to contact page, triggers modal on mobile)
 
+

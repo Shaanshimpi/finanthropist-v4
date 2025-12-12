@@ -93,3 +93,4 @@ export const Leads: CollectionConfig = {
   timestamps: true,
 }
 
+

@@ -168,28 +168,9 @@ export default function AboutPage() {
 
         {/* Nikita */}
         <Reveal delay={290} className="mb-14">
-          <section className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center rounded-2xl border border-slate-800 bg-slate-900/75 p-5 sm:p-7 shadow-lg shadow-black/40">
-            {/* Placeholder image area */}
-            <div className="flex justify-center md:justify-start">
-              <div className="relative w-full max-w-xs aspect-[4/5] rounded-3xl border border-slate-700 bg-gradient-to-br from-slate-700 via-slate-500 to-slate-300 overflow-hidden">
-                <div className="absolute inset-0 bg-slate-900/30 mix-blend-multiply" />
-                <div className="relative flex h-full flex-col items-center justify-center text-center px-4">
-                  <span className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/90 text-lg font-black text-slate-900 shadow">
-                    NB
-                  </span>
-                  <p className="text-xs font-semibold tracking-wide text-white/80 uppercase">
-                    Placeholder Image
-                  </p>
-                  <p className="mt-1 text-[11px] text-white/70">
-                    Replace with professional photo of{' '}
-                    <span className="font-semibold">Nikita Bhopale</span>.
-                  </p>
-                </div>
-              </div>
-            </div>
-
+          <section className="grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center rounded-2xl border border-slate-800 bg-slate-900/75 p-5 sm:p-7 shadow-lg shadow-black/40">
             {/* Content */}
-            <div className="space-y-3">
+            <div className="order-2 md:order-1 space-y-3">
               <p className="text-[11px] font-semibold text-[#FCC22F] uppercase tracking-wide">
                 Director
               </p>
@@ -201,7 +182,86 @@ export default function AboutPage() {
                 provider.
               </p>
             </div>
+
+            {/* Image */}
+            <div className="order-1 md:order-2 flex justify-center md:justify-end items-center">
+              <div className="relative w-full max-w-xs aspect-[4/5] rounded-3xl border border-slate-700 overflow-hidden bg-slate-800">
+                <Image
+                  src="/static-media/Nikita Bhopale.png"
+                  alt="Nikita Bhopale - Director"
+                  width={400}
+                  height={500}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+              </div>
+            </div>
           </section>
+        </Reveal>
+
+        {/* Key Members */}
+        <Reveal delay={320} className="mb-14">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Key Members</h2>
+          <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#FCC22F] mb-6">
+            Our Dedicated Team
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {/* Siddhesh */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Siddhesh Deshmukh.png"
+                  alt="Siddhesh Deshmukh"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Siddhesh Deshmukh</h3>
+            </div>
+
+            {/* Yash */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Yash Darade.png"
+                  alt="Yash Darade"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Yash Darade</h3>
+            </div>
+
+            {/* Pratik */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Pratik Darade.png"
+                  alt="Pratik Darade"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Pratik Darade</h3>
+            </div>
+
+            {/* Karan */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square max-w-[200px] rounded-2xl border border-slate-700 overflow-hidden bg-slate-800 mb-3">
+                <Image
+                  src="/static-media/Karan Pachkavade.png"
+                  alt="Karan Pachkavade"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-sm font-semibold text-white text-center">Karan Pachkavade</h3>
+            </div>
+          </div>
         </Reveal>
 
         {/* Values / Commitment */}
