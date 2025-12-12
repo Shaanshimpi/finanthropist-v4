@@ -205,7 +205,7 @@ export default function AboutPage() {
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#FCC22F] mb-6">
             Our Dedicated Team
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
             
             {/* Pratik */}
             <div className="flex flex-col items-center">
