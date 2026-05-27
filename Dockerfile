@@ -21,6 +21,7 @@ RUN \
 
 # Rebuild the source code only when needed
 FROM base AS builder
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -28,6 +29,8 @@ COPY . .
 # Railway / CI: pass public URL at build time for NEXT_PUBLIC_* (optional; runtime uses RAILWAY_PUBLIC_DOMAIN)
 ARG NEXT_PUBLIC_SERVER_URL
 ENV NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}
+ENV NODE_OPTIONS="--max-old-space-size=6144"
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -43,6 +46,7 @@ RUN \
 
 # Production image, copy all the files and run next
 FROM base AS runner
+RUN apk add --no-cache libc6-compat vips
 WORKDIR /app
 
 ENV NODE_ENV production
@@ -68,7 +72,6 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 # server.js is created by next build from the standalone output
