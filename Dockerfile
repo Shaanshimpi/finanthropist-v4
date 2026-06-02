@@ -8,10 +8,9 @@ WORKDIR /app
 
 # --- dependencies ---
 FROM base AS deps
-RUN corepack enable
+RUN npm i -g pnpm@10.15.1
 COPY package.json pnpm-lock.yaml ./
-# Pin pnpm via package.json "packageManager" (avoids Corepack fetching pnpm 11)
-RUN corepack install && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # --- build ---
 FROM base AS builder
@@ -37,7 +36,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV CI=true
 
 # Skip postbuild (next-sitemap) — not needed inside the image; avoids extra build failures
-RUN corepack enable && corepack install && pnpm exec next build
+RUN pnpm exec next build
 
 # --- runtime ---
 FROM base AS runner
