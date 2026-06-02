@@ -1,5 +1,5 @@
 // storage-adapter-import-placeholder
-import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -21,6 +21,7 @@ import { ContactPageContent } from './globals/ContactPageContent'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { getPostgresPoolConfig } from './utilities/postgresConnection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -64,10 +65,8 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  db: vercelPostgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL || '',
-    },
+  db: postgresAdapter({
+    pool: getPostgresPoolConfig(),
   }),
   collections: [Pages, Posts, Media, Categories, Users, Leads],
   cors: [getServerSideURL()].filter(Boolean),

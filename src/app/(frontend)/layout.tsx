@@ -13,6 +13,7 @@ import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from '@/utilities/siteMeta'
 import { StaticHeader } from '@/components/StaticHeader'
 import { Footer } from '@/components/Footer'
 import { PageLoader } from '@/components/PageLoader'
@@ -47,9 +48,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title: DEFAULT_SITE_TITLE,
+  description: DEFAULT_SITE_DESCRIPTION,
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    title: DEFAULT_SITE_TITLE,
+    description: DEFAULT_SITE_DESCRIPTION,
   },
 }
