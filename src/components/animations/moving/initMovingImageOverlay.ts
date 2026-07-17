@@ -87,8 +87,10 @@ export const initMovingImageOverlay = (
   const imgEl = moving.querySelector('img') as HTMLImageElement | null
   const stateKey = '__overlayImageState__'
   const transitionKey = '__overlayImageTransition__'
+  const hiddenKey = '__overlayHidden__'
   ;(moving as any)[stateKey] = 'fist'
   ;(moving as any)[transitionKey] = false
+  ;(moving as any)[hiddenKey] = false
 
   const swapImage = (src: string, nextState: 'fist' | 'top' | 'webinar' | 'instructor') => {
     if (!imgEl) return
@@ -102,6 +104,11 @@ export const initMovingImageOverlay = (
       onComplete: () => {
         imgEl.src = src
         ;(moving as any)[stateKey] = nextState
+        if ((moving as any)[hiddenKey]) {
+          // onLeave hid us mid-swap; stay hidden, don't fade back in
+          ;(moving as any)[transitionKey] = false
+          return
+        }
         gsap.to(moving, {
           opacity: 1,
           duration: 0.25,
@@ -216,11 +223,13 @@ export const initMovingImageOverlay = (
         }
       },
       onLeave: () => {
+        ;(moving as any)[hiddenKey] = true
         const instructorImg = document.querySelector('.instructor-bio-section img') as HTMLElement | null
         gsap.to(instructorImg, { opacity: 1, duration: 0.1 })
         gsap.to(moving, { opacity: 0, duration: 0.1 })
       },
       onEnterBack: () => {
+        ;(moving as any)[hiddenKey] = false
         const instructorImg = document.querySelector('.instructor-bio-section img') as HTMLElement | null
         gsap.to(instructorImg, { opacity: 0, duration: 0 })
         gsap.to(moving, { opacity: 1, duration: 0.1 })

@@ -1,4 +1,7 @@
-import type { PoolConfig } from 'pg'
+interface PostgresPoolConfig {
+  connectionString: string
+  ssl?: boolean | { rejectUnauthorized: boolean }
+}
 
 /**
  * Resolves the Postgres URL Payload should use.
@@ -48,9 +51,9 @@ function isRailwayPublicHost(host: string): boolean {
 }
 
 /** Pool config for @payloadcms/db-postgres (TCP/pg — required for Railway). */
-export function getPostgresPoolConfig(): PoolConfig {
+export function getPostgresPoolConfig(): PostgresPoolConfig {
   const connectionString = getPostgresConnectionString()
-  const config: PoolConfig = { connectionString }
+  const config: PostgresPoolConfig = { connectionString }
 
   if (!connectionString) return config
 
