@@ -3,8 +3,11 @@ import { withPayload } from '@payloadcms/next/withPayload'
 import redirects from './redirects.js'
 
 function resolvePublicServerUrl() {
-  if (process.env.NEXT_PUBLIC_SERVER_URL) {
-    return process.env.NEXT_PUBLIC_SERVER_URL
+  const publicServerUrl = process.env.NEXT_PUBLIC_SERVER_URL
+  const isProduction = process.env.NODE_ENV === 'production'
+
+  if (publicServerUrl && (!isProduction || !publicServerUrl.includes('localhost'))) {
+    return publicServerUrl
   }
   if (process.env.RAILWAY_PUBLIC_DOMAIN) {
     return `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
@@ -12,7 +15,7 @@ function resolvePublicServerUrl() {
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
-  return process.env.__NEXT_PRIVATE_ORIGIN || (process.env.NODE_ENV === 'production' ? 'https://finanthropist.com' : 'http://localhost:3000')
+  return process.env.__NEXT_PRIVATE_ORIGIN || (isProduction ? 'https://finanthropist.com' : 'http://localhost:3000')
 }
 
 const NEXT_PUBLIC_SERVER_URL = resolvePublicServerUrl()

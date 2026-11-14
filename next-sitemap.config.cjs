@@ -1,8 +1,11 @@
+const publicServerUrl = process.env.NEXT_PUBLIC_SERVER_URL
+const isProduction = process.env.NODE_ENV === 'production'
+
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL ||
+  (publicServerUrl && (!isProduction || !publicServerUrl.includes('localhost')) ? publicServerUrl : null) ||
   (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : null) ||
   process.env.VERCEL_PROJECT_PRODUCTION_URL ||
-  (process.env.NODE_ENV === 'production' ? 'https://finanthropist.com' : 'http://localhost:3000')
+  'https://finanthropist.com'
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
