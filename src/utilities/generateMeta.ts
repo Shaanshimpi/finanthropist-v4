@@ -9,7 +9,7 @@ import { DEFAULT_SITE_DESCRIPTION, formatPageTitle } from './siteMeta'
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
 
-  let url = serverUrl + '/website-template-OG.webp'
+  let url = serverUrl + '/og-image.jpg'
 
   if (image && typeof image === 'object' && 'url' in image) {
     const ogUrl = image.sizes?.og?.url
@@ -29,20 +29,29 @@ export const generateMeta = async (args: {
 
   const title = formatPageTitle(doc?.meta?.title ?? null)
   const description = doc?.meta?.description || DEFAULT_SITE_DESCRIPTION
+  const docSlug = Array.isArray(doc?.slug) ? doc?.slug.join('/') : doc?.slug || ''
+  const canonicalUrl =
+    docSlug === 'home' || !docSlug ? getServerSideURL() : `${getServerSideURL()}/${docSlug}`
 
   return {
     description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: mergeOpenGraph({
       description,
       images: ogImage
         ? [
             {
               url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: title,
             },
           ]
         : undefined,
       title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      url: canonicalUrl,
     }),
     title,
   }

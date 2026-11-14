@@ -16,12 +16,21 @@ export default function ContactPage() {
         setSubmitStatus(null)
         setSubmitMessage('')
 
+        let attribution: Record<string, string> = {}
+        try {
+            const raw = sessionStorage.getItem('fin_attribution')
+            if (raw) attribution = JSON.parse(raw)
+        } catch {
+            // ignore
+        }
+
         const formData = new FormData(e.currentTarget)
         const data = {
             name: formData.get('name') as string,
             email: formData.get('email') as string,
             phone: formData.get('phone') as string,
             message: formData.get('message') as string,
+            ...attribution,
         }
 
         try {

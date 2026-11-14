@@ -12,7 +12,7 @@ function resolvePublicServerUrl() {
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
-  return process.env.__NEXT_PRIVATE_ORIGIN || 'http://localhost:3000'
+  return process.env.__NEXT_PRIVATE_ORIGIN || (process.env.NODE_ENV === 'production' ? 'https://finanthropist.com' : 'http://localhost:3000')
 }
 
 const NEXT_PUBLIC_SERVER_URL = resolvePublicServerUrl()

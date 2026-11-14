@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /admin/*
+
+# OpenAI & ChatGPT Search Crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Host
+Host: https://finanthropist.com
+
+# Sitemaps
+Sitemap: https://finanthropist.com/sitemap.xml
+Sitemap: https://finanthropist.com/pages-sitemap.xml

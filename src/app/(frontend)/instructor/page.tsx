@@ -1,10 +1,62 @@
-"use client"
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getServerSideURL } from '@/utilities/getURL'
+import { PersonJsonLd, BreadcrumbJsonLd } from '@/components/StructuredData'
+
+const siteUrl = getServerSideURL()
+const title = 'Meet Sammeer Sarang - Stock Market Educator & Mentor | Finanthropist'
+const description =
+  "Learn share market trading with Sammeer Sarang. 23+ years finance experience (ex-HDFC Bank, HSBC, author of 'Billionaire Mindset'). 10,000+ families trained across Maharashtra."
+
+export const metadata: Metadata = {
+  title,
+  description,
+  keywords: [
+    'Sammeer Sarang',
+    'Sameer Sarang stock market',
+    'Finanthropist founder',
+    'stock market mentor Maharashtra',
+    'share market teacher Nashik',
+    'Billionaire Mindset author',
+    'learn trading with Sameer Sarang',
+  ],
+  alternates: {
+    canonical: `${siteUrl}/instructor`,
+  },
+  openGraph: {
+    title,
+    description,
+    url: `${siteUrl}/instructor`,
+    type: 'profile',
+    images: [
+      {
+        url: `${siteUrl}/static-media/sameer-fist.png`,
+        width: 600,
+        height: 700,
+        alt: 'Sammeer Sarang - Stock Market Educator',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [`${siteUrl}/static-media/sameer-fist.png`],
+  },
+}
 
 export default function InstructorPage() {
   return (
     <main className="min-h-screen">
+      <PersonJsonLd siteUrl={siteUrl} />
+      <BreadcrumbJsonLd
+        siteUrl={siteUrl}
+        items={[
+          { name: 'Home', path: '' },
+          { name: 'Instructor', path: '/instructor' },
+        ]}
+      />
       {/* Light theme wrapper to match webinar light mode */}
       <div className="relative">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
@@ -89,7 +141,7 @@ export default function InstructorPage() {
               {[
                 { title: '16 Years at HDFC Bank', desc: 'Senior finance professional with deep banking experience' },
                 { title: 'HSBC Experience', desc: 'International banking and finance expertise' },
-                { title: 'Published Author', desc: "Co-author of &#39;Billionaire Mindset&#39; book" },
+                { title: 'Published Author', desc: "Co-author of 'Billionaire Mindset' book" },
                 { title: '10,000+ families Trained', desc: 'Successful track record since 2017' },
                 { title: '23+ Years Finance Experience', desc: 'Proven expertise in financial markets' },
                 { title: 'Maharashtra Focus', desc: 'Understanding local investor mindset' }
@@ -106,5 +158,3 @@ export default function InstructorPage() {
     </main>
   )
 }
-
-

@@ -2,58 +2,72 @@ import { getServerSideSitemap } from 'next-sitemap'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { unstable_cache } from 'next/cache'
+import { getServerSideURL } from '@/utilities/getURL'
 
 const getPagesSitemap = unstable_cache(
   async () => {
-    const payload = await getPayload({ config })
-    const SITE_URL =
-      process.env.NEXT_PUBLIC_SERVER_URL ||
-      process.env.VERCEL_PROJECT_PRODUCTION_URL ||
-      'https://example.com'
-
-    const results = await payload.find({
-      collection: 'pages',
-      overrideAccess: false,
-      draft: false,
-      depth: 0,
-      limit: 1000,
-      pagination: false,
-      where: {
-        _status: {
-          equals: 'published',
-        },
-      },
-      select: {
-        slug: true,
-        updatedAt: true,
-      },
-    })
-
+    const SITE_URL = getServerSideURL()
     const dateFallback = new Date().toISOString()
 
-    const defaultSitemap = [
-      {
-        loc: `${SITE_URL}/search`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/posts`,
-        lastmod: dateFallback,
-      },
-    ]
+    // Core live application pages
+    const liveAppPages = [
+      '',
+      '/course',
+      '/instructor',
+      '/about',
+      '/contact',
+      '/privacy',
+      '/terms',
+    ].map((path) => ({
+      loc: `${SITE_URL}${path}`,
+      lastmod: dateFallback,
+    }))
 
-    const sitemap = results.docs
-      ? results.docs
-          .filter((page) => Boolean(page?.slug))
-          .map((page) => {
-            return {
-              loc: page?.slug === 'home' ? `${SITE_URL}/` : `${SITE_URL}/${page?.slug}`,
-              lastmod: page.updatedAt || dateFallback,
-            }
-          })
-      : []
+    let cmsPages: Array<{ loc: string; lastmod: string }> = []
+    try {
+      const payload = await getPayload({ config })
+      const results = await payload.find({
+        collection: 'pages',
+        overrideAccess: false,
+        draft: false,
+        depth: 0,
+        limit: 1000,
+        pagination: false,
+        where: {
+          _status: {
+            equals: 'published',
+          },
+        },
+        select: {
+          slug: true,
+          updatedAt: true,
+        },
+      })
 
-    return [...defaultSitemap, ...sitemap]
+      if (results?.docs) {
+        cmsPages = results.docs
+          .filter((page) => Boolean(page?.slug) && page.slug !== 'home')
+          .map((page) => ({
+            loc: `${SITE_URL}/${page.slug}`,
+            lastmod: page.updatedAt || dateFallback,
+          }))
+      }
+    } catch {
+      // Build/DB fallback
+    }
+
+    // Merge and deduplicate by loc
+    const seen = new Set<string>()
+    const sitemap: Array<{ loc: string; lastmod: string }> = []
+
+    for (const item of [...liveAppPages, ...cmsPages]) {
+      if (!seen.has(item.loc)) {
+        seen.add(item.loc)
+        sitemap.push(item)
+      }
+    }
+
+    return sitemap
   },
   ['pages-sitemap'],
   {

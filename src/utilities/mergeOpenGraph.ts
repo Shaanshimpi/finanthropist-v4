@@ -7,7 +7,10 @@ const defaultOpenGraph: Metadata['openGraph'] = {
   description: DEFAULT_SITE_DESCRIPTION,
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}/og-image.jpg`,
+      width: 1200,
+      height: 630,
+      alt: 'Finanthropist - Best Stock Market Education & Trading Institute in Marathi',
     },
   ],
   siteName: SITE_NAME,

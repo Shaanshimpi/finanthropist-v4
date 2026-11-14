@@ -15,6 +15,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    let message = (body.message || '').trim()
+    const trackingLines: string[] = []
+
+    const source = body.source || body.utm_source
+    const medium = body.medium || body.utm_medium
+    const campaign = body.campaign || body.utm_campaign
+    const referrer = body.referrer
+    const landingPage = body.landingPage || body.page
+
+    if (source) trackingLines.push(`Source: ${source}`)
+    if (medium) trackingLines.push(`Medium: ${medium}`)
+    if (campaign) trackingLines.push(`Campaign: ${campaign}`)
+    if (referrer) trackingLines.push(`Referrer: ${referrer}`)
+    if (landingPage) trackingLines.push(`Landing Page: ${landingPage}`)
+
+    if (trackingLines.length > 0) {
+      const trackingBlock = `\n\n[Traffic & Attribution]\n${trackingLines.join('\n')}`
+      message = message ? `${message}${trackingBlock}` : `[Traffic & Attribution]\n${trackingLines.join('\n')}`
+    }
+
     // Create the lead in Payload
     const lead = await payload.create({
       collection: 'leads',
@@ -22,7 +42,7 @@ export async function POST(request: NextRequest) {
         name: body.name,
         email: body.email,
         phone: body.phone,
-        message: body.message || '',
+        message,
         status: 'new',
       },
     })
@@ -44,4 +64,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-
