@@ -442,8 +442,8 @@ async function generateQuotationPdf() {
           <div class="val">Finanthropist Educare Pvt Ltd (https://finanthropist.com)</div>
         </div>
         <div class="client-card-item">
-          <div class="label">Core Market</div>
-          <div class="val">Maharashtra (Marathi-speaking)</div>
+          <div class="label">Prepared By</div>
+          <div class="val">Firefist Solutions</div>
         </div>
         <div class="client-card-item">
           <div class="label">Target Timeline</div>
@@ -526,7 +526,7 @@ async function generateQuotationPdf() {
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Proposal &amp; Quotation</div>
+      <div>Finanthropist Educare • Prepared by Firefist Solutions</div>
       <div class="confidential">Confidential Commercial Document</div>
       <div>Page 1 of 5</div>
     </div>
@@ -631,7 +631,7 @@ async function generateQuotationPdf() {
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Proposal &amp; Quotation</div>
+      <div>Finanthropist Educare • Prepared by Firefist Solutions</div>
       <div class="confidential">Confidential Commercial Document</div>
       <div>Page 2 of 5</div>
     </div>
@@ -724,7 +724,7 @@ async function generateQuotationPdf() {
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Proposal &amp; Quotation</div>
+      <div>Finanthropist Educare • Prepared by Firefist Solutions</div>
       <div class="confidential">Confidential Commercial Document</div>
       <div>Page 3 of 5</div>
     </div>
@@ -882,7 +882,7 @@ async function generateQuotationPdf() {
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Proposal &amp; Quotation</div>
+      <div>Finanthropist Educare • Prepared by Firefist Solutions</div>
       <div class="confidential">Confidential Commercial Document</div>
       <div>Page 4 of 5</div>
     </div>
@@ -988,8 +988,8 @@ async function generateQuotationPdf() {
       <div style="border-top: 1px solid #e2e8f0; padding-top: 7px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         <div>
           <div style="font-size: 6.8pt; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 11px;">Prepared By:</div>
-          <div style="font-size: 8.3pt; font-weight: 700; color: #0f172a;">Engineering &amp; Growth Team</div>
-          <div style="font-size: 7.3pt; color: #475569;">Technical SEO &amp; Next.js Architecture</div>
+          <div style="font-size: 8.3pt; font-weight: 700; color: #0f172a;">Firefist Solutions</div>
+          <div style="font-size: 7.3pt; color: #475569;">Engineering &amp; Growth Team • Technical SEO</div>
         </div>
         <div>
           <div style="font-size: 6.8pt; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 11px;">Accepted &amp; Approved By:</div>
@@ -1000,7 +1000,7 @@ async function generateQuotationPdf() {
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Proposal &amp; Quotation</div>
+      <div>Finanthropist Educare • Prepared by Firefist Solutions</div>
       <div class="confidential">Confidential Commercial Document</div>
       <div>Page 5 of 5</div>
     </div>

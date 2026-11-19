@@ -15,7 +15,7 @@ async function generateMinimalReport() {
   <style>
     @page {
       size: A4;
-      margin: 16mm 18mm 16mm 18mm;
+      margin: 13mm 16mm 13mm 16mm;
     }
 
     * {
@@ -28,8 +28,8 @@ async function generateMinimalReport() {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: #ffffff;
       color: #0f172a;
-      font-size: 9.5pt;
-      line-height: 1.5;
+      font-size: 9.3pt;
+      line-height: 1.48;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
@@ -37,7 +37,7 @@ async function generateMinimalReport() {
     .page {
       page-break-after: always;
       position: relative;
-      min-height: 264mm;
+      min-height: 260mm;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -229,14 +229,14 @@ async function generateMinimalReport() {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 4px;
-      padding: 10px 12px;
+      padding: 6px 9px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 7.5pt;
+      font-size: 7.1pt;
       color: #0f172a;
-      line-height: 1.45;
+      line-height: 1.38;
       white-space: pre-wrap;
       word-break: break-word;
-      margin: 8px 0 16px 0;
+      margin: 4px 0 8px 0;
     }
 
     .grid-2 {
@@ -320,7 +320,7 @@ async function generateMinimalReport() {
         </div>
         <div class="header-meta">
           <div class="doc-type">TECHNICAL AUDIT &amp; COMPLIANCE REPORT</div>
-          <div class="doc-ref">Target: https://finanthropist.com • November 2026</div>
+          <div class="doc-ref">Target: https://finanthropist.com • Audited by Firefist Solutions</div>
         </div>
       </div>
 
@@ -430,7 +430,7 @@ async function generateMinimalReport() {
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Technical Verification Report</div>
+      <div>Finanthropist Educare • Audited &amp; Verified by Firefist Solutions</div>
       <div class="status-confirmed">Verified Live on Production</div>
       <div>Page 1 of 4</div>
     </div>
@@ -544,7 +544,7 @@ Sitemap: https://finanthropist.com/pages-sitemap.xml</div>
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Technical Verification Report</div>
+      <div>Finanthropist Educare • Audited &amp; Verified by Firefist Solutions</div>
       <div class="status-confirmed">Verified Live on Production</div>
       <div>Page 2 of 4</div>
     </div>
@@ -631,7 +631,7 @@ Sitemap: https://finanthropist.com/pages-sitemap.xml</div>
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Technical Verification Report</div>
+      <div>Finanthropist Educare • Audited &amp; Verified by Firefist Solutions</div>
       <div class="status-confirmed">Verified Live on Production</div>
       <div>Page 3 of 4</div>
     </div>
@@ -757,7 +757,7 @@ Landing Page: /contact</div>
     </div>
 
     <div class="doc-footer">
-      <div>Finanthropist Educare Pvt Ltd • Technical Verification Report</div>
+      <div>Finanthropist Educare • Audited &amp; Verified by Firefist Solutions</div>
       <div class="status-confirmed">Verified Live on Production</div>
       <div>Page 4 of 4</div>
     </div>
